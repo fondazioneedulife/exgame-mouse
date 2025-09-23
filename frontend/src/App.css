@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f4f4f4;
+  color: #222;
+}
+
+.header {
+  top: 0%;
+  position: fixed;
+  top: 0%;
+  left:0%;
+  width: 100%;
+  background: #fff;
+  color: #fff;
+  padding: 24px 0 16px 0;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+}
+
+.header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  color: #111;
+}
+.header-left{
+  display: flex;
+}
+
+.header nav {
+  margin: 10px 0;
+}
+.nav-sinistra{
+   display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.nav-destra{
+   display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+
+.header ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pulsante, .pulsante-sec {
+  background: #fff;
+  color: #222;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.pulsante-sec{
+  color: chocolate;
+}
+
+.pulsante:hover {
+  background: #e0e0e0;
+  color: #111;
+}
+.pulsante-sec:hover{
+  color: white;
+  background: chocolate;
+}
+
+.MainSection {
+  max-width: 1100px;
+  margin: 32px auto;
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  padding-top: 10%;
+  
+
+}
+
+.SecondSection,.PrimaSection {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 14px 18px;
+  text-align: center;
+  
+  width: 50rem;
+}
+
+.PrimaSection{
+  border-radius: 15px;
+  border-style: solid ;
+  border-color: chocolate;
+  border-width: 0.2rem;
+  
+}
+
+.SecondSection h1 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.SecondSection p {
+  color: #555;
+  font-size: 1rem;
+}
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.Logo {
+  height: 4em;
+
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+.header{
+text-align: center;
+}
+.header > nav{
+  margin-top: 2%;
+}
