@@ -1,0 +1,57 @@
+
+
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  align-items:flex-start;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  cursor: pointer;
+}
+
+
+.App-logo {
+  height: auto;
+  width: 20vmin;
+  margin: 1rem;
+}
+
+.App-title {
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+.App-subtitle {
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+.App-user {
+  font-size: 1.5rem;
+  margin: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 10rem;
+  color: orange;
+}
+
+.App-logout {
+  font-size: 1.5rem;
+  margin: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  color: orange;
+}
+
+.App-user-container {
+  display: flex;
+  flex-direction:column-reverse;
+  align-items: flex-end;
+  justify-content: center;
+  right: 0;
+  height: 100%;
+  
+}
+
