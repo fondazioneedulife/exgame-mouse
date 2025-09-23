@@ -34,6 +34,24 @@ function App() {
           <p>Tempo Rimasto</p>
           <div className='timer'>00:25:00</div>
         </div>
+        <div className='question-container'>
+          <p className='question'>1. Qual è il risultato di 2 + 2?</p>
+          <div className='answers'>
+            <div className='answer'>Ｏ 3</div>
+            <div className='answer'>Ｏ 4</div>
+            <div className='answer'>Ｏ 5</div>
+            <div className='answer'>Ｏ 6</div>
+          </div>
+        </div>
+        <div className='question-container'>
+          <p className='question'>2. Qual è il risultato di 3 x 3?</p>
+          <div className='answers'>
+            <div className='answer'>Ｏ 6</div>
+            <div className='answer'>Ｏ 7</div>
+            <div className='answer'>Ｏ 8</div>
+            <div className='answer'>Ｏ 9</div>
+          </div>
+        </div>
       </div>
     </>
   )
