@@ -1,0 +1,54 @@
+.header_tutto{
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+    width: 100%;
+    margin-top: 0px ;
+}
+
+.header_sx{
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+    margin-top: 0px ;
+    width: 90%;
+}
+
+.header_dx{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-self: flex-start;
+    margin-top: 0px ;
+    width: 10%;
+}
+
+.logo{
+    height: 45px;
+    margin-right: 20px;
+}
+
+.bottone{
+    border: 0px;
+    background-color: transparent;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0.7;
+}
+
+.testo_header{
+    border: 0px;
+    background-color: transparent;
+    font-size: 15px;
+    opacity: 0.7;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.bottone:hover {
+  background-color: orange;
+  border-radius: 5px;
+  opacity: 1;
+}
