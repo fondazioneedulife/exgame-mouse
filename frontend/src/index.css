@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    align-content: center;
+    width: 100%;
+}
+    
+    .logo_menu {
+        width: 50%;
+        display: flex;
+    }
+    
+    .user_menu {
+        width: 50%;
+        display: flex;
+        
+    }
