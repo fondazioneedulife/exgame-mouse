@@ -19,8 +19,21 @@ function App() {
           <div className='logout'>Logout</div>
         </div>
       </div>
-      <div className='card-main'>
-        <img src={user} className='user-icon' alt="user-icon" />
+      <div className='main'>
+        <div className='card-main'>
+          <img src={user} className='user-icon' alt="user-icon" />
+          <p className='nome-utente'>Jacopo Sassi</p>
+        </div>
+        <h1 className='title'>Test di Matematica - Classe 1A</h1>
+        <div className='label-list'>
+          <div className='label'>Prova di Matematica</div>
+          <div className='label'>Prima sessione</div>
+          <div className='label'>Teacher Prof Bianchi</div>
+        </div>
+        <div className='timer-container'>
+          <p>Tempo Rimasto</p>
+          <div className='timer'>00:25:00</div>
+        </div>
       </div>
     </>
   )
