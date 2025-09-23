@@ -1,12 +1,11 @@
 import './App.css'
 import logo from './assets/ExGame logo.svg'
 import user from './assets/user-icon.svg'
+
 function App() {
-
-
   return (
     <>
-       <div className='header'>
+      <div className='header'>
         <div className='left-header'>
           <div className='image-div'>
             <img src={logo} className='logo' alt="logo" />
@@ -34,24 +33,50 @@ function App() {
           <p>Tempo Rimasto</p>
           <div className='timer'>00:25:00</div>
         </div>
-        <div className='question-container'>
-          <p className='question'>1. Qual è il risultato di 2 + 2?</p>
-          <div className='answers'>
-            <div className='answer'>Ｏ 3</div>
-            <div className='answer'>Ｏ 4</div>
-            <div className='answer'>Ｏ 5</div>
-            <div className='answer'>Ｏ 6</div>
+        <form id="quiz-form">
+          <div className="question-container">
+            <p className="question">1. Qual è il risultato di 2 + 2?</p>
+            <div className="answers">
+              <label className="answer">
+                <input type="radio" name="q1" value="3"/>
+                <span>3</span>
+              </label>
+              <label className="answer">
+                <input type="radio" name="q1" value="4"/>
+                <span>4</span>
+              </label>
+              <label className="answer">
+                <input type="radio" name="q1" value="5"/>
+                <span>5</span>
+              </label>
+              <label className="answer">
+                <input type="radio" name="q1" value="6"/>
+                <span>6</span>
+              </label>
+            </div>
           </div>
-        </div>
-        <div className='question-container'>
-          <p className='question'>2. Qual è il risultato di 3 x 3?</p>
-          <div className='answers'>
-            <div className='answer'>Ｏ 6</div>
-            <div className='answer'>Ｏ 7</div>
-            <div className='answer'>Ｏ 8</div>
-            <div className='answer'>Ｏ 9</div>
+          <div className="question-container">
+            <p className="question">2. Qual è il risultato di 3 x 3?</p>
+            <div className="answers">
+              <label className="answer">
+                <input type="radio" name="q2" value="6"/>
+                <span>6</span>
+              </label>
+              <label className="answer">
+                <input type="radio" name="q2" value="7"/>
+                <span>7</span>
+              </label>
+              <label className="answer">
+                <input type="radio" name="q2" value="8"/>
+                <span>8</span>
+              </label>
+              <label className="answer">
+                <input type="radio" name="q2" value="9"/>
+                <span>9</span>
+              </label>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </>
   )
