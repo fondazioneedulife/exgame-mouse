@@ -1,21 +1,23 @@
 {
-  "name": "backend",
+  "name": "its-exgame-2025-26-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "ITS - corso React, Nodejs, DB - 2025/26",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "",
     "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "exgame-mouse"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.36.0",
-    "@typescript-eslint/eslint-plugin": "^8.44.1",
-    "@typescript-eslint/parser": "^8.44.1",
     "eslint": "^9.36.0",
-    "eslint-plugin-react": "^7.37.5",
     "globals": "^16.4.0",
+    "jiti": "^2.6.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "typescript-eslint": "^8.44.1"
