@@ -19,5 +19,10 @@
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "typescript-eslint": "^8.44.1"
+  },
+  "dependencies": {
+    "@koa/router": "^14.0.0",
+    "@types/node": "^24.5.2",
+    "koa": "^3.0.1"
   }
 }
