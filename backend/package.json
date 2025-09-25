@@ -1,0 +1,32 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "ITS - corso React, Nodejs, DB - 2025/26",
+  "main": "index.ts",
+  "scripts": {
+    "test": ""
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "exgame-mouse"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
+    "jiti": "^2.6.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^8.44.1"
+  },
+  "dependencies": {
+    "@koa/router": "^14.0.0",
+    "@types/node": "^24.5.2",
+    "dotenv": "^17.2.2",
+    "koa": "^3.0.1",
+    "tsx": "^4.20.5"
+  }
+}
