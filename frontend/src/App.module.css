@@ -79,3 +79,73 @@ body {
   padding: 12px;
   font-size: 1.2em;
 }
+
+.titolo {
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+
+.info {
+  display: flex;
+  margin-left: 40px;
+}
+
+.info p {
+  border-radius: 50px;
+  background-color: rgb(182, 182, 182);
+  color:rgb(117, 117, 117);
+  padding: 4px;
+  margin-right: 10px;
+}
+
+.timer {
+  border-radius: 100px;
+  box-shadow: #616161 0px 1px 8px;
+  text-align: center;
+  margin: 30px;
+  font-size: 1.2rem;
+  width: 70%;
+}
+
+.timer h3 {
+  padding: 20px;
+  font-size: 30px;
+  color: #616161;
+  font-weight: lighter;
+}
+
+.timer p {
+  font-size: 30px;
+  padding-bottom: 20px;
+}
+
+.domande {
+  margin-left: 40px;
+}
+
+.consegna {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.linea {
+  border-top: 2px solid var(--primary-color);
+  margin: 20px 0;
+  width: 95%;
+}
+
+.inviaRisposte {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.bottone {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 20px;;
+}
