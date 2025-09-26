@@ -1,0 +1,30 @@
+.domanda {
+  margin-top: 60px;
+}
+
+.testodomanda {
+  font-weight: 600;
+}
+
+.risposta {
+  font-weight: 400;
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: circle;
+  padding-left: 20px;
+  margin: -3px;
+  color: black;
+}
+
+ul:has(button:focus),
+ul:has(button:active) {
+  list-style-type: disc;
+  color: orange;         
+}
+

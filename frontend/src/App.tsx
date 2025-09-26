@@ -8,6 +8,7 @@ import { Nav } from "./Nav";
 import {Nomeprofilo} from "./Nomeprofilo";
 import { Description } from "./Description";
 import { Timer } from "./Timer";
+import { Domande } from "./Domande";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Text/>
         <Description/>
         <Timer/>
+        <Domande/>
       </main>
 
 
