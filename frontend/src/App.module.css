@@ -79,3 +79,24 @@ body {
   padding: 12px;
   font-size: 1.2em;
 }
+
+.divpar{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.par{
+  border-radius: 1rem;
+  background-color: #616161;
+}
+h2{
+  opacity: 50%;
+}
+
+.divtempo{
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

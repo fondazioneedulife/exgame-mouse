@@ -48,7 +48,19 @@ function App() {
           </div>
         </div>
       </div>
-
+      <h1 className={styles.main}>Test di Matematica - Classe 1A</h1>
+      <div className={styles.divpar}>
+        <p className={styles.par}>date: 12 settembre 2025</p>
+        <p className={styles.par}>session: Prima sessione</p>
+        <p className={styles.par}>teacher: Prof. Bianchi</p>
+      </div>
+      <div className={styles.divtempo}>
+        <h2>Tempo Rimasto:</h2>
+        <p>00:25:00</p>
+      </div>
+      <div>
+        
+      </div>
       {/* <Description type="info"> Oggi facciamo:
         <ul>
           <li>Esercizio 1</li>
