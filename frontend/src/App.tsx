@@ -1,10 +1,9 @@
 import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import Icona from "./assets/profilo.png";
-import { useState } from "react";
+import { Question } from "./Question";
 
 function App() {
-  const [scelta, setScelta] = useState("");
   const today = new Date().toLocaleDateString("it-IT", {
     year: "numeric",
     month: "long",
@@ -89,53 +88,33 @@ function App() {
         </div>
       </div>
 
-      <div className={styles.main}>
-        <div className={styles.content}>
-          <div className={styles.question}>
-            <p>Quanto fa 2+2?</p>
-            <label>
-              <input
-                type="radio"
-                name="scelta"
-                value="a"
-                checked={scelta === "a"}
-                onChange={(e) => setScelta(e.target.value)}
-              />
-              3
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="scelta"
-                value="b"
-                checked={scelta === "b"}
-                onChange={(e) => setScelta(e.target.value)}
-              />
-              4
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="scelta"
-                value="c"
-                checked={scelta === "c"}
-                onChange={(e) => setScelta(e.target.value)}
-              />
-              5
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="scelta"
-                value="d"
-                checked={scelta === "d"}
-                onChange={(e) => setScelta(e.target.value)}
-              />
-              Dipende dalla fantasia
-            </label>
-        </div>
-      </div>
-    </div >
+      <Question 
+        domanda="Quanto fa 2+2?" 
+        risposta1="3" 
+        risposta2="4" 
+        risposta3="5" 
+        risposta4="Dipende dalla fantasia"></Question>
+
+      <Question 
+        domanda="Quanto fa 3x3?" 
+        risposta1="6" 
+        risposta2="9" 
+        risposta3="12" 
+        risposta4="Dipende dalla fantasia"></Question>
+
+      <Question 
+        domanda="Quante caramelle rimangono se ne hai 10 e ne mangi 2?" 
+        risposta1="2" 
+        risposta2="4" 
+        risposta3="8" 
+        risposta4="10 (le hai solo guardate)"></Question>
+
+      <Question 
+        domanda="Quante zampe hanno due giraffe e mezzo?" 
+        risposta1="6" 
+        risposta2="8" 
+        risposta3="10" 
+        risposta4="Dipende dalla fantasia"></Question>
 
     <div className={styles.main}>
         <div className={styles.contentEndTest}>
