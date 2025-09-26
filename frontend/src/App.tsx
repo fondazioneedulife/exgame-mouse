@@ -1,6 +1,7 @@
 import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import Icona from "./assets/profilo.png";
+import { Question } from "./Question"
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <ul>
             <li>
               <a href="#" className={styles.dx}>
-                Albe Molon
+                Cane Molon
               </a>
             </li>
             <li>
@@ -47,19 +48,40 @@ function App() {
             <p>Alberto Molon</p>
           </div>
         </div>
+
+      <p className={styles.title}>Test di Matematica - 1A</p>
+      <div className={styles.menu}>
+        <p className={styles.container}>date: 12 Settembre 2025</p>
+        <p className={styles.container}>session: prima sessione</p>
+        <p className={styles.container}>teacher: prof bianchi</p>
       </div>
 
-      {/* <Description type="info"> Oggi facciamo:
-        <ul>
-          <li>Esercizio 1</li>
-          <li>Esercizio 2</li>
-          <li>Esercizio 3</li>
-        </ul> 
-      </Description>
+      <div className={styles.timeContainer}>
+        <p className={styles.timeTitle}>Tempo Rimasto</p>
+        <p className={styles.timeCounter}>counter</p>
+      </div>
 
-      <Description type="warning"> 
-        Attenzione sarà difficile!
-      </Description> */}
+    <Question
+      title="Quanto fa 2+2?"
+      answer={["2", "3", "4", "dipende"]}>
+    </Question>
+
+    <Question
+      title="Quanto fa 3x3?"
+      answer={["3", "6", "9", "dipende dalla fantasia"]}>
+    </Question>
+
+    <Question
+      title="Quante caramelle rimangono se ne hai 10 e ne mangio 2"
+      answer={["2", "4", "8", "10 (le hai solo guardate)"]}>
+    </Question>
+
+    <Question
+      title="Quante zampe hanno le giraffe in mezzo?"
+      answer={["6", "8", "10", "dipende dalla fantasia"]}>
+    </Question>
+
+      </div>
     </>
   );
 }
