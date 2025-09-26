@@ -1,18 +1,32 @@
 import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import Icona from "./assets/profilo.png";
+
+
 import { Text } from "./Text";
 import { Nav } from "./Nav";
 import {Nomeprofilo} from "./Nomeprofilo";
+import { Description } from "./Description";
+import { Timer } from "./Timer";
 
 function App() {
   return (
     <>
+
       <Nav/>
-      <Nomeprofilo/>
-      <Text/>
+      <main className={styles.main}>
+        <Nomeprofilo/>
+        <Text/>
+        <Description/>
+        <Timer/>
+      </main>
+
 
       
+
+
+
+
 
 
       {/* <Description type="info"> Oggi facciamo:

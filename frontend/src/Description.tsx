@@ -1,17 +1,13 @@
-import classes from "./Description.module.css";
+import styles from "./Description.module.css";
 
 
-export const Description = ({Children, type}) => {
-    let className = "";
-    if (type === "info") {
-        className = classes.info;
-    }
-
-    if (type === "warning") {
-        className = classes.warning;
-    }
+export const Description = ({}) => {
 
     return (
-        <p className={className}>Descrizione:{Children} </p>
+        <section className={styles.dati}>
+            <p className={styles.texdati}>Data: 12 Settembre 2025 </p>
+            <p className={styles.texdati}>Session: Prima sessione </p>
+            <p className={styles.texdati}>Teacher: prof. Bianchi </p>
+        </section>
     );
 }

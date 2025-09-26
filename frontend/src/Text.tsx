@@ -1,4 +1,4 @@
-import styles from './App.module.css';
+import styles from './Text.module.css';
 
 export const Text = ({}) => {
     return (

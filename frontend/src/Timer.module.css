@@ -1,0 +1,17 @@
+.Timer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 100px;
+    padding: 18px;
+}
+
+.tempo{
+    color: gray;
+    font-weight: 100;
+}
+
+.numeri{
+    font-weight: 100;
+}
