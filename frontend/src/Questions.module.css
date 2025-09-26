@@ -1,0 +1,10 @@
+.question {
+  margin-top: 20px;
+  border-bottom: 1px solid var(--primary-color);
+  padding-bottom: 3%;
+}
+
+.question input, h3 {
+  margin-left: 3%;
+  margin-right: 1%;
+}
