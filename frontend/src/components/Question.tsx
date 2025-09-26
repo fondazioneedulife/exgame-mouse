@@ -1,25 +1,21 @@
 import styles from "./Question.module.css";
 
-export const Question = () => {
-    return(
-        <div className={styles.question}>
-            <h4>Quanto fa 2+2?</h4>
-            <div className={styles.answer}>
-              <input type="radio" name="answer" id="answer" />
-              <label htmlFor="answer">3</label>
-            </div>
-            <div className={styles.answer}>
-              <input type="radio" name="answer" id="answer" />
-              <label htmlFor="answer">2</label>
-            </div>
-            <div className={styles.answer}>
-              <input type="radio" name="answer" id="answer" />
-              <label htmlFor="answer">4</label>
-            </div>
-            <div className={styles.answer}>
-              <input type="radio" name="answer" id="answer" />
-              <label htmlFor="answer">Non lo so</label>
-            </div>
+export const Question = ({ id, question, answers }:{id: number; question: string; answers: { id: number; text: string; isCorrect: boolean }[];}) => {
+  
+  return (
+    <div className={styles.question}>
+      <h4>{question}</h4>
+      {answers.map((a) => (
+        <div className={styles.answer} key={a.id}>
+          <input
+            type="radio"
+            name={`question-${id}`}   // così ogni domanda ha un gruppo separato
+            id={`answer-${id}-${a.id}`}
+            value={a.text}
+          />
+          <label htmlFor={`answer-${id}-${a.id}`}>{a.text}</label>
         </div>
-    )
-}
+      ))}
+    </div>
+  );
+};

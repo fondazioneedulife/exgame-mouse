@@ -2,6 +2,7 @@ import styles from "./App.module.css";
 import { Navigation } from "./components/Navigation";
 import { Question } from "./components/Question";
 import { UserInfo } from "./components/UserInfo";
+import questions from "./data/questions.json"
 
 function App() {
   return (
@@ -38,15 +39,18 @@ function App() {
 
           <div className={styles.questions}>
             <form>
-              <Question />
-              <Question />
-              <Question />
-              <Question />
-              <Question />
+              {questions.map((q) => (
+                <Question
+                  key={q.id}
+                  id={q.id}
+                  question={q.question}
+                  answers={q.answers}
+                />
+              ))}
 
-                <button type="submit" className={styles.btnSubmit}>
-                  <p>Hai terminato? Consegna!</p>
-                </button>
+              <button type="submit" className={styles.btnSubmit}>
+                <p>Hai terminato? Consegna!</p>
+              </button>
             </form>
           </div>
 

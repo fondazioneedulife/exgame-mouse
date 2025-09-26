@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "question": "Quanto fa 2+2?",
+    "answers": [
+      { "id": 1, "text": "3", "isCorrect": false },
+      { "id": 2, "text": "2", "isCorrect": false },
+      { "id": 3, "text": "4", "isCorrect": true },
+      { "id": 4, "text": "Non lo so", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Qual è il pianeta più vicino al Sole?",
+    "answers": [
+      { "id": 1, "text": "Venere", "isCorrect": false },
+      { "id": 2, "text": "Mercurio", "isCorrect": true },
+      { "id": 3, "text": "Terra", "isCorrect": false },
+      { "id": 4, "text": "Marte", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Chi ha dipinto la Gioconda?",
+    "answers": [
+      { "id": 1, "text": "Michelangelo", "isCorrect": false },
+      { "id": 2, "text": "Raffaello", "isCorrect": false },
+      { "id": 3, "text": "Leonardo da Vinci", "isCorrect": true },
+      { "id": 4, "text": "Caravaggio", "isCorrect": false }
+    ]
+  }
+]
