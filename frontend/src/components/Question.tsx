@@ -1,6 +1,12 @@
 import styles from "./Question.module.css";
 
-export const Question = ({ id, question, answers }:{id: number; question: string; answers: { id: number; text: string; isCorrect: boolean }[];}) => {
+type QuestionProps = {
+  id: number; 
+  question: string; 
+  answers: { id: number; text: string; isCorrect: boolean }[];
+}
+
+export const Question = ({ id, question, answers }: QuestionProps) => {
   
   return (
     <div className={styles.question}>
