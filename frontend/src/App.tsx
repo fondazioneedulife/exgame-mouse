@@ -5,6 +5,7 @@ import Icona from "./assets/profilo.png";
 function App() {
   return (
     <>
+    {/* <Header /> */}
       <nav className={styles.navbar}>
         <div className={styles.left}>
           <a href="">
@@ -39,28 +40,50 @@ function App() {
           </ul>
         </div>
       </nav>
+    {/* <Header /> */}
 
+    {/* <Main /> */}
       <main className={styles.main}>
         <div className={styles.content}>
+          {/* <UserInfo /> */}
           <div className={styles.userInfo}>
             <img src={Icona} alt="" className={styles.icona} />
             <p>Alberto Molon</p>
           </div>
         </div>
+         {/* <UserInfo /> */}
+
+         {/* Exam-Title */}
         <h1 className={styles.title}>Test di Matematica - Classe 1A</h1>
+        {/* Exam-Title */}
+
+        {/* Labels List */}
         <div className={styles.labelList}>
           <div className={styles.label}>Date: 12 Settembre 2025</div>
           <div className={styles.label}>Session: Prima Sessione</div>
           <div className={styles.label}>Teacher: Prof Bianchi</div>
         </div>
+         {/* Labels List */}
+
+         {/* Timer */}
         <div className={styles.timerContainer}>
           <p>Tempo Rimasto</p>
           <div className={styles.timer}>00:25:00
           </div>
         </div>
+          {/* Timer */}
+
+        {/* Form */}
         <form className={styles.form}>
+
+          {/* QuestionContainer */}
           <div className={styles.questionContainer}>
+
+            {/* Question */}
             <p className={styles.question}>Quanto fa 2 + 2?</p>
+             {/* Question */}
+
+            {/* AllAnswers */}
             <div className={styles.AllAnswers}>
               <label className={styles.answer}>
                 <input type="radio" name="q1" value="3" />
@@ -79,9 +102,17 @@ function App() {
                 <span> Dipende dalla fantasia</span>
               </label>
             </div>
+            {/* AllAnswers */}
           </div>
+          {/* QuestionContainer */}
+
+          {/* QuestionContainer */}
             <div className={styles.questionContainer}>
+             {/* Question */}
             <p className={styles.question}>Quanto fa 3 x 3?</p>
+             {/* Question */}
+
+            {/* AllAnswers */}
             <div className={styles.AllAnswers}>
               <label className={styles.answer}>
                 <input type="radio" name="q1" value="3" />
@@ -100,9 +131,17 @@ function App() {
                 <span> Dipende dalla fantasia</span>
               </label>
             </div>
+            {/* AllAnswers */}
           </div>
+          {/* QuestionContainer */}
+
+          {/* QuestionContainer */}
           <div className={styles.questionContainer}>
+             {/* Question */}
             <p className={styles.question}>Quante caramelle rimangono se ne hai 10 e ne mangi 2?</p>
+             {/* Question */}
+
+            {/* AllAnswers */}
             <div className={styles.AllAnswers}>
               <label className={styles.answer}>
                 <input type="radio" name="q1" value="3" />
@@ -121,9 +160,17 @@ function App() {
                 <span> 10 (le hai solo guardate)</span>
               </label>
             </div>
+            {/* AllAnswers */}
           </div>
+          {/* QuestionContainer */}
+
+          {/* QuestionContainer */}
           <div className={styles.questionContainer}>
+             {/* Question */}
             <p className={styles.question}>Quante zampe hanno due giraffe e mezzo?</p>
+             {/* Question */}
+
+            {/* AllAnswers */}
             <div className={styles.AllAnswers}>
               <label className={styles.answer}>
                 <input type="radio" name="q1" value="3" />
@@ -142,13 +189,19 @@ function App() {
                 <span> Dipende dalla fantasia</span>
               </label>
             </div>
+            {/* AllAnswers */}
           </div>
+          {/* QuestionContainer */}
         </form>
+        {/* Form */}
+
+        {/* SubmitButton */}
         <div className={styles.WrapperContainer}>
           <button className={styles.submitButton} type="submit">Hai terminato? Consegna!</button>
         </div>
+        {/* SubmitButton */}
       </main>
-
+     {/* <Main /> */}
     </>
   );
 }
