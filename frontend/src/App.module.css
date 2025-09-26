@@ -1,10 +1,14 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
 }
 
 .main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding: 20px;
 }
@@ -13,4 +17,57 @@ body {
   padding: 8px;
   max-width: 900px;
   width: 100%;
+}
+
+
+.container{
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.info{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3vw;
+}
+
+.info div{
+  background-color: lightgray;
+  padding: 3px;
+  height: auto;
+  border-radius: 5px;
+}
+.info div p{
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.time{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  border-radius: 50px;
+  gap: 2vh;
+}
+
+.timeLable{
+  color: lightgray;
+  font-size: 1.2rem;
+  margin: 0;
+}
+.timeValue{
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.questions{
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
 }
