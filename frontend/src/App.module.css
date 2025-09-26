@@ -79,3 +79,85 @@ body {
   padding: 12px;
   font-size: 1.2em;
 }
+
+.testTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px, 0px, 12px, 12px;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.mainInfos {
+  display: flex;
+  justify-content: center;
+  padding: 20px, 0px, 0px, 0px;
+}
+
+.contentInfos {
+  display: flex;
+  padding: 8px, 0px, 0px, 0px;
+  max-width: 900px;
+  width: 100%;
+}
+
+.date {
+  background-color: lightgray;
+  border-radius: 10px;
+  font-size: 0.7em;
+  padding: 5px;
+}
+
+.session {
+  background-color: lightgray;
+  border-radius: 10px;
+  font-size: 0.7em;
+  margin-left: 20px;
+  padding: 5px;
+}
+
+.teacher {
+  background-color: lightgray;
+  border-radius: 10px;
+  font-size: 0.7em;
+  margin-left: 20px;
+  padding: 5px;
+}
+
+.timeRemain {
+  color: lightgray;
+}
+
+.contentTime {
+  padding: 8px;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 50px;
+  box-shadow: 0px 0px 4px rgba(211, 211, 211, 0.8);
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 20px;
+}
+
+.contentendTest {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  max-width: 900px;
+  width: 100%;
+}
+
+.endTest {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  color: white;
+  padding: 5px;
+}
