@@ -5,6 +5,10 @@
 - [Domain model](./doc/domain-model.md)
 - [Design del database](./doc/database-model.md)
 
+### Per studiare
+
+Puoi consultare le basi di **javascript**, **react** e **node.js** in questo repository, dove trovi gli argomenti principali che abbiamo affrontato in classe: [https://github.com/alefalezza/my-lectures](https://github.com/alefalezza/my-lectures)
+
 ## Install
 
 Questo progetto è un ["monorepo"](https://docs.npmjs.com/cli/v7/using-npm/workspaces) che contiene due applicazioni:

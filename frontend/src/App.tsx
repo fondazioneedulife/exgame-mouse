@@ -1,32 +1,67 @@
-//import { useState } from 'react'
-import './App.css'
-import Logo from './assets/ExGame logo.svg'
-import UserLogo from './assets/149071.png'
+import styles from "./App.module.css";
+import Logo from "./assets/ExGame logo.svg";
+import Icona from "./assets/profilo.png";
 
 function App() {
-
   return (
     <>
-      <div className='navbar flex flex-row gap-5 justify-between items-center p-6'>
-        <div className='flex flex-row gap-5 items-center'>
-          <img className="w-40" src={Logo} alt="" />
-          <a href="">Dashboard</a> 
-          <a href="">Esami</a>
+      <nav className={styles.navbar}>
+        <div className={styles.left}>
+          <a href="">
+            <img src={Logo} alt="" className={styles.logo} />
+          </a>
+          <ul>
+            <li>
+              <a href="#" className={styles.sx}>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="#" className={styles.sx}>
+                Esami
+              </a>
+            </li>
+          </ul>
         </div>
-        <div className='flex flex-row gap-5 items-center'>
-          <a href="">nome</a>
-          <a href="">Logout</a>
+
+        <div className={styles.right}>
+          <ul>
+            <li>
+              <a href="#" className={styles.dx}>
+                Albe Molon
+              </a>
+            </li>
+            <li>
+              <a href="#" className={styles.dx}>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div className={styles.main}>
+        <div className={styles.content}>
+          <div className={styles.userInfo}>
+            <img src={Icona} alt="" className={styles.icona} />
+            <p>Alberto Molon</p>
+          </div>
         </div>
       </div>
-      <div className='flex justify-center p-6 flex-col gap-4'>
-        <div className='flex flex-row border-1 border-orange-300 rounded-lg h-20 w-[75%] items-center gap-5 p-4'>
-          <img className="w-10 h-10" src={UserLogo} alt="" />
-          <p className='text-gray-700 font-bold text-xl'>Nome Cognome</p>
-        </div>
-        <p className='font-bold text-4xl text-black'>Test di Matematica - Classe 1A</p>
-      </div>
+
+      {/* <Description type="info"> Oggi facciamo:
+        <ul>
+          <li>Esercizio 1</li>
+          <li>Esercizio 2</li>
+          <li>Esercizio 3</li>
+        </ul> 
+      </Description>
+
+      <Description type="warning"> 
+        Attenzione sarà difficile!
+      </Description> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
