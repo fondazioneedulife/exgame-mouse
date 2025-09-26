@@ -28,7 +28,7 @@ function App() {
           <ul>
             <li>
               <a href="#" className={styles.dx}>
-                Albe Molon
+                Riccardo Borsatto
               </a>
             </li>
             <li>
@@ -44,10 +44,22 @@ function App() {
         <div className={styles.content}>
           <div className={styles.userInfo}>
             <img src={Icona} alt="" className={styles.icona} />
-            <p>Alberto Molon</p>
+            <p>Riccardo Borsatto</p>
           </div>
         </div>
       </div>
+
+      <div className={styles.main}>
+        <h1 className={styles.content}>Test di Matematica - Classe 1A</h1>
+      </div>
+
+      <div className={styles.main}>
+        <div className={styles.timeInfo}>
+          <p className={styles.time}>Tempo rimasto:</p>
+          <p>00:25:00</p>
+        </div>
+      </div>
+      
 
       {/* <Description type="info"> Oggi facciamo:
         <ul>
