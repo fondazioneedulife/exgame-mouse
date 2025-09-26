@@ -144,6 +144,9 @@ function App() {
             </div>
           </div>
         </form>
+        <div className={styles.WrapperContainer}>
+          <button className={styles.submitButton} type="submit">Hai terminato? Consegna!</button>
+        </div>
       </main>
 
     </>

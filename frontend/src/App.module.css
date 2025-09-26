@@ -143,6 +143,7 @@ margin-top: 2%;
   width: 80%;
   padding: 0.5% 1% 1% 0.5%;
   border-bottom: #ffa200 2px solid;
+  max-width: 900px;
 }
 
 .answer{
@@ -151,6 +152,7 @@ margin-top: 2%;
   font-size: 18px;
   width: 50%;
   display: flex;
+  gap: 10px;
 }
 
 .question{
@@ -162,4 +164,31 @@ margin-top: 2%;
     flex-direction: column;
     gap: 1px;
     margin-top: 2%;
+  }
+
+  .WrapperContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .submitButton{
+    margin-top: 3%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 20%;
+    transition: background-color 0.3s ease;
+    justify-content: center;
+    align-content:  center;
+  }
+  .submitButton:hover {
+    background-color: #04f208;
+    transform: translateY(-8px) scale(1.05);
   }
