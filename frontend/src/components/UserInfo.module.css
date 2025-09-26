@@ -1,0 +1,13 @@
+.icona {
+  height: 70px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1.2em;
+}

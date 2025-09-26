@@ -3,57 +3,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-
-  .logo {
-    height: 55px;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  .left,
-  .right {
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
-  }
-
-  ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 6px;
-    a {
-      border-radius: 10px;
-      padding: 10px;
-    }
-  }
-
-  .left ul a {
-    color: #616161;
-    /* margin-left: 30px; */
-    &:hover {
-      background-color: var(--primary-color);
-      color: white;
-    }
-  }
-
-  .right ul a {
-    color: var(--primary-color);
-    /* margin-left: 30px; */
-    &:hover {
-      background-color: var(--primary-color);
-      color: white;
-    }
-  }
-}
-
 .main {
   display: flex;
   justify-content: center;
@@ -64,18 +13,4 @@ body {
   padding: 8px;
   max-width: 900px;
   width: 100%;
-}
-
-.icona {
-  height: 70px;
-}
-
-.userInfo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: 2px solid var(--primary-color);
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 1.2em;
 }
