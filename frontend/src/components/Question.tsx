@@ -8,12 +8,18 @@ export const Question = () => {
             <div className={styles.answer}>
               <input type="radio" name="answer" id="answer" />
               <label htmlFor="answer">3</label>
+            </div>
+            <div className={styles.answer}>
               <input type="radio" name="answer" id="answer" />
               <label htmlFor="answer">2</label>
+            </div>
+            <div className={styles.answer}>
               <input type="radio" name="answer" id="answer" />
               <label htmlFor="answer">4</label>
+            </div>
+            <div className={styles.answer}>
               <input type="radio" name="answer" id="answer" />
-              <label htmlFor="answer">Bla Bla Bla</label>
+              <label htmlFor="answer">Non lo so</label>
             </div>
           </form>
         </div>

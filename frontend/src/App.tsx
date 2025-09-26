@@ -6,8 +6,8 @@ import { UserInfo } from "./components/UserInfo";
 function App() {
   return (
     <>
-    <Navigation />
     <div className={styles.main}>
+      <Navigation />
       <div className={styles.content}>
         <UserInfo />
         <div className={styles.container}>
