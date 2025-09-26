@@ -55,13 +55,13 @@ body {
 }
 
 .main {
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
 }
 
 .content {
-  padding: 8px;
   max-width: 900px;
   width: 100%;
 }

@@ -1,0 +1,21 @@
+.container{
+    border-color: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 4px 4px 10px 4px rgba(106, 106, 106, 0.1);
+    border-radius: 90px;
+    margin-top: 30px;
+}
+
+.titolo{
+    color:  rgb(164, 164, 164);
+    font-weight: 500;
+}
+
+.tempo{
+    color: rgb(91, 91, 91);
+    font-weight: 300;
+}
