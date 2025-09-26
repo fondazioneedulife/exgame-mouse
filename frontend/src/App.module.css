@@ -66,6 +66,31 @@ body {
   width: 100%;
 }
 
+.examTitle {
+  padding: 8px;
+  max-width: 900px;
+  width: 100%;
+}
+
+.examLabels {
+  list-style-type: none;
+}
+
+.examLabelsItem {
+  background-color: #cccccc;
+  border-radius: 15px;
+  width: fit-content;
+  padding: 0px 7px;
+  display: inline;
+  margin-right: 10px;
+}
+
+.timeBox {
+  border-radius: 20px;
+  box-shadow: 2px 2px 8px #00000030;
+  text-align: center;
+}
+
 .icona {
   height: 70px;
 }
