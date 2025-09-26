@@ -1,67 +1,56 @@
 import styles from "./App.module.css";
-import Logo from "./assets/ExGame logo.svg";
-import Icona from "./assets/profilo.png";
 
-function App() {
+import Navbar from "./components/Navbar";
+import UserPill from "./components/UserPill";
+import ExamHeader from "./components/ExamHeader";
+import TimerBox from "./components/TimerBox";
+import Submit from "./components/Submit";
+import Question from "./components/Question";
+
+export default function App() {
+  const questions = [
+    {
+      id: "q1",
+      title: "Quanto fa 2 + 2?",
+      options: ["3", "4", "5", "Dipende dalla fantasia"],
+    },
+    {
+      id: "q2",
+      title: "Quanto fa 3 × 3?",
+      options: ["6", "9", "12", "Dipende dalla fantasia"],
+    },
+    {
+      id: "q3",
+      title: "Quante caramelle rimangono se ne hai 10 e ne mangi 2?",
+      options: ["2", "4", "8", "10 (le hai solo guardate)"],
+    },
+    {
+      id: "q4",
+      title: "Quante zampe hanno due giraffe e mezzo?",
+      options: ["6", "8", "10", "Dipende dalla fantasia"],
+    },
+  ];
+
   return (
     <>
-      <nav className={styles.navbar}>
-        <div className={styles.left}>
-          <a href="">
-            <img src={Logo} alt="" className={styles.logo} />
-          </a>
-          <ul>
-            <li>
-              <a href="#" className={styles.sx}>
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#" className={styles.sx}>
-                Esami
-              </a>
-            </li>
-          </ul>
-        </div>
+      <Navbar />
+      <main className={styles.main}>
+        <UserPill />
+        <ExamHeader />
+        <TimerBox />
 
-        <div className={styles.right}>
-          <ul>
-            <li>
-              <a href="#" className={styles.dx}>
-                Albe Molon
-              </a>
-            </li>
-            <li>
-              <a href="#" className={styles.dx}>
-                Logout
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+        {questions.map((q, idx) => (
+          <Question
+            key={q.id}
+            id={q.id}
+            title={q.title}
+            options={q.options}
+            topDivider={idx !== 0}
+          />
+        ))}
 
-      <div className={styles.main}>
-        <div className={styles.content}>
-          <div className={styles.userInfo}>
-            <img src={Icona} alt="" className={styles.icona} />
-            <p>Alberto Molon</p>
-          </div>
-        </div>
-      </div>
-
-      {/* <Description type="info"> Oggi facciamo:
-        <ul>
-          <li>Esercizio 1</li>
-          <li>Esercizio 2</li>
-          <li>Esercizio 3</li>
-        </ul> 
-      </Description>
-
-      <Description type="warning"> 
-        Attenzione sarà difficile!
-      </Description> */}
+        <Submit />
+      </main>
     </>
   );
 }
-
-export default App;
