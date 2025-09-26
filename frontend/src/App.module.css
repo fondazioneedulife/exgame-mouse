@@ -54,6 +54,11 @@ body {
   }
 }
 
+main{
+  max-width: 900px;
+  margin: auto;
+}
+
 .main {
   display: flex;
   justify-content: center;

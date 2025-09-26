@@ -1,6 +1,8 @@
 import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import Icona from "./assets/profilo.png";
+import TestMatematica from "./elements/quiz-matematica";
+import Timer from "./elements/timer";
 
 function App() {
   return (
@@ -40,26 +42,27 @@ function App() {
         </div>
       </nav>
 
-      <div className={styles.main}>
-        <div className={styles.content}>
-          <div className={styles.userInfo}>
-            <img src={Icona} alt="" className={styles.icona} />
-            <p>Alberto Molon</p>
+      <main>
+
+        <div className={styles.main}>
+          <div className={styles.content}>
+            <div className={styles.userInfo}>
+              <img src={Icona} alt="" className={styles.icona} />
+              <p>Mario Rossi</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* <Description type="info"> Oggi facciamo:
-        <ul>
-          <li>Esercizio 1</li>
-          <li>Esercizio 2</li>
-          <li>Esercizio 3</li>
-        </ul> 
-      </Description>
+        <h1 className={styles.description}>
+          Test di Matematica - Classe 1A
+        </h1>
 
-      <Description type="warning"> 
-        Attenzione sarà difficile!
-      </Description> */}
+        <div className={styles.helpers}></div>
+        <Timer></Timer>
+        <TestMatematica></TestMatematica>
+      </main>
+
+
     </>
   );
 }
