@@ -1,55 +1,67 @@
-import { useState } from 'react'
-import Logo from './assets/ExGame logo.svg';
-import './App.css'
+import styles from "./App.module.css";
+import Logo from "./assets/ExGame logo.svg";
+import Icona from "./assets/profilo.png";
 
 function App() {
-
-  
-
   return (
     <>
-      <header className="header">
-        <div className="header-left">
-        <img src={Logo} className='Logo'></img>
+      <nav className={styles.navbar}>
+        <div className={styles.left}>
+          <a href="">
+            <img src={Logo} alt="" className={styles.logo} />
+          </a>
+          <ul>
+            <li>
+              <a href="#" className={styles.sx}>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="#" className={styles.sx}>
+                Esami
+              </a>
+            </li>
+          </ul>
+        </div>
 
-        <nav className="nav-sinistra">
+        <div className={styles.right}>
           <ul>
-            <button className="pulsante"> Primo Pulsante</button>
-            <button className="pulsante"> Secondo Pulsante</button>
+            <li>
+              <a href="#" className={styles.dx}>
+                Albe Molon
+              </a>
+            </li>
+            <li>
+              <a href="#" className={styles.dx}>
+                Logout
+              </a>
+            </li>
           </ul>
-        </nav>
         </div>
-        <div className='header-right'>
-        <nav className="nav-destra">
-          <ul>
-            <button className="pulsante-sec">Terzo pulsante</button>
-            <button className="pulsante-sec">Quarto pulsante</button>
-          </ul>
-        </nav>
+      </nav>
+
+      <div className={styles.main}>
+        <div className={styles.content}>
+          <div className={styles.userInfo}>
+            <img src={Icona} alt="" className={styles.icona} />
+            <p>Alberto Molon</p>
+          </div>
         </div>
-      </header>
-      
-      <section className='MainSection'>
-        <section className='PrimaSection'>
-          <h1>Main Title</h1>
-          <p> paragrafo</p>
-        </section>
-        <section className='SecondSection'>
-          <h1>Main Title</h1>
-          <p> paragrafo</p>
-        </section>
-        <section className='SecondSection'>
-          <h1>Main Title</h1>
-          <p> paragrafo</p>
-        </section>
-        <section className='SecondSection'>
-          <h1>Main Title</h1>
-          <p> paragrafo</p>
-        </section>
-        
-      </section>
+      </div>
+
+      {/* <Description type="info"> Oggi facciamo:
+        <ul>
+          <li>Esercizio 1</li>
+          <li>Esercizio 2</li>
+          <li>Esercizio 3</li>
+        </ul> 
+      </Description>
+
+      <Description type="warning"> 
+        Attenzione sarà difficile!
+      </Description> */}
     </>
   );
 }
 
-export default App
+export default App;
