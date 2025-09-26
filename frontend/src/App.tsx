@@ -37,11 +37,17 @@ function App() {
           </div>
 
           <div className={styles.questions}>
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
+            <form>
+              <Question />
+              <Question />
+              <Question />
+              <Question />
+              <Question />
+
+                <button type="submit" className={styles.btnSubmit}>
+                  <p>Hai terminato? Consegna!</p>
+                </button>
+            </form>
           </div>
 
         </div>

@@ -3,7 +3,6 @@ import styles from "./Question.module.css";
 export const Question = () => {
     return(
         <div className={styles.question}>
-          <form>
             <h4>Quanto fa 2+2?</h4>
             <div className={styles.answer}>
               <input type="radio" name="answer" id="answer" />
@@ -21,7 +20,6 @@ export const Question = () => {
               <input type="radio" name="answer" id="answer" />
               <label htmlFor="answer">Non lo so</label>
             </div>
-          </form>
         </div>
     )
 }
