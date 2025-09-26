@@ -118,9 +118,7 @@ function App() {
 
     <div className={styles.main}>
         <div className={styles.contentEndTest}>
-          <div className={styles.endTest}>
-            <p>Hai terminato? Consegna!</p>
-          </div>
+            <button className={styles.endTest}>Hai terminato? Consegna!</button>
         </div>
       </div>
 
