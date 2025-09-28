@@ -143,13 +143,6 @@ body {
   box-shadow: 0px 0px 4px rgba(211, 211, 211, 0.8);
 }
 
-.question {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: 20px;
-}
-
 .contentendTest {
   display: flex;
   align-items: center;

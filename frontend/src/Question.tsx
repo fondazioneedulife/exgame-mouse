@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./App.module.css";
+import styles from "./Question.module.css";
 type QuestionProps = {domanda: string, risposta1: string, risposta2: string, risposta3: string, risposta4: string};
 
 export const Question: React.FC<QuestionProps> = ({domanda, risposta1, risposta2, risposta3, risposta4}) => {
