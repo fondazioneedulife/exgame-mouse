@@ -77,5 +77,18 @@ body {
   
 }
 
+.contentendTest {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  max-width: 900px;
+  width: 100%;
+}
 
-
+.endTest {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+  font-size: 1em;
+}

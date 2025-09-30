@@ -3,9 +3,12 @@ import styles from "./QuestionComponent.module.css";
 export type QuestionComponentProp = {
   question: string;
   answers: string[];
+  response: string;
+  setResponses: React.Dispatch<React.SetStateAction<{}>>
+  id: string;
 };
 
-const QuestionComponent = ({ question, answers }: QuestionComponentProp) => {
+const QuestionComponent = ({id, question, answers, response, setResponses}: QuestionComponentProp) => {
   return (
     <form className={styles.form}>
       <h3 className={styles.question}>{question} ? </h3>
@@ -16,6 +19,13 @@ const QuestionComponent = ({ question, answers }: QuestionComponentProp) => {
             name="answer"
             value={answer}
             className={styles.radio}
+            checked={answer===response}
+            onChange={() => setResponses(state => {
+              console.log("stato cliccato");
+              const newState = {...state};
+              newState[id] = answer;
+              return newState;
+            })}
           />
           {answer}
         </label>
