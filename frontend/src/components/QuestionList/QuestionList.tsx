@@ -3,14 +3,19 @@ import type { QuestionComponentProp } from "./QuestionComponent/QuestionComponen
 import QuestionComponent from "./QuestionComponent/QuestionComponent";
 
 
-type QuestionList = {
+
+type QuestionListProps = {
   QuestionsList: QuestionComponentProp[];
 };
 
-const QuestionList = ({ QuestionsList }: QuestionList) => (
+const QuestionList = ({ QuestionsList }: QuestionListProps) => (
   <div className="QuestionList">
     {QuestionsList.map((Question, idx) => (
-      <QuestionComponent key={idx}  question={Question.question} answers={Question.answers} />
+      <QuestionComponent 
+      key={idx}  
+      question={Question.question} 
+      answers={Question.answers} 
+      />
     ))}
   </div>
 );
