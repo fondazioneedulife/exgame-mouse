@@ -42,10 +42,10 @@ function App() {
 
       <div className={styles.main}>
         <div className={styles.content}>
-          {/* TODO Sposta questa struttura nel componente /pages/Subscription.tsx */}
-          {/* --- da qui --- */}
+
+      
           <Subscription/>
-          {/* --- fino a qui --- */}
+
         </div>
       </div>
     </>
