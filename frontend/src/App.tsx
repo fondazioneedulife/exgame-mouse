@@ -1,11 +1,8 @@
 import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
+import { Subscription } from "./pages/Subscription";
 
 function App() {
-  // TODO Sposta questi dati nel file /mocks/chips.ts FATTO
-
-  // TODO Sposta questi dati nel file /mocks/questions.ts FATTO
-
   return (
     <>
       <nav className={styles.navbar}>
@@ -45,6 +42,7 @@ function App() {
 
       <div className={styles.main}>
         <div className={styles.content}>
+          <Subscription></Subscription>
         </div>
       </div>
     </>
