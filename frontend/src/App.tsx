@@ -81,7 +81,7 @@ function App() {
             </li>
           </ul>
         </div>
-      </nav>
+      </div>
 
       <div className={styles.main}>
         <div className={styles.content}>
