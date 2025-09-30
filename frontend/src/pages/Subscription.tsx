@@ -15,7 +15,7 @@ return(
           <Description classe="1A" tipoDiTest="Matematica"></Description>
           <ChipList chips={chips}></ChipList>
           <ClockComponent tempo={7200}></ClockComponent>
-          <QuestionList QuestionsList={questions} />
+          <QuestionList questionsList={questions} />
     </>
 )
 } 
