@@ -9,6 +9,37 @@ function App() {
     month: "long",
     day: "numeric",
   });;
+
+  const domande = [
+    {
+      domanda: "Quanto fa 2+2?",
+      risposta1: "3",
+      risposta2: "4",
+      risposta3: "5",
+      risposta4: "Dipende dalla fantasia",
+    },
+    {
+      domanda: "Quanto fa 3x3?",
+      risposta1: "6",
+      risposta2: "9",
+      risposta3: "12",
+      risposta4: "Dipende dalla fantasia",
+    },
+    {
+      domanda: "Quante caramelle rimangono se ne hai 10 e ne mangi 2?",
+      risposta1: "2",
+      risposta2: "4",
+      risposta3: "8",
+      risposta4: "10 (le hai solo guardate)",
+    },
+    {
+      domanda: "Quante zampe hanno due giraffe e mezzo?",
+      risposta1: "6",
+      risposta2: "8",
+      risposta3: "10",
+      risposta4: "Dipende dalla fantasia",
+    },
+  ]
   return (
     <>
       <nav className={styles.navbar}>
@@ -88,41 +119,24 @@ function App() {
         </div>
       </div>
 
-      <Question 
-        domanda="Quanto fa 2+2?" 
-        risposta1="3" 
-        risposta2="4" 
-        risposta3="5" 
-        risposta4="Dipende dalla fantasia"></Question>
+      {domande.map((q, index) => (
+        <Question
+        key={index}
+        domanda={q.domanda}
+        risposta1={q.risposta1}
+        risposta2={q.risposta2}
+        risposta3={q.risposta3}
+        risposta4={q.risposta4}
+        />
+      ))}
 
-      <Question 
-        domanda="Quanto fa 3x3?" 
-        risposta1="6" 
-        risposta2="9" 
-        risposta3="12" 
-        risposta4="Dipende dalla fantasia"></Question>
-
-      <Question 
-        domanda="Quante caramelle rimangono se ne hai 10 e ne mangi 2?" 
-        risposta1="2" 
-        risposta2="4" 
-        risposta3="8" 
-        risposta4="10 (le hai solo guardate)"></Question>
-
-      <Question 
-        domanda="Quante zampe hanno due giraffe e mezzo?" 
-        risposta1="6" 
-        risposta2="8" 
-        risposta3="10" 
-        risposta4="Dipende dalla fantasia"></Question>
-
-    <div className={styles.main}>
+      <div className={styles.main}>
         <div className={styles.contentEndTest}>
-            <button className={styles.endTest}>Hai terminato? Consegna!</button>
+          <button className={styles.endTest}>Hai terminato? Consegna!</button>
         </div>
       </div>
 
-    {/* <Description type="info"> Oggi facciamo:
+      {/* <Description type="info"> Oggi facciamo:
         <ul>
           <li>Esercizio 1</li>
           <li>Esercizio 2</li>
