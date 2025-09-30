@@ -8,10 +8,12 @@ type QuestionList = {
 };
 
 const QuestionList = ({ QuestionsList }: QuestionList) => {
-  const [responses, setResponses] = useState({
-    "0": "Marsiglia",
-    "1": "Petrarca",
-  });
+  const [responses, setResponses] = useState<Record<String, string>>({});
+
+  console.log(
+    "Lo stato in questo momento è:", 
+    JSON.stringify(responses, null, 2)
+  )
 
   return (
     <div className="QuestionList">
@@ -31,7 +33,3 @@ const QuestionList = ({ QuestionsList }: QuestionList) => {
 };
 
 export default QuestionList;
-
-
-//dentro alla variabile di stato salva le doamnde
-//creare un componente per la domanda

@@ -8,11 +8,6 @@ export type QuestionComponentProp = {
 
 const QuestionComponent = ({ question, answers }: QuestionComponentProp) => {
 
-  console.log(
-    "Lo stato in questo momento è:", 
-    JSON.stringify(responses, null, 2)
-  )
-
   return (
     <form className={styles.form}>
       <h3 className={styles.question}>{question} ? </h3>
