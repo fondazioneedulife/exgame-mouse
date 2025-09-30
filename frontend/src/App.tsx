@@ -28,7 +28,7 @@ function App() {
           <ul>
             <li>
               <a href="#" className={styles.dx}>
-                Albe Molon
+                Alessandro Molon
               </a>
             </li>
             <li>
@@ -44,6 +44,7 @@ function App() {
         <div className={styles.content}>
           <Subscription/>
         </div>
+        <button>Hai terminato ? Consegna!</button>
       </div>
     </>
   );

@@ -11,7 +11,7 @@ import { questions } from "../mocks/questions";
 function Subscription () {
 return(
     <>
-        <UserInfoComponent testo="Ceci Florea"></UserInfoComponent>
+        <UserInfoComponent testo="Alessandro Molon"></UserInfoComponent>
           <Description classe="1A" tipoDiTest="Matematica"></Description>
           <ChipList chips={chips}></ChipList>
           <ClockComponent tempo={7200}></ClockComponent>
