@@ -8,3 +8,14 @@
 .radio {
   margin-right: 8px;
 }
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
