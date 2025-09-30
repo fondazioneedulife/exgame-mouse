@@ -1,8 +1,6 @@
 /**
  * Il componente Subscription rappresenta la pagina che visualizza uno studente quando esegue un esame.
  */
-
-
 import ChipList from "../components/ChipList/ChipList";
 import ClockComponent from "../components/Clock/ClockComponent";
 import Description from "../components/Description/Description";
