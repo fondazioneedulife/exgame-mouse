@@ -1,5 +1,5 @@
 import styles from "./Header.module.css";
-import Logo from "./assets/ExGame logo.svg";
+import Logo from "../../assets/ExGame logo.svg";
  export default function Header() {
   return (
 <>

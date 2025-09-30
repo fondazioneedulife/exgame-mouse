@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 function App() {
   return (
     <>
+
       <Header/>
       <div className={styles.main}>
         <div className={styles.content}>
