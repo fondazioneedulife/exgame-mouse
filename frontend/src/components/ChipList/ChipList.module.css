@@ -1,0 +1,6 @@
+.chips {
+  display: flex;
+  flex-direction: row; /* orizzontale */
+  gap: 12px;           /* spazio tra i chip */
+  flex-wrap: wrap;     /* opzionale: manda a capo se non c'è spazio */
+}
