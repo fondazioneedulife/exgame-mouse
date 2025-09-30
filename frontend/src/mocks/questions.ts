@@ -46,6 +46,7 @@ const questions = [
   export default questions;
 
 /*
+ Formato corretto dei dati (questions + answers):
 
  question_id: ObjectId("1"),
         responses: [
