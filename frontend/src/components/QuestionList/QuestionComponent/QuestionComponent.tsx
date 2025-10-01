@@ -15,11 +15,11 @@ const QuestionComponent = ({
   return (
     <fieldset className={styles.form}>
       <h3 className={styles.question}>{question.text} ? </h3>
-      {question.answers.map((answer, idx) => (
-        <label key={idx}>
+      {question.answers.map((answer) => (
+        <label key={answer._id}>
           <input
             type="radio"
-            name={question._id}
+            name={answer._id}
             value={answer.answer}
             className={styles.radio}
             checked={answer.answer === response}
