@@ -1,0 +1,18 @@
+.type{
+    color: rgb(0, 255, 170);
+}
+
+.warning{
+    color: red;
+}
+.descrizione{
+      font-size: 2rem;
+    font-weight: bold;
+    color: black;
+  
+    letter-spacing: 1px;
+    text-align: left;
+    justify-content: left;
+    
+   
+}
