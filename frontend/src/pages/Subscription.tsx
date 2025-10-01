@@ -42,7 +42,7 @@ export const Subscription = () => {
       <Description classe="1A" tipoDiTest="Matematica"></Description>
       <ChipList chips={chips}></ChipList>
       <ClockComponent tempo={7200}></ClockComponent>
-      <QuestionList questionsList={exam.questions} />
+      <QuestionList questionsList={questions.questions} />
     </>
   );
 };
