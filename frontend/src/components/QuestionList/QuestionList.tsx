@@ -22,10 +22,10 @@ const QuestionList = ({ questionsList }: QuestionList) => {
     <div className="QuestionList">
       {questionsList.map((question, idx) => (
         <QuestionComponent
-          key={idx}
+          key={question._id}
           question={question}
-          response={responses[idx]}
-          setReponse={(value: string) => {
+          response={responses[question._id]}
+          setResponse={(value: string) => {
             setResponses({ ...responses, [idx]: value });
             console.log(
               "Hai selezionato: ",
