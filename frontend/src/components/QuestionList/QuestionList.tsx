@@ -1,7 +1,7 @@
 import { useState } from "react";
 import QuestionComponent from "./QuestionComponent/QuestionComponent";
 import classes from "./QuestionList.module.css";
-import type { QuestionType } from "./types";
+import type { Answer, QuestionType } from "./types";
 
 type QuestionList = {
   questionsList: QuestionType[]; // ATTENZIONE: QuestionType è cambiato!
@@ -25,7 +25,7 @@ const QuestionList = ({ questionsList }: QuestionList) => {
           key={idx}
           question={question}
           response={responses[idx]}
-          setReponse={(value: string) => {
+          setResponse={(value: Answer) => {
             setResponses({ ...responses, [idx]: value });
             console.log(
               "Hai selezionato: ",

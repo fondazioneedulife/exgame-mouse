@@ -1,34 +1,34 @@
-import type { QuestionType } from "../types";
+import type { Answer, QuestionType } from "../types";
 import styles from "./QuestionComponent.module.css";
 
 export type QuestionComponentProp = {
   question: QuestionType;
   response: string;
-  setReponse: (value: string) => void;
+  setResponse: (value: Answer) => void;
 };
 
 const QuestionComponent = ({
   question,
   response,
-  setReponse,
+  setResponse,
 }: QuestionComponentProp) => {
   return (
     <fieldset className={styles.form}>
-      <h3 className={styles.question}>{question} ? </h3>
+      <h3 className={styles.question}>{question.text} ? </h3>
       {question.answers.map((answer, idx) => (
         <label key={idx}>
           <input
             type="radio"
-            name={question}
-            value={answer}
+            name={question._id}
+            value={answer.answer}
             className={styles.radio}
-            checked={answer === response}
+            checked={answer.answer === response}
             onChange={() => {
               console.log("Domanda: ", question, "Hai selezionato: ", answer);
-              setReponse(answer);
+              setResponse(answer);
             }}
           />
-          {answer}
+          {String(answer)}
         </label>
       ))}
     </fieldset>
