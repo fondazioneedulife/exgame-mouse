@@ -21,5 +21,5 @@ export type ExamType = {
 
 export type QuestionComponentProp = QuestionType & {
   response: string;
-  setReponse: (value: string) => void;
+  setResponse: (value: string) => void;
 };
