@@ -24,9 +24,9 @@ const QuestionList = ({ questionsList }: QuestionList) => {
         <QuestionComponent
           key={idx}
           question={question}
-          response={responses[idx]}
-          setReponse={(value: string) => {
-            setResponses({ ...responses, [idx]: value });
+          response={responses[question._id]}
+          setResponse={(value: string) => {
+            setResponses({ ...responses, [question._id]: value });
             console.log(
               "Hai selezionato: ",
               value,
