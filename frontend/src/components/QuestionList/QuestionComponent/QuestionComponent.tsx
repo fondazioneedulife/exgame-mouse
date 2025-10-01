@@ -22,10 +22,10 @@ const QuestionComponent = ({
             name={answer._id}
             value={answer.answer}
             className={styles.radio}
-            checked={answer.answer === response}
+            checked={answer._id === response}
             onChange={() => {
               console.log("Domanda: ", question.text, "Hai selezionato: ", answer.answer);
-              setReponse(answer.answer);
+              setReponse(answer._id);
             }}
           />
           {answer.answer}
