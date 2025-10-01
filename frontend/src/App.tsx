@@ -12,17 +12,27 @@ function App() {
           <a href="">Dashboard</a> 
           <a href="">Esami</a>
         </div>
-        <div className='flex flex-row gap-5 items-center'>
-          <a href="">nome</a>
-          <a href="">Logout</a>
+
+        <div className={styles.right}>
+          <ul>
+            <li>
+              <a href="#" className={styles.dx}>
+                Albe Molon
+              </a>
+            </li>
+            <li>
+              <a href="#" className={styles.dx}>
+                Logout
+              </a>
+            </li>
+          </ul>
         </div>
-      </div>
+      </nav>
 
       <div className={styles.main}>
         <div className={styles.content}>
           <Subscription />
         </div>
-        <p className='font-bold text-4xl text-black'>Test di Matematica - Classe 1A</p>
       </div>
     </>
   )
