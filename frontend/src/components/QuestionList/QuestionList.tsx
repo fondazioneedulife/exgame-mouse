@@ -20,18 +20,18 @@ const QuestionList = ({ questionsList }: QuestionList) => {
 
   return (
     <div className="QuestionList">
-      {questionsList.map((question, idx) => (
+      {questionsList.map((question) => (
         <QuestionComponent
-          key={idx}
+          key={question._id}
           question={question}
-          response={responses[idx]}
+          response={responses[question._id]}
           setReponse={(value: string) => {
-            setResponses({ ...responses, [idx]: value });
+            setResponses({ ...responses, [question._id]: value});
             console.log(
               "Hai selezionato: ",
               value,
               "devo inserire questo valore nella domanda: ",
-              idx,
+              question._id,
             );
           }}
         />

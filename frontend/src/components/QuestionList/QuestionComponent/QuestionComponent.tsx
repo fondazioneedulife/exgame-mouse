@@ -14,21 +14,21 @@ const QuestionComponent = ({
 }: QuestionComponentProp) => {
   return (
     <fieldset className={styles.form}>
-      <h3 className={styles.question}>{question} ? </h3>
-      {question.answers.map((answer, idx) => (
-        <label key={idx}>
+      <h3 className={styles.question}>{question.text} ? </h3>
+      {question.answers.map((answer) => (
+        <label key={answer._id}>
           <input
             type="radio"
-            name={question}
-            value={answer}
+            name={question._id}
+            value={answer.answer}
             className={styles.radio}
-            checked={answer === response}
+            checked={answer._id === response}
             onChange={() => {
               console.log("Domanda: ", question, "Hai selezionato: ", answer);
-              setReponse(answer);
+              setReponse(answer._id);
             }}
           />
-          {answer}
+          {answer.answer}
         </label>
       ))}
     </fieldset>
