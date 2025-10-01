@@ -16,3 +16,18 @@
 .chip:hover {
   background: #d5d6da;
 }
+
+.date {
+  background-color: #4caf50;
+  color: white;
+}
+
+.session {
+  background-color: #2196f3;
+  color: white;
+}
+
+.teacher {
+  background-color: #f44336;
+  color: white;
+}
