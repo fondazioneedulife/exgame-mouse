@@ -1,0 +1,17 @@
+.actions {
+  text-align: center;
+  margin: 24px 0;
+  .submit {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    &:hover {
+      filter: brightness(140%);
+    }
+  }
+}

@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
-import { chips } from "./mocks/chips";
-import { questions } from "./mocks/questions";
-import Subscription from "./pages/Subscription";
+import { Subscription } from "./pages/Subscription";
 
 function App() {
   return (
@@ -45,7 +43,7 @@ function App() {
 
       <div className={styles.main}>
         <div className={styles.content}>
-          <Subscription chips={chips} questions={questions} />
+          <Subscription />
         </div>
       </div>
     </>

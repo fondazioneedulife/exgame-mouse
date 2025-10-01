@@ -1,35 +1,48 @@
-import React from "react";
-import UserInfoComponent from "../components/UserInfo/UserInfoComponent";
-import Description from "../components/Description/Description";
+import { useEffect, useState } from "react";
 import ChipList from "../components/ChipList/ChipList";
 import ClockComponent from "../components/Clock/ClockComponent";
+import Description from "../components/Description/Description";
 import QuestionList from "../components/QuestionList/QuestionList";
+import type { ExamType } from "../components/QuestionList/types";
+import UserInfoComponent from "../components/UserInfo/UserInfoComponent";
+import { chips } from "../mocks/chips";
+import { questions } from "../mocks/questions";
 
-interface Chip {
-  type: string;
-  testo: string;
-}
+/**
+ * Invoca una API e restituisce i dati.
+ */
+const useApiData = (url: string, defaultState: ExamType) => {
+  const [state, setState] = useState<ExamType>(defaultState);
 
-interface Question {
-  question: string;
-  answers: string[];
-}
+  useEffect(() => {
+    // DA RIPRISTINARE quando sarà pronta l'api
+    // fetch(url)
+    //   .then((response) => response.json())
+    //   .then((response) => {
+    //     setState(response);
+    //   });
 
-interface SubscriptionProps {
-  chips: Chip[];
-  questions: Question[];
-}
+    setState(questions); // DA RIMUOVERE quando sarà pronta l'api
+  }, []);
 
-const Subscription: React.FC<SubscriptionProps> = ({ chips, questions }) => {
+  return state;
+};
+
+export const Subscription = () => {
+  const exam = useApiData(
+    "http://localhost:8080/exams/matematica",
+    {} as ExamType,
+  );
+
+  // ordinaIlCaffè().then(beviIlCaffe).then(pagaIlCaffe)
+
   return (
     <>
-      <UserInfoComponent testo="Alberto Molon" />
-      <Description classe="1A" tipoDiTest="Matematica" />
-      <ChipList chips={chips} />
-      <ClockComponent tempo={7200} />
-      <QuestionList QuestionsList={questions} />
+      <UserInfoComponent testo="Alberto Molon"></UserInfoComponent>
+      <Description classe="1A" tipoDiTest="Matematica"></Description>
+      <ChipList chips={chips}></ChipList>
+      <ClockComponent tempo={7200}></ClockComponent>
+      <QuestionList questionsList={exam.questions} />
     </>
   );
 };
-
-export default Subscription;

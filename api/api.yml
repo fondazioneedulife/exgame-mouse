@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Exgame - API Documentation
+  description: API documentation for the application
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Development server
+
+paths:
+  /exams/{examId}:
+    get:
+      summary: Ritorna i dettagli di un esame, comprese question e answers
+      parameters:
+        - in: path
+          name: examId
+          required: true
+          schema:
+            type: string
+          description: ID dell'esame da recuperare
+      description: Returns the health status of the API
+      responses:
+        "200":
+          description: Dati dell'esame
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Exam"
+  /subscriptions:
+    put:
+      summary: Api da chiamare alla consegna dell'esame
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscription"
+      responses:
+        "201":
+          description: Iscrizione creata con successo
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Exam:
+      type: object
+      description: Rappresenta un esame con le sue domande e risposte
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        schedule_date:
+          type: string
+          format: iso-date
+        max_time:
+          type: integer
+          description: Durata dell'esame in minuti
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Question"
+    Question:
+      type: object
+      description: Rappresenta una domanda con le sue risposte
+      properties:
+        _id:
+          type: string
+        text:
+          type: string
+        type:
+          type: string
+          enum: [single-choice, multiple-choice, true-false]
+          description: Tipo di domanda (per ora non lo useremo)
+        answers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Answer"
+    Answer:
+      type: object
+      description: Rappresenta una risposta possibile a una domanda
+      properties:
+        _id:
+          type: string
+        answer:
+          type: string
+        is_correct:
+          type: boolean
+          description: Indica se la risposta è corretta
+    SubscriptionQuestion:
+      type: object
+      properties:
+        question_id:
+          type: string
+          description: ID della domanda
+        responses:
+          type: array
+          items:
+            $ref: "#/components/schemas/Response"
+    Response:
+      type: object
+      properties:
+        answer_id:
+          type: string
+          description: ID della risposta selezionata
+    Subscription:
+      type: object
+      description: Rappresenta l'iscrizione di uno studente a un esame con le risposte date
+      properties:
+        _id:
+          type: string
+        exam_id:
+          type: string
+        student_id:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/SubscriptionQuestion"
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+      required:
+        - code
+        - message
