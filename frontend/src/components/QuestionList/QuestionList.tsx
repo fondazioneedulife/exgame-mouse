@@ -1,27 +1,29 @@
 import { useState } from "react";
-import type { QuestionType } from "./QuestionComponent/QuestionComponent";
 import QuestionComponent from "./QuestionComponent/QuestionComponent";
 import classes from "./QuestionList.module.css";
+import type { QuestionType } from "./types";
 
 type QuestionList = {
-  questionsList: QuestionType[];
+  questionsList: QuestionType[]; // ATTENZIONE: QuestionType è cambiato!
 };
 
 const QuestionList = ({ questionsList }: QuestionList) => {
   const [responses, setResponses] = useState<Record<string, string>>({});
 
-  console.log(
-    "Lo stato in questo momento è: ",
-    JSON.stringify(responses, null, 2),
-  );
+  const handleSubmit = () => {
+    console.log(
+      "Lo stato che stai inviando è:\n",
+      JSON.stringify(responses, null, 2),
+    );
+    // Qui potresti inviare le risposte a un server o fare altre azioni
+  };
 
   return (
     <div className="QuestionList">
-      {questionsList.map((Question, idx) => (
+      {questionsList.map((question, idx) => (
         <QuestionComponent
           key={idx}
-          question={Question.question}
-          answers={Question.answers}
+          question={question}
           response={responses[idx]}
           setReponse={(value: string) => {
             setResponses({ ...responses, [idx]: value });
@@ -36,7 +38,9 @@ const QuestionList = ({ questionsList }: QuestionList) => {
       ))}
 
       <div className={classes.actions}>
-        <button className={classes.submit}>Consegna</button>
+        <button className={classes.submit} onClick={handleSubmit}>
+          Consegna
+        </button>
       </div>
     </div>
   );
