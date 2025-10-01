@@ -1,5 +1,5 @@
 import styles from "./UserInfoComponent.module.css";
-import Icona from "/src/assets/profilo.png";
+// import Icona from "/src/assets/profilo.png";
 
 type UserInfoComponentProps = {
   testo: string;
@@ -8,7 +8,7 @@ type UserInfoComponentProps = {
 const UserInfoComponent = ({ testo }: UserInfoComponentProps) => {
   return (
     <div className={styles.userInfo}>
-      <img src={Icona} alt="" className={styles.icona} />
+      {/* <img src={Icona} alt="" className={styles.icona} /> */}
       <p>{testo}</p>
     </div>
   );
