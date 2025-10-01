@@ -22,13 +22,13 @@ const QuestionComponent = ({
             name={question._id}
             value={answer.answer}
             className={styles.radio}
-            checked={answer.answer === response}
+            checked={response === answer.answer}
             onChange={() => {
               console.log("Domanda: ", question, "Hai selezionato: ", answer);
               setResponse(answer);
             }}
           />
-          {String(answer)}
+          {answer.answer}
         </label>
       ))}
     </fieldset>

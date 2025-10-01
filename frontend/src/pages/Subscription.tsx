@@ -46,8 +46,8 @@ export const Subscription = () => {
       <ClockComponent tempo={7200}></ClockComponent>
       <QuestionList
         questionsList={
-          Array.isArray(questions)
-            ? questions.map((question: QuestionType) => ({
+          Array.isArray(exam.questions)
+            ? exam.questions.map((question: QuestionType) => ({
                 ...question,
                 answers: question.answers.map((answer: Answer) => ({
                   ...answer,

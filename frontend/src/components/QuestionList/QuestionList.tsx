@@ -20,23 +20,26 @@ const QuestionList = ({ questionsList }: QuestionList) => {
 
   return (
     <div className="QuestionList">
-      {questionsList.map((question, idx) => (
-        <QuestionComponent
-          key={idx}
-          question={question}
-          response={responses[idx]}
-          setResponse={(value: Answer) => {
-            setResponses({ ...responses, [idx]: value });
-            console.log(
-              "Hai selezionato: ",
-              value,
-              "devo inserire questo valore nella domanda: ",
-              idx,
-            );
-          }}
-        />
-      ))}
-
+      {questionsList.map((question, idx) => {
+  const key = question._id ?? String(idx); // chiave stabile
+  return (
+    <QuestionComponent
+      key={key}
+      question={question}
+      response={responses[key]}   // usa la stessa chiave
+      setResponse={(value: Answer) => {
+        setResponses({ ...responses, [key]: value.answer });
+        console.log(
+          "Hai selezionato: ",
+          value,
+          "devo inserire questo valore nella domanda: ",
+          key,
+        );
+      }}
+    />
+  );
+})}
+      
       <div className={classes.actions}>
         <button className={classes.submit} onClick={handleSubmit}>
           Consegna
