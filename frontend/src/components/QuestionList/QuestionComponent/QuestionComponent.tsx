@@ -19,7 +19,7 @@ const QuestionComponent = ({
         <label key={answer._id}>
           <input
             type="radio"
-            name={question._id}
+            name={answer._id}
             value={answer.answer}
             className={styles.radio}
             checked={answer.answer === response}
