@@ -13,12 +13,21 @@ router.get('/', async (ctx) => {
 
 router.get('/:id', async (ctx) => {
     const id = ctx.params.id;
-    let exams = [];
-    const exam = JSON.parse(JSON.stringify(questions));
-    exams.push(exam);
+    const exams = questions;
     const foundExam = exams.find((e) => e._id === id);
     ctx.body = foundExam || { message: 'Exam not found' };
     ctx.status = foundExam ? 200 : 404;
+});
+
+router.post('/', async (ctx) => {
+    const newExam = {
+        _id: "exam_003",
+        name: "Quiz Generale",
+        schedule_date: "2024-01-15",
+        max_time: 1800,
+    }
+    ctx.body = "Esame Creato";
+    ctx.status = 200;
 });
 
 export default router;
