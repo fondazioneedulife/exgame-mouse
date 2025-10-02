@@ -31,9 +31,9 @@ router.get("/exams", async (ctx) => {
 
 router.get(`/exams/:id`, async (ctx) => {
   ctx.body =
-    ExamsMocks._id === ctx.params.id
+    ExamsMocks.find((exam) => exam._id === ctx.params.id) || (ctx.params.id === "exam_001"
       ? ExamsMocks
-      : { message: "Exam not found" };
+      : { message: "Exam not found" });
   ctx.status = 200;
 });
 
