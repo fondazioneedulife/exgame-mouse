@@ -1,3 +1,2 @@
-import { config } from "./config/config";
+import Koa from 'koa';
 
-console.log(config.PORT);
