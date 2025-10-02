@@ -1,4 +1,6 @@
-export const questions = {
+import type { ExamType } from "../components/QuestionList/types";
+
+export const questions: ExamType = {
   _id: "exam_001",
   name: "Quiz Generale",
   schedule_date: "2024-01-15",

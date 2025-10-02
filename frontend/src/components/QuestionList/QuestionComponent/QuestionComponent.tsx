@@ -4,19 +4,19 @@ import styles from "./QuestionComponent.module.css";
 export type QuestionComponentProp = {
   question: QuestionType;
   response: string;
-  setReponse: (value: string) => void;
+  setResponse: (value: string) => void;
 };
 
 const QuestionComponent = ({
   question,
   response,
-  setReponse,
+  setResponse,
 }: QuestionComponentProp) => {
   return (
     <fieldset className={styles.form}>
       <h3 className={styles.question}>{question.text} ? </h3>
-      {question.answers.map((answer, idx) => (
-        <label key={idx}>
+      {question.answers.map((answer) => (
+        <label key={answer._id}>
           <input
             type="radio"
             name={question._id}
@@ -25,7 +25,7 @@ const QuestionComponent = ({
             checked={answer._id === response}
             onChange={() => {
               console.log("Domanda: ", question, "Hai selezionato: ", answer);
-              setReponse(answer._id);
+              setResponse(answer._id);
             }}
           />
           {answer.answer}
