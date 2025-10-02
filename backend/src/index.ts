@@ -8,6 +8,14 @@ import {config} from "./config/config";
 const app = new Koa();
 const router = new Router();
 
+app.use(async (ctx, next) => {
+  const start = Date.now();
+  await next();
+  const ms = Date.now() - start;
+  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+  ctx.set("X-Response-Time", `${ms}ms`);
+});
+
 app.use(bodyParser());
 
 router.get("/", async (ctx) => {
