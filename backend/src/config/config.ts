@@ -23,7 +23,6 @@ const getConfig = (): IConfig => {
   const config = {
     HOST: process.env["APP_HOST"] || "localhost",
     PORT: process.env["APP_PORT"] || "3000",
-
     DB_URL: process.env["MONGODB_URI"] || "mongodb://localhost:27017/test",
     FRONTEND_APP: process.env["FRONTEND_APP"] || "http://localhost:5173",
   };
