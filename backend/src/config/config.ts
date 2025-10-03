@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 // Il metodo .config() legge il file .env e le aggiunge a process.env
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 // Interfaccia per definire la struttura delle variabili d'ambiente
 // Questo è opzionale ma utile con TypeScript per avere tipizzazione e autocompletamento
@@ -23,6 +23,7 @@ const getConfig = (): IConfig => {
   const config = {
     HOST: process.env["APP_HOST"] || "localhost",
     PORT: process.env["APP_PORT"] || "3000",
+
     DB_URL: process.env["MONGODB_URI"] || "mongodb://localhost:27017/test",
     FRONTEND_APP: process.env["FRONTEND_APP"] || "http://localhost:5173",
   };

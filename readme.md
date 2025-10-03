@@ -18,6 +18,10 @@ Questo progetto è un ["monorepo"](https://docs.npmjs.com/cli/v7/using-npm/works
 
 L'installazione di tutte le dipendenze si effettua lanciando il comando: `npm install` dalla directory principale del progetto.
 
+### Configurazione dell'app di backend
+
+L'applicazione di backend utilizza delle variabili d'ambiente. Quando installi l'applicazione la prima volta, crea un file `backend/.env` e copia il contenuto del file `backend/.env.example`.
+
 ### Connessione al database
 
 Se hai un **database Mongo** attivo sulla tua macchina, usa quello. La connessione è impostata sui parametri di default `mongodb://localhost:27017/exgame`.
