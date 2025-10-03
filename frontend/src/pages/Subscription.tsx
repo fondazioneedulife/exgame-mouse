@@ -6,33 +6,33 @@ import QuestionList from "../components/QuestionList/QuestionList";
 import type { ExamType } from "../components/QuestionList/types";
 import UserInfoComponent from "../components/UserInfo/UserInfoComponent";
 import { chips } from "../mocks/chips";
-import { questions } from "../mocks/questions";
+// import { questions } from "../mocks/questions";
 
 /**
  * Invoca una API e restituisce i dati.
  */
-const useApiData = (url: string, defaultState: ExamType) => {
-  const [state, setState] = useState<ExamType>(defaultState);
+const useApiData = (url: string, defaultState: ExamType[]) => {
+  const [state, setState] = useState<ExamType[]>(defaultState);
 
   useEffect(() => {
     // DA RIPRISTINARE quando sarà pronta l'api
-    // fetch(url)
-    //   .then((response) => response.json())
-    //   .then((response) => {
-    //     setState(response);
-    //   });
+        fetch(url)
+       .then((response) => response.json())
+       .then((response) => {
+         setState(response);
+       })
+       .catch((error) => {
+         console.error("Errore nel fetch:", error);
+       });
 
-    setState(questions); // DA RIMUOVERE quando sarà pronta l'api
+    // setState(questions); // DA RIMUOVERE quando sarà pronta l'api
   }, []);
 
   return state;
 };
 
 export const Subscription = () => {
-  const exam = useApiData(
-    "http://localhost:8080/exams/matematica",
-    {} as ExamType,
-  );
+  const exams = useApiData("http://localhost:3000/api/exams", []);
 
   // ordinaIlCaffè().then(beviIlCaffe).then(pagaIlCaffe)
 
@@ -42,7 +42,9 @@ export const Subscription = () => {
       <Description classe="1A" tipoDiTest="Matematica"></Description>
       <ChipList chips={chips}></ChipList>
       <ClockComponent tempo={7200}></ClockComponent>
-      <QuestionList questionsList={exam.questions || []} />
+      {exams.map((exam, index) => (
+        <QuestionList key={index} questionsList={exam.questions || []} />
+      ))}
     </>
   );
 };
