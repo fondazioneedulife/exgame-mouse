@@ -1,25 +1,5 @@
-export type Answer = {
-  _id: string;
-  answer: string;
-  is_correct: boolean;
-};
+import type {Answer, QuestionType, QuestionComponentProp, ExamType} from "../../../../api/types"
 
-export type QuestionType = {
-  _id: string;
-  text: string;
-  type: string;
-  answers: Answer[];
-};
-
-export type ExamType = {
-  _id: string;
-  name: string;
-  schedule_date: string;
-  max_time: number;
-  questions: QuestionType[];
-};
-
-export type QuestionComponentProp = QuestionType & {
-  response: string;
-  setReponse: (value: string) => void;
-};
+export type {
+  Answer, QuestionType, QuestionComponentProp, ExamType
+}
