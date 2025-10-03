@@ -23,3 +23,19 @@ export type QuestionComponentProp = QuestionType & {
   response: string;
   setReponse: (value: string) => void;
 };
+
+export type Response = {
+  answer_id: string;
+};
+
+export type SubscriptionTypeQuestion = {
+  question_id: string;
+  responses:Response[];
+};
+
+export type SubscriptionType = {
+  _id: string;
+  exam_id: string;
+  student_id: string;
+  questions: SubscriptionTypeQuestion[];
+}
