@@ -1,4 +1,7 @@
-export const exams = [
+import type {ExamType} from "../../../api/types"
+
+
+export const exams: ExamType []= [
   {
     _id: "exam_001",
     name: "Quiz Generale",

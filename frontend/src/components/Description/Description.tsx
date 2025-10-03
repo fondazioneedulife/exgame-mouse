@@ -14,7 +14,7 @@ const Description = ({ classe,tipoDiTest }: DescriptionProps) => {
  
   return (
     <p className={styles.descrizione}>
-      Test di {tipoDiTest}, - Classe {classe}
+      Test di {tipoDiTest} - Classe {classe}
     </p>
   );
 };
