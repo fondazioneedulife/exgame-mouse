@@ -2,13 +2,14 @@ import { useState } from "react";
 import QuestionComponent from "./QuestionComponent/QuestionComponent";
 import classes from "./QuestionList.module.css";
 import type { QuestionType } from "./types";
+import type { AnswerId, QuestionId, SubscriptionType } from "../../../../api/types";
 
 type QuestionList = {
   questionsList: QuestionType[]; // ATTENZIONE: QuestionType è cambiato!
 };
 
 const QuestionList = ({ questionsList }: QuestionList) => {
-  const [responses, setResponses] = useState<Record<string, string>>({});
+  const [responses, setResponses] = useState<Record<QuestionId, AnswerId>>({});
 
   const handleSubmit = () => {
     console.log(
@@ -16,7 +17,25 @@ const QuestionList = ({ questionsList }: QuestionList) => {
       JSON.stringify(responses, null, 2),
     );
     // Qui potresti inviare le risposte a un server o fare altre azioni
-  };
+
+    const requestBody: SubscriptionType = {
+      _id: "subscription_id_example",
+      exam_id: "exam_id_example",
+      student_id:"student_id_example",
+      questions: Object.entries(responses).map(([questionId, answerId]) => ({
+        question_id: questionId,
+        responses: [{answer_id: answerId }],
+      })),
+    };
+
+    fetch("http://localhost:3000/api/subscriptions", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(responses),
+    });
+  };  
 
   return (
     <div className="QuestionList">
