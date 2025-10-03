@@ -1,0 +1,3 @@
+apis:
+  api/api.yml:
+    alias: exgame-api-documentation

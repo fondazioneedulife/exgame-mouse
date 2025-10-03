@@ -1,0 +1,202 @@
+{
+    "version": "2.0.0",
+    "runtimeConfiguration": {
+        "environment": "default",
+        "laxTestingModeEnabled": false,
+        "apiConnectivityCheck": true,
+        "logLevel": "error",
+        "logDestination": "stdout+platform",
+        "logMaxFileSize": 2147483648,
+        "requestHeaderNameRequestId": "x-scan-request-id",
+        "requestHeaderNameScenarioId": "x-scan-scenario-id",
+        "requestHeaderNameRequestType": "x-scan-request-type",
+        "requestFlowrate": 100,
+        "requestTimeout": 30,
+        "requestTlsInsecureSkipVerify": true,
+        "responseFollowRedirection": false,
+        "responseMaxBodySizeScan": 10485760,
+        "happyPathOnly": false,
+        "maxRequestRetryAttempts": 5,
+        "maxScanDuration": 1800,
+        "memoryLimit": 2147483648,
+        "memoryTimeSpan": 10,
+        "reportMaxRequestSizeHappyPath": 8092,
+        "reportMaxRequestSizeTest": 8092,
+        "reportIncludeRequestBody": true,
+        "reportIncludeResponseBody": true,
+        "reportMaxHttpResponseSizeHappyPath": 8092,
+        "reportMaxBodySizeHappyPath": 8092,
+        "reportMaxHttpResponseSizeTest": 8092,
+        "reportMaxBodySizeTest": 8092,
+        "reportIssuesOnly": false,
+        "reportMaxIssues": 1000,
+        "reportMaxSize": 20971520,
+        "reportGenerateCurlCommand": true,
+        "normalizeServerUrls": true
+    },
+    "customizations": {
+        "happyPaths": {
+            "retry": 1,
+            "responsePolicy": {
+                "httpStatusExpected": true,
+                "mustBeConformant": true
+            },
+            "httpStatusExpected": []
+        },
+        "tests": {
+            "responsePolicy": {
+                "httpStatusExpected": true,
+                "mustBeConformant": true
+            }
+        }
+    },
+    "operations": {
+        "/exams/{examId}:get": {
+            "operationId": "/exams/{examId}:get",
+            "scenarios": [
+                {
+                    "key": "happy.path",
+                    "fuzzing": true,
+                    "requests": [
+                        {
+                            "$ref": "#/operations/~1exams~1{examId}:get/request",
+                            "fuzzing": true
+                        }
+                    ]
+                }
+            ],
+            "request": {
+                "operationId": "/exams/{examId}:get",
+                "request": {
+                    "type": "42c",
+                    "details": {
+                        "url": "{{host}}/exams/{examId}",
+                        "method": "GET",
+                        "paths": [
+                            {
+                                "key": "examId",
+                                "value": "rdtenwyqwrfwfrrsvxwksnyfdznvyphg"
+                            }
+                        ]
+                    }
+                },
+                "defaultResponse": "200",
+                "responses": {
+                    "200": {
+                        "expectations": {
+                            "httpStatus": 200
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions:put": {
+            "operationId": "/subscriptions:put",
+            "scenarios": [
+                {
+                    "key": "happy.path",
+                    "fuzzing": true,
+                    "requests": [
+                        {
+                            "$ref": "#/operations/~1subscriptions:put/request",
+                            "fuzzing": true
+                        }
+                    ]
+                }
+            ],
+            "request": {
+                "operationId": "/subscriptions:put",
+                "request": {
+                    "type": "42c",
+                    "details": {
+                        "url": "{{host}}/subscriptions",
+                        "method": "PUT",
+                        "headers": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "requestBody": {
+                            "mode": "json",
+                            "json": {
+                                "_id": "rqnhlbytxdlycbvtydesvlzyehzudqql",
+                                "exam_id": "kfyvgbnjtchbzptuqmfxywiwsitamjdp",
+                                "questions": [
+                                    {
+                                        "question_id": "koriungumtlfmsgdzgvhqtwhhxbfygpf",
+                                        "responses": [
+                                            {
+                                                "answer_id": "ivxeawhajesaknmdrqsfzphavctajgrh"
+                                            },
+                                            {
+                                                "answer_id": "nuczpfqqaloaxxfurmplpkdwxmznhztj"
+                                            },
+                                            {
+                                                "answer_id": "emaiajyuprdwqlpqwixsieybroigjgsx"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "question_id": "ihrolerfiiudacwzvanydwuxavuqrrya",
+                                        "responses": [
+                                            {
+                                                "answer_id": "kvyjwmyrffejndeivxryzitvhjxkbdax"
+                                            },
+                                            {
+                                                "answer_id": "trvnuygfqsnvysrjcwiufjhlvcvrlbkn"
+                                            },
+                                            {
+                                                "answer_id": "vkjeuibpwiyrvtdtximnozddvcysbayr"
+                                            },
+                                            {
+                                                "answer_id": "ihlpdnaenpflnwoaqfmrppfxmxmrzjdg"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "question_id": "xfnvdajskvtrgjxiauvfihlzwbkxqkfv",
+                                        "responses": [
+                                            {
+                                                "answer_id": "mwnxcxucmxdipbtxyjaheluxcokpnman"
+                                            },
+                                            {
+                                                "answer_id": "oysbwtgwenlxfkhtknuxailuckxcxpze"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "student_id": "nbriozbiuljgskfzbmpacsierequbewl"
+                            }
+                        }
+                    }
+                },
+                "defaultResponse": "201",
+                "responses": {
+                    "201": {
+                        "expectations": {
+                            "httpStatus": 201
+                        }
+                    },
+                    "400": {
+                        "expectations": {
+                            "httpStatus": 400
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "environments": {
+        "default": {
+            "variables": {
+                "host": {
+                    "from": "environment",
+                    "name": "SCAN42C_HOST",
+                    "required": false,
+                    "default": "http://localhost:8080"
+                }
+            }
+        }
+    }
+}
