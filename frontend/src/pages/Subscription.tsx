@@ -18,8 +18,8 @@ const useApiData = (url: string, defaultState: ExamType[]) => {
     // DA RIPRISTINARE quando sarà pronta l'api
         fetch(url)
        .then((response) => response.json())
-       .then((response) => {
-         setState(response);
+       .then((response : ExamType) => {
+         setState(response ? [response] : []);
        })
        .catch((error) => {
          console.error("Errore nel fetch:", error);
