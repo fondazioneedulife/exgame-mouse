@@ -15,6 +15,13 @@ const QuestionList = ({ questionsList }: QuestionList) => {
       "Lo stato che stai inviando è:\n",
       JSON.stringify(responses, null, 2),
     );
+    fetch("http://localhost:3000/api/subscriptions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(responses),
+    });
     // Qui potresti inviare le risposte a un server o fare altre azioni
   };
 
