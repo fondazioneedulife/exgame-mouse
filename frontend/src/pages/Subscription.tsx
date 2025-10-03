@@ -6,7 +6,6 @@ import QuestionList from "../components/QuestionList/QuestionList";
 import type { ExamType } from "../../../api/types";
 import UserInfoComponent from "../components/UserInfo/UserInfoComponent";
 import { chips } from "../mocks/chips";
-//import { questions } from "../mocks/questions";
 
 /**
  * Invoca una API e restituisce i dati.
