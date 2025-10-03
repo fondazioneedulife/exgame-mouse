@@ -34,7 +34,7 @@ const useApiData = (url: string, defaultState: ExamType[]) => {
 };
 
 export const Subscription = () => {
-  const exams = useApiData("http://localhost:3000/api/exams", []); // meglio non usare `{} as ExamType[]`
+  const exams = useApiData("http://localhost:3000/api/exams/", []);
 
   return (
     <>
