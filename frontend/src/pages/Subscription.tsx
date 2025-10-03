@@ -3,10 +3,10 @@ import ChipList from "../components/ChipList/ChipList";
 import ClockComponent from "../components/Clock/ClockComponent";
 import Description from "../components/Description/Description";
 import QuestionList from "../components/QuestionList/QuestionList";
-import type { ExamType } from "../components/QuestionList/types";
+import type { ExamType } from "../../../api/types";
 import UserInfoComponent from "../components/UserInfo/UserInfoComponent";
 import { chips } from "../mocks/chips";
-import { questions } from "../mocks/questions";
+//import { questions } from "../mocks/questions";
 
 /**
  * Invoca una API e restituisce i dati.
@@ -15,14 +15,15 @@ const useApiData = (url: string, defaultState: ExamType) => {
   const [state, setState] = useState<ExamType>(defaultState);
 
   useEffect(() => {
-    // DA RIPRISTINARE quando sarà pronta l'api
-    // fetch(url)
-    //   .then((response) => response.json())
-    //   .then((response) => {
-    //     setState(response);
-    //   });
+    fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        setState(response);
+      })
+      .catch((error) => {
+        console.error("Errore nel fetch:", error);
+      });
 
-    setState(questions); // DA RIMUOVERE quando sarà pronta l'api
   }, []);
 
   return state;
@@ -30,15 +31,13 @@ const useApiData = (url: string, defaultState: ExamType) => {
 
 export const Subscription = () => {
   const exam = useApiData(
-    "http://localhost:8080/exams/matematica",
+    "http://localhost:3000/api/exams/exam_001",
     {} as ExamType,
   );
 
-  // ordinaIlCaffè().then(beviIlCaffe).then(pagaIlCaffe)
-
   return (
     <>
-      <UserInfoComponent testo="Alberto Molon"></UserInfoComponent>
+      <UserInfoComponent testo="Elisa Pozzatti"></UserInfoComponent>
       <Description classe="1A" tipoDiTest="Matematica"></Description>
       <ChipList chips={chips}></ChipList>
       <ClockComponent tempo={7200}></ClockComponent>

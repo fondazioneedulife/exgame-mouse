@@ -1,4 +1,4 @@
-import type { ExamType } from "../components/QuestionList/types";
+import type { ExamType } from "../../../api/types";
 
 export const questions: ExamType = {
   _id: "exam_001",

@@ -24,7 +24,7 @@ const getConfig = (): IConfig => {
     HOST: process.env["APP_HOST"] || "localhost",
     PORT: process.env["APP_PORT"] || "3000",
     DB_URL: process.env["MONGODB_URI"] || "mongodb://localhost:27017/test",
-    FRONTEND_APP: process.env["FRONTEND_APP"] || "http://localhost:3000",
+    FRONTEND_APP: process.env["FRONTEND_APP"] || "http://localhost:5173",
   };
 
   // Esempio di validazione: lancia un errore se una variabile cruciale non è definita
