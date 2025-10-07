@@ -47,6 +47,8 @@ const QuestionList = ({ questionsList }: QuestionList) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
+    }).finally(() => {
+      navigate("/");
     });
   };
 

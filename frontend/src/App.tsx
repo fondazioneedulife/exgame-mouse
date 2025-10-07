@@ -1,6 +1,8 @@
 import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import { MySubscriptions } from "./pages/student/mySubscriptions";
+import { Routes, Route, Link } from "react-router";
+import { Subscription } from "./pages/Subscription";
 
 function App() {
   return (
@@ -12,14 +14,14 @@ function App() {
           </a>
           <ul>
             <li>
-              <a href="#" className={styles.sx}>
+              <Link to="/subscriptions" className={styles.sx}>
                 Dashboard
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className={styles.sx}>
+              <Link to="/subscriptions" className={styles.sx}>
                 Esami
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -27,14 +29,14 @@ function App() {
         <div className={styles.right}>
           <ul>
             <li>
-              <a href="#" className={styles.dx}>
+              <Link to="/subscriptions" className={styles.dx}>
                 Albe Molon
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className={styles.dx}>
+              <Link to="/subscriptions" className={styles.dx}>
                 Logout
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -42,8 +44,10 @@ function App() {
 
       <div className={styles.main}>
         <div className={styles.content}>
-          {/* <Subscription /> */}
-          <MySubscriptions />
+          <Routes>
+            <Route index element={<MySubscriptions/>}/>
+            <Route path="/subscriptions" element={<Subscription/>}/>
+          </Routes>
         </div>
       </div>
     </>

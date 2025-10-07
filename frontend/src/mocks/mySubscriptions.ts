@@ -1,4 +1,12 @@
-export const mySubscriptions = [
+export type SubscriptionType = {
+  _id: string;
+  exam: string;
+  completed: boolean;
+  date: string;
+  grade?: number;
+};
+
+export const mySubscriptions: SubscriptionType[] = [
   {
     _id: "sub_001",
     exam: "Matematica - 1A",
@@ -10,6 +18,7 @@ export const mySubscriptions = [
     exam: "Italiano - 2B",
     completed: true,
     date: "15/05/2024",
+    grade: 9,
   },
   {
     _id: "sub_003",
@@ -22,6 +31,7 @@ export const mySubscriptions = [
     exam: "Storia - 1D",
     completed: true,
     date: "05/06/2024",
+    grade: 2,
   },
   {
     _id: "sub_005",
@@ -34,6 +44,7 @@ export const mySubscriptions = [
     exam: "Inglese - 3F",
     completed: true,
     date: "30/05/2024",
+    grade: 9,
   },
   {
     _id: "sub_007",
@@ -46,6 +57,7 @@ export const mySubscriptions = [
     exam: "Chimica - 2H",
     completed: true,
     date: "12/06/2024",
+    grade: 10,
   },
   {
     _id: "sub_009",
@@ -58,5 +70,6 @@ export const mySubscriptions = [
     exam: "Arte - 1J",
     completed: true,
     date: "18/05/2024",
+    grade: 9,
   },
 ];
