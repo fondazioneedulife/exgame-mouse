@@ -6,10 +6,10 @@ export const MySubscriptions: React.FC = () => {
   const esamiSostenuti = mySubscriptions.filter(sub => sub.completed);
   return (
     <>
-      <h2>Le mie iscrizioni</h2>
-      <Table subscription={esamiDaSostenere} />
+      <h2>Esami da sostenere</h2>
+      <Table subscriptions={esamiDaSostenere} />
       <h2>Esami sostenuti</h2>
-      <Table subscription={esamiSostenuti} />
+      <Table subscriptions={esamiSostenuti} />
     </>
   );
 };
