@@ -1,6 +1,7 @@
 import { IconEdit, IconEye, IconPlayerPlay } from "@tabler/icons-react";
 import styles from "./Table.module.css";
 import type { SubscriptionType } from "../../mocks/mySubscriptions";
+import { Link } from "react-router";
 
 
 export const Table = ({ subscriptions }:{subscriptions:SubscriptionType[]}) => {
@@ -24,19 +25,19 @@ export const Table = ({ subscriptions }:{subscriptions:SubscriptionType[]}) => {
         <div className={`${styles.cell} ${styles.actions}`}>
           <ul>
             <li>
-              <a href="" title="Visualizza esame">
+              <Link to="/subscription" title="Visualizza esame">
                 <IconEye stroke={2} />
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="" title="Inizia esame">
+              <Link to="/subscription" title="Inizia esame">
                 <IconPlayerPlay stroke={2} />
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="" title="Modifica esame">
+              <Link to="/subscription" title="Modifica esame">
                 <IconEdit />
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

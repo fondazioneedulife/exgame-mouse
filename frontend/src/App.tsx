@@ -1,15 +1,17 @@
+import { Link, Route, Routes } from "react-router";
 import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import { MySubscriptions } from "./pages/student/mySubscriptions";
+import { Subscription } from "./pages/Subscription";
 
 function App() {
   return (
     <>
       <nav className={styles.navbar}>
         <div className={styles.left}>
-          <a href="">
+          <Link to="/">
             <img src={Logo} alt="" className={styles.logo} />
-          </a>
+          </Link>
           <ul>
             <li>
               <a href="#" className={styles.sx}>
@@ -42,8 +44,10 @@ function App() {
 
       <div className={styles.main}>
         <div className={styles.content}>
-          {/* <Subscription /> */}
-          <MySubscriptions />
+          <Routes>
+            <Route index element={<MySubscriptions />} />
+            <Route path="subscription" element={<Subscription />} />
+          </Routes>
         </div>
       </div>
     </>
