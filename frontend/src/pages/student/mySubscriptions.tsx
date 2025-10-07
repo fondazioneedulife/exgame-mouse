@@ -1,5 +1,5 @@
 import styles from "../../components/Table/Table.module.css";
-import { Table } from "../../components/Table/table";
+import { Table } from "../../components/Table/Table";
 import { mySubscriptions } from "../../mocks/mySubscriptions";
 
 export const MySubscriptions: React.FC = () => {
