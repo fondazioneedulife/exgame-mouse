@@ -4,20 +4,9 @@ import styles from "../../components/Table/Table.module.css";
 import React from "react";
 import { mySubscriptions } from "../../mocks/mySubscriptions";
 
-const exams = mySubscriptions.filter((sub) => sub.completed).map((sub => ({
-  subject: sub.exam,
-  class:sub.class,
-  date: sub.date,})));
-
-  const completedExams = mySubscriptions.filter((sub) => sub.completed).map((sub) => ({
-    subject: sub.exam,
-    mark: sub.mark,
-    class: sub.class,
-    date: sub.date,
-  }));
-
 
 export const MySubscriptions: React.FC = () => {
+
   return (
     <>
       <h2>Le mie iscrizioni</h2>
@@ -30,11 +19,14 @@ export const MySubscriptions: React.FC = () => {
             {/* Azioni */}
           </div>
         </div>
-
-        <TableIscription Exam="Filosofia" Date="20/06/2024" Class="1A" />
-        <TableIscription Exam="Letteratura" Date="15/05/2024" Class="2B" />
-        <TableIscription Exam="Informatica" Date="10/07/2024" Class="3C" />
-        <TableIscription Exam="Diritto" Date="05/06/2024" Class="1D" />
+        {mySubscriptions.map((subscription) => (
+          <TableIscription
+            key={subscription._id}
+            Exam={subscription.exam}
+            Date={subscription.date}
+            Class={subscription.class}
+          />
+        ))}
       </div>
 
       <h2>Esami sostenuti</h2>
@@ -49,30 +41,15 @@ export const MySubscriptions: React.FC = () => {
           </div>
         </div>
 
-        <TableExams
-          ExamGeneral="Matematica"
-          DateGeneral="20/06/2024"
-          MarkGeneral="10"
-          ClassGeneral="1A"
-        />
-        <TableExams
-          ExamGeneral="Italiano"
-          DateGeneral="15/05/2024"
-          MarkGeneral="8"
-          ClassGeneral="2B"
-        />
-        <TableExams
-          ExamGeneral="Scienze"
-          DateGeneral="10/07/2024"
-          MarkGeneral="7"
-          ClassGeneral="3C"
-        />
-        <TableExams
-          ExamGeneral="Storia"
-          DateGeneral="05/06/2024"
-          MarkGeneral="9"
-          ClassGeneral="1D"
-        />
+        {mySubscriptions.map((subscription) => (
+          <TableExams
+            key={subscription._id}
+            ExamGeneral={subscription.exam}
+            DateGeneral={subscription.date}
+            MarkGeneral={subscription.mark}
+            ClassGeneral={subscription.class}
+          />
+        ))}
       </div>
     </>
   );
