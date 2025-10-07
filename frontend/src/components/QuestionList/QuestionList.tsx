@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import type {
   AnswerId,
   QuestionId,
@@ -15,6 +16,7 @@ type QuestionList = {
 
 const QuestionList = ({ questionsList }: QuestionList) => {
   const [responses, setResponses] = useState<Record<QuestionId, AnswerId>>({});
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     console.log(
@@ -47,6 +49,8 @@ const QuestionList = ({ questionsList }: QuestionList) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
+    }).finally(() => {
+      navigate("/");
     });
   };
 
