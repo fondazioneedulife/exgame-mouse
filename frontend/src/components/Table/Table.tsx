@@ -1,38 +1,45 @@
 import { IconEdit, IconEye, IconPlayerPlay } from "@tabler/icons-react";
 import styles from "../../components/Table/Table.module.css";
 import type { mySubscription } from "../../mocks/mySubscriptions";
+import { Link } from "react-router";
 
-export const Table = ({ subscription }: { subscription: mySubscription[] }) => {
+
+
+
+export const Table = ({ subscriptions }: { subscriptions: mySubscription[] }) => {
+    const grade = subscriptions.find((sub) => sub.grade !== undefined)?.grade;
     return (
         <>
             <div className={styles.table}>
                 <div className={styles.header}>
                     <div className={styles.cell}>Esame</div>
                     <div className={styles.cell}>Data</div>
+                    {grade ? <div className={styles.cell}>Voto</div>: null}
                     <div className={`${styles.cell} ${styles.actions}`}>
                         {/** Azioni */}
                     </div>
                 </div>
-                {subscription.map(sub => (
+                {subscriptions.map(sub => (
                     <div className={styles.row} key={sub._id}>
                         <div className={styles.cell}>{sub.exam}</div>
                         <div className={styles.cell}>{sub.date}</div>
+                        {grade ? <div className={styles.cell}>{sub.grade}</div> : null}
                         <div className={`${styles.cell} ${styles.actions}`}>
                             <ul>
                                 <li>
-                                    <a href="" title="Visualizza esame">
+                                    <Link to="/subscriptions" title="Visualizza esame">
                                         <IconEye stroke={2} />
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="" title="Inizia esame">
+                                    <Link to="/subscriptions" title="Inizia esame">
                                         <IconPlayerPlay stroke={2} />
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="" title="Modifica esame">
+                                    <Link to="/subscriptions" title="Modifica esame">
                                         <IconEdit />
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

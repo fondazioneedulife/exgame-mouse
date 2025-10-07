@@ -7,9 +7,9 @@ export const MySubscriptions: React.FC = () => {
   return (
     <>
       <h2>Le mie iscrizioni</h2>
-      <Table subscription={esamiDaSostenere} />
+      <Table subscriptions={esamiDaSostenere} />
       <h2>Esami sostenuti</h2>
-      <Table subscription={esamiSostenuti} />
+      <Table subscriptions={esamiSostenuti} />
     </>
   );
 };

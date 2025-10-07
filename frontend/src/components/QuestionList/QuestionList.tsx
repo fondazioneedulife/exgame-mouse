@@ -8,6 +8,7 @@ import type {
 import QuestionComponent from "./QuestionComponent/QuestionComponent";
 import classes from "./QuestionList.module.css";
 import type { QuestionType } from "./types";
+import { useNavigate } from "react-router";
 
 type QuestionList = {
   questionsList: QuestionType[]; // ATTENZIONE: QuestionType è cambiato!
@@ -15,6 +16,8 @@ type QuestionList = {
 
 const QuestionList = ({ questionsList }: QuestionList) => {
   const [responses, setResponses] = useState<Record<QuestionId, AnswerId>>({});
+
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     console.log(
@@ -47,6 +50,8 @@ const QuestionList = ({ questionsList }: QuestionList) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
+    }).finally(() => {
+      navigate("/")
     });
   };
 
