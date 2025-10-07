@@ -2,6 +2,20 @@ import { TableExams } from "../../components/Table/TableExams";
 import { TableIscription } from "../../components/Table/TableIscription";
 import styles from "../../components/Table/Table.module.css";
 import React from "react";
+import { mySubscriptions } from "../../mocks/mySubscriptions";
+
+const exams = mySubscriptions.filter((sub) => sub.completed).map((sub => ({
+  subject: sub.exam,
+  class:sub.class,
+  date: sub.date,})));
+
+  const completedExams = mySubscriptions.filter((sub) => sub.completed).map((sub) => ({
+    subject: sub.exam,
+    mark: sub.mark,
+    class: sub.class,
+    date: sub.date,
+  }));
+
 
 export const MySubscriptions: React.FC = () => {
   return (
