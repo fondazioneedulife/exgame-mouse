@@ -1,3 +1,11 @@
+export type mySubscription = {
+  _id: string;
+  exam: string;
+  completed: boolean;
+  date: string;
+  grade?: number;
+};
+
 export const mySubscriptions = [
   {
     _id: "sub_001",
@@ -10,6 +18,7 @@ export const mySubscriptions = [
     exam: "Italiano - 2B",
     completed: true,
     date: "15/05/2024",
+    grade: 9,
   },
   {
     _id: "sub_003",
