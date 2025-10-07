@@ -45,12 +45,10 @@ function App() {
 
       <div className={styles.main}>
         <div className={styles.content}>
-
           <Routes>
-           <Route index element= {<Subscription/>} />
-            <Route path="/mySubscriptions" element= {<MySubscriptions/>} />
+            <Route index element={<MySubscriptions />} />
+            <Route path="/Subscription" element={<Subscription />} />
           </Routes>
-
         </div>
       </div>
     </>
