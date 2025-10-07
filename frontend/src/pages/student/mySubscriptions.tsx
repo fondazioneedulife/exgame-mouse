@@ -1,174 +1,29 @@
-import { IconEdit, IconEye, IconPlayerPlay } from "@tabler/icons-react";
-import styles from "../../components/Table/Table.module.css";
+import { Table } from "../../components/Table/Table";
+import { mySubscriptions } from "../../mocks/mySubscriptions";
 
 export const MySubscriptions: React.FC = () => {
+  
+  // const esamiDaSostenere = mySubscriptions.filter(mySubscriptions => mySubscriptions.completed === false);
+  
+  // const esamiSostenuti = mySubscriptions.filter(mySubscriptions => mySubscriptions.completed === true);
+
+  const esamiDaSostenere = mySubscriptions.filter(sub => !sub.completed);
+  
+  const esamiSostenuti = mySubscriptions.filter(sub => sub.completed);
+
   return (
     <>
       <h2>Le mie iscrizioni</h2>
 
-      <div className={styles.table}>
-        <div className={styles.header}>
-          <div className={styles.cell}>Esame</div>
-          <div className={styles.cell}>Data</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            {/** Azioni */}
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Matematica - 1A</div>
-          <div className={styles.cell}>20/06/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Italiano - 2B</div>
-          <div className={styles.cell}>15/05/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Scienze - 3C</div>
-          <div className={styles.cell}>10/07/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      {/* Tabella con gli esami da sostenere */}
+
+      <Table data={esamiDaSostenere}/>
 
       <h2>Esami sostenuti</h2>
 
-      <div className={styles.table}>
-        <div className={styles.header}>
-          <div className={styles.cell}>Esame</div>
-          <div className={styles.cell}>Esito</div>
-          <div className={styles.cell}>Data</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            {/** Azioni */}
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Matematica - 1A</div>
-          <div className={styles.cell}>10</div>
-          <div className={styles.cell}>20/06/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Italiano - 2B</div>
-          <div className={styles.cell}>6</div>
-          <div className={styles.cell}>15/05/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Scienze - 3C</div>
-          <div className={styles.cell}>4</div>
-          <div className={styles.cell}>10/07/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      {/* Tabella con gli esami sostenuti */}
+
+      <Table data={esamiSostenuti}/>
     </>
   );
 };

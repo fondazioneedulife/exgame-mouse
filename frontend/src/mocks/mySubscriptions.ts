@@ -1,4 +1,15 @@
-export const mySubscriptions = [
+// con i type descriviamo gli elementi, quali tipi di dati contengono
+export type SubscriptionType = {
+  _id: string;
+  exam: string;
+  completed: boolean;
+  date: string;
+  grade?: number; //con il punto di domanda indichiamo che si tratta di una proprità 
+  // opzionale, non obbligatoria, che non torna in tutti gli oggetti dell'array. Se non mettessimo questa
+  //dicitura, tutti gli agli oggetti senza grade non sarebbero validi e li darebbe con un errore
+};
+
+export const mySubscriptions: SubscriptionType[] = [
   {
     _id: "sub_001",
     exam: "Matematica - 1A",
@@ -10,6 +21,7 @@ export const mySubscriptions = [
     exam: "Italiano - 2B",
     completed: true,
     date: "15/05/2024",
+    grade: 9,
   },
   {
     _id: "sub_003",
