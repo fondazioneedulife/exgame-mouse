@@ -1,4 +1,11 @@
-export const mySubscriptions = [
+type SubscritionType = {
+  _id: string;
+  exam: string;
+  completed: boolean;
+  date: string;
+};
+
+export const mySubscriptions : SubscritionType[] = [
   {
     _id: "sub_001",
     exam: "Matematica - 1A",
