@@ -1,5 +1,20 @@
-import { IconEdit, IconEye, IconPlayerPlay } from "@tabler/icons-react";
 import styles from "../../components/Table/Table.module.css";
+import ExamTable from "../../components/Table/ExamTable";
+import CompletedExamTable from "../../components/Table/CompletedExamTable";
+import { mySubscriptions } from "../../mocks/mySubscriptions";
+
+const exams = mySubscriptions.filter(sub => !sub.completed).map(sub => ({
+  subject: sub.exam,
+  class: sub.class,
+  date: sub.date,
+}));
+
+const completedExams = mySubscriptions.filter(sub => sub.completed).map(sub => ({
+  subject: sub.exam,
+  class: sub.class,
+  grade: sub.grade,
+  date: sub.date,
+}));
 
 export const MySubscriptions: React.FC = () => {
   return (
@@ -14,77 +29,11 @@ export const MySubscriptions: React.FC = () => {
             {/** Azioni */}
           </div>
         </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Matematica - 1A</div>
-          <div className={styles.cell}>20/06/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Italiano - 2B</div>
-          <div className={styles.cell}>15/05/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Scienze - 3C</div>
-          <div className={styles.cell}>10/07/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+          {exams.map((exam, index) => (
+            <ExamTable key={index} subject={exam.subject} class={exam.class} date={exam.date} />
+          ))}
       </div>
-
+      
       <h2>Esami sostenuti</h2>
 
       <div className={styles.table}>
@@ -96,78 +45,9 @@ export const MySubscriptions: React.FC = () => {
             {/** Azioni */}
           </div>
         </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Matematica - 1A</div>
-          <div className={styles.cell}>10</div>
-          <div className={styles.cell}>20/06/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Italiano - 2B</div>
-          <div className={styles.cell}>6</div>
-          <div className={styles.cell}>15/05/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.cell}>Scienze - 3C</div>
-          <div className={styles.cell}>4</div>
-          <div className={styles.cell}>10/07/2024</div>
-          <div className={`${styles.cell} ${styles.actions}`}>
-            <ul>
-              <li>
-                <a href="" title="Visualizza esame">
-                  <IconEye stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Inizia esame">
-                  <IconPlayerPlay stroke={2} />
-                </a>
-              </li>
-              <li>
-                <a href="" title="Modifica esame">
-                  <IconEdit />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+          {completedExams.map((exam, index) => (
+            <CompletedExamTable key={index} subject={exam.subject} class={exam.class} grade={exam.grade} date={exam.date} />
+          ))}
       </div>
     </>
   );
