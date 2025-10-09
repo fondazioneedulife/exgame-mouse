@@ -20,21 +20,6 @@ router.get("/", (ctx) => {
   ctx.body = exams;
 });
 
-// GET /exams/:id - dettaglio di un singolo esame
-router.get("/:id", (ctx) => {
-  const { id } = ctx.params;
-  const exam = findExamById(id);
-
-  if (!exam) {
-    ctx.status = 404;
-    ctx.body = { error: `Exam with id ${id} not found` };
-    return;
-  }
-
-  ctx.status = 200;
-  ctx.body = exam;
-});
-
 // POST /exams/new - crea un nuovo esame
 router.post("/new", (ctx) => {
   try {
@@ -142,6 +127,21 @@ router.get("/time", (ctx) => {
   ctx.status = 200;
   ctx.body = examsFilteredTime;
   console.log(examsFilteredTime);
+});
+
+// GET /exams/:id - dettaglio di un singolo esame
+router.get("/:id", (ctx) => {
+  const { id } = ctx.params;
+  const exam = findExamById(id);
+
+  if (!exam) {
+    ctx.status = 404;
+    ctx.body = { error: `Exam with id ${id} not found` };
+    return;
+  }
+
+  ctx.status = 200;
+  ctx.body = exam;
 });
 
 export default router;
