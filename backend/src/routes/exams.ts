@@ -18,15 +18,30 @@ router.get("/", (ctx) => {
 });
 
 //GET /exams/search
+
+function sanitizeSearchInput(input: string): string {
+  return input
+    .trim()
+    .replace(/[<>%$#&*;(){}[\]\\]/g, "") // Rimuove caratteri pericolosi
+    .replace(/\s+/g, " ") // Sostituisce spazi multipli con uno solo
+    .substring(0, 100); // Limita lunghezza
+}
+
 router.get("/search", (ctx) => {
   const { name } = ctx.query;
   const searchTerm = typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
+const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
+
   const results = exams.filter((e) =>
     e.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   ctx.status = 200;
-  ctx.body = results;
+  ctx.body = {
+    searchTerm: sanitizedSearchTerm,
+    count: results.length,
+    results: results
+};
 });
 
 // GET /exams/:id - dettaglio di un singolo esame
