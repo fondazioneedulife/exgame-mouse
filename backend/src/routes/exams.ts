@@ -17,6 +17,18 @@ router.get("/", (ctx) => {
   ctx.body = exams;
 });
 
+//GET /exams/search
+router.get("/search", (ctx) => {
+  const { name } = ctx.query;
+  const searchTerm = typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
+  const results = exams.filter((e) =>
+    e.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  ctx.status = 200;
+  ctx.body = results;
+});
+
 // GET /exams/:id - dettaglio di un singolo esame
 router.get("/:id", (ctx) => {
   const { id } = ctx.params;
@@ -32,16 +44,7 @@ router.get("/:id", (ctx) => {
   ctx.body = exam;
 });
 
-//GET /exams/search
-router.get("/search/:query", (ctx) => {
-  const { query } = ctx.params;
-  const results = exams.filter((e) =>
-    e.name.toLowerCase().includes(query.toLowerCase()),
-  );
 
-  ctx.status = 200;
-  ctx.body = results;
-});
 
 
 // POST /exams/new - crea un nuovo esame
