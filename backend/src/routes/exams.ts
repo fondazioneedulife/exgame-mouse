@@ -10,7 +10,7 @@ const findExamById = (id: string) => exams.find((e) => e._id === id);
 const findExamIndexById = (id: string) => exams.findIndex((e) => e._id === id);
 const cleanSearchName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, "");
 const findExamByName = (name: string) => exams.filter((e) => e.name.toLocaleLowerCase().includes(name));
-const findExamByTime = (exams: {minTime: number; max_time: number}[]) => exams.filter((e) => e.minTime < e.max_time);
+const findExamByTime = (minTime: number) => exams.filter((e) => minTime < e.max_time);
 
 // ---- Routes ----
 
@@ -105,16 +105,15 @@ router.get("/search/:name", (ctx) => {
 
   if (!name) {
     ctx.status = 400;
-    ctx.body = {error: "Nome non trovato!"};
+    ctx.body = { error: "Nome non trovato!" };
     return;
   }
-  if(typeof(name) !== "string") {
+  if (typeof (name) !== "string") {
     ctx.status = 500;
-    ctx.body = {error: "Il nome non è una stringa singola"};
+    ctx.body = { error: "Il nome non è una stringa singola" };
     return;
   }
   const nameCleaned = cleanSearchName(name);
-  console.log(nameCleaned);
   const examsName = findExamByName(nameCleaned);
 
   ctx.status = 200;
@@ -123,7 +122,26 @@ router.get("/search/:name", (ctx) => {
 
 //GET /time - cerca un esame per durata massima
 router.get("/time", (ctx) => {
-  const examsTime = ctx.params;
-  const examsFilteredTime = findExamByTime(examsTime);
+  const examsTime = ctx.query.minTime;
+
+  if (!examsTime) {
+    ctx.status = 404;
+    ctx.body = { error: "Non esiste" };
+  }
+
+  const examsTimeNum = parseInt(examsTime as string, 10);
+
+  if (isNaN(examsTimeNum)) {
+    ctx.status = 400;
+    ctx.body = { error: "Non è un numero" };
+    return;
+  }
+
+  const examsFilteredTime = findExamByTime(examsTimeNum);
+
+  ctx.status = 200;
+  ctx.body = examsFilteredTime;
+  console.log(examsFilteredTime);
 });
+
 export default router;
