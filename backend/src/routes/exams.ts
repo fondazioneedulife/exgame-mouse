@@ -19,7 +19,7 @@ router.get("/", (ctx) => {
 
 // GET /exams/search - cercare gli esami simili a quel nome
 router.get("/search", (ctx) => {
-  const { name } = ctx.query;
+  let { name } = ctx.query;
 
   if (!name || typeof name !== "string") {
     ctx.status = 400;
@@ -27,10 +27,37 @@ router.get("/search", (ctx) => {
     return;
   }
 
+  if (!/^[A-Za-z]+$/.test(name)) {
+    for (let i = 0; i < name.length; i++) {
+      if (!/^[A-Za-z]+$/.test(name[i])) {
+        console.log(name[i]);
+        name = name.replace(`${name[i]}`, '')
+        console.log(name);
+      }
+    }
+  }
+
   const search = name.toLowerCase();
 
   const results = exams.filter((exam) =>
     exam.name.toLowerCase().includes(search)
+  );
+
+  ctx.status = 200;
+  ctx.body = results;
+});
+
+router.get('/time', ctx => {
+  const min_time = Number(ctx.query.min_time);
+
+  if (!min_time || isNaN(min_time) || min_time < 0) {
+    ctx.status = 400;
+    ctx.body = { error: "Parametro 'min_time' non valido. Il valore deve essere un numero positivo" };
+    return;
+  }
+
+  const results = exams.filter((exam) =>
+    exam.max_time >= min_time
   );
 
   ctx.status = 200;
@@ -118,3 +145,6 @@ router.delete("/:id", (ctx) => {
 });
 
 export default router;
+
+// 0101000001000001010011000100110001000101
+// 01010000010000010100110001001100010011110100111001001001001000000101000001000001010011110100110001001111
