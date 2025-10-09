@@ -59,7 +59,7 @@ router.get("/search-by-time", (ctx) => {
   const timeParsed = typeof time === "string" ? parseInt(time) : Array.isArray(time) ? parseInt(time[0]) : NaN;
   if (isNaN(timeParsed) || timeParsed < 0) {
     ctx.status = 400;
-    ctx.body = { error: "400 Bad Request - time must be a positive number" };
+    ctx.body = { error: "400 Bad Request - time must be a positive number and must be express in seconds" };
     return;
   }
   const results = exams.filter((e) => e.max_time <= timeParsed);
