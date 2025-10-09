@@ -96,4 +96,68 @@ router.delete("/:id", (ctx) => {
   }
 });
 
+
+// GET /exams/search - ricerca esami per nome (case-insensitive e sanitizzata)
+router.get('/search', (ctx) => {
+  const rawQuery = ctx.query.name;
+
+  // Verifica esistenza
+  if (!rawQuery) {
+    ctx.status = 400;
+    ctx.body = { error: "Parametro 'name' mancante" };
+    return;
+  }
+
+  // Verifica tipo
+  if (typeof rawQuery !== 'string') {
+    ctx.status = 400;
+    ctx.body = { error: "Parametro 'name' deve essere una stringa" };
+    return;
+  }
+
+  // Sanitizzazione: rimuove caratteri non alfanumerici o spazi
+  const searchTerm = rawQuery.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase();
+
+  // Ricerca case-insensitive e "contains"
+  const results = exams.filter(exam =>
+    exam.name.toLowerCase().includes(searchTerm)
+  );
+
+  // Output (sempre array, anche vuoto)
+  ctx.status = 200;
+  ctx.body = results;
+});
+
+// GET /exams/time - filtra esami con max_time > min_time
+router.get('/time', (ctx) => {
+  const rawQuery = ctx.query.min_time;
+
+  //Verifica esistenza
+  if (!rawQuery) {
+    ctx.status = 400;
+    ctx.body = { error: "Parametro 'min_time' mancante" };
+    return;
+  }
+
+  // Conversione in intero
+  const minTime = parseInt(rawQuery as string, 10);
+
+  // Verifica conversione e logica
+  if (isNaN(minTime) || minTime <= 0) {
+    ctx.status = 400;
+    ctx.body = { error: "Parametro 'min_time' deve essere un numero intero positivo (secondi)" };
+    return;
+  }
+
+  // Filtraggio array mock
+  const results = exams.filter(exam => exam.max_time > minTime);
+
+  // Output (sempre array, anche vuoto)
+  ctx.status = 200;
+  ctx.body = results;
+});
+
+
+
+
 export default router;

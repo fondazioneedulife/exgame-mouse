@@ -6,8 +6,12 @@ import serverRoute from "./routes/server";
 import examsRoute from "./routes/exams";
 import cors from "@koa/cors";
 
+import { logger } from "./middleware/logger";
+
 const app = new Koa();
 const router = new Router();
+
+app.use(logger);
 
 app.use(bodyParser());
 
