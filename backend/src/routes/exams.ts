@@ -131,7 +131,7 @@ router.get("/time", (ctx) => {
 
   const examsTimeNum = parseInt(examsTime as string, 10);
 
-  if (isNaN(examsTimeNum)) {
+  if (isNaN(examsTimeNum) || examsTimeNum < 0) {
     ctx.status = 400;
     ctx.body = { error: "Non è un numero" };
     return;
