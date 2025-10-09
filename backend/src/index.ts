@@ -5,9 +5,13 @@ import { config } from "./config/config";
 import serverRoute from "./routes/server";
 import examsRoute from "./routes/exams";
 import cors from "@koa/cors";
+import { loggedMiddleware, responseTimeMiddleware } from "./middleware/logger";
 
 const app = new Koa();
 const router = new Router();
+
+app.use(loggedMiddleware);
+app.use(responseTimeMiddleware)
 
 app.use(bodyParser());
 
