@@ -8,6 +8,8 @@ const router = new Router({
 // ---- Helper Functions ----
 const findExamById = (id: string) => exams.find((e) => e._id === id);
 const findExamIndexById = (id: string) => exams.findIndex((e) => e._id === id);
+const cleanSearchName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, "");
+const findExamByName = (name: string) => exams.filter((e) => e.name.toLocaleLowerCase().includes(name));
 
 // ---- Routes ----
 
@@ -94,6 +96,28 @@ router.delete("/:id", (ctx) => {
     ctx.status = 500;
     ctx.body = { error: "Errore durante l'eliminazione" };
   }
+});
+
+//GET /search - cerca un esame per nome
+router.get("/search/:name", (ctx) => {
+  const name = ctx.params.name;
+
+  if (!name) {
+    ctx.status = 400;
+    ctx.body = {error: "Nome non trovato!"};
+    return;
+  }
+  if(typeof(name) !== "string") {
+    ctx.status = 500;
+    ctx.body = {error: "Il nome non è una stringa singola"};
+    return;
+  }
+  const nameCleaned = cleanSearchName(name);
+  console.log(nameCleaned);
+  const examsName = findExamByName(nameCleaned);
+
+  ctx.status = 200;
+  ctx.body = examsName;
 });
 
 export default router;
