@@ -25,7 +25,7 @@ const useApiData = (url: string, defaultState: ExamType) => {
       });
 
     // setState(questions); // DA RIMUOVERE quando sarà pronta l'api
-  }, []);
+  }, [url]);
 
   return state;
 };
