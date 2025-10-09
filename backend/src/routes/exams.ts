@@ -1,5 +1,6 @@
 import Router from "@koa/router";
 import { exams } from "../mocks/exams";
+import validator from "validator";
 
 const router = new Router({
   prefix: "/api/exams",
@@ -20,11 +21,10 @@ router.get("/", (ctx) => {
 //GET /exams/search
 
 function sanitizeSearchInput(input: string): string {
-  return input
-    .trim()
-    .replace(/[<>%$#&*;(){}[\]\\]/g, "") // Rimuove caratteri pericolosi
-    .replace(/\s+/g, " ") // Sostituisce spazi multipli con uno solo
-    .substring(0, 100); // Limita lunghezza
+  return validator
+    .escape(input) // Rimuovi caratteri potenzialmente pericolosi
+    .trim() // Rimuovi spazi bianchi iniziali e finali
+    .slice(0, 100); // Limita la lunghezza a 100 caratteri
 }
 
 router.get("/search", (ctx) => {
