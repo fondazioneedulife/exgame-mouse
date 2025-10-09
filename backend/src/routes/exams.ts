@@ -33,6 +33,20 @@ router.get("/search", (ctx) => {
   ctx.body = filtered;
 });
 
+router.get("/time", (ctx) => {
+  const minTime = parseInt(ctx.query.min_time as string) || 0;
+
+  if(!minTime || isNaN(minTime) || minTime < 0) {
+    ctx.status = 400;
+    ctx.body = { error: "Parametro 'min_time' mancante o non valido" };
+    return;
+  }
+  const filtered = exams.filter((exam) => exam.max_time > minTime);
+  ctx.status = 200;
+  ctx.body = filtered;
+
+});
+
 // GET /exams/:id - dettaglio di un singolo esame
 router.get("/:id", (ctx) => {
   const { id } = ctx.params;
