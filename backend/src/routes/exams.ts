@@ -27,7 +27,7 @@ function sanitizeSearchInput(input: string): string {
     .slice(0, 100); // Limita la lunghezza a 100 caratteri
 }
 
-router.get("/search", (ctx) => {
+router.get("/search-by-name", (ctx) => {
   const { name } = ctx.query;
   if (!name) {
     ctx.status = 400;
@@ -48,6 +48,33 @@ const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
     results: results
 };
 });
+// GET /exams/:time
+router.get("/search-by-time", (ctx) => {
+  const { time } = ctx.query;
+  if (!time) {
+    ctx.status = 400;
+    ctx.body = { error: "400 Bad Request" };
+    return;
+  }
+  const timeParsed = typeof time === "string" ? parseInt(time) : Array.isArray(time) ? parseInt(time[0]) : NaN;
+  if (isNaN(timeParsed) || timeParsed < 0) {
+    ctx.status = 400;
+    ctx.body = { error: "400 Bad Request - time must be a positive number" };
+    return;
+  }
+  const results = exams.filter((e) => e.max_time <= timeParsed);
+
+  ctx.status = 200;
+  ctx.body = {
+    time: time,
+    count: results.length,
+    results: results
+  };
+
+});
+
+
+
 
 // GET /exams/:id - dettaglio di un singolo esame
 router.get("/:id", (ctx) => {
@@ -63,6 +90,9 @@ router.get("/:id", (ctx) => {
   ctx.status = 200;
   ctx.body = exam;
 });
+
+
+
 
 
 
