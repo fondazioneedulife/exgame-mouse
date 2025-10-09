@@ -17,6 +17,22 @@ router.get("/", (ctx) => {
   ctx.body = exams;
 });
 
+router.get("/search", (ctx) => {
+  const name = ctx.query.name as string;
+
+  if (!name) {
+    ctx.status = 400;
+    ctx.body = { error: "Parametro 'name' mancante" };
+    return;
+  }
+
+  const filtered = exams.filter((exam) =>
+    exam.name.toLowerCase().includes(name.toLowerCase())
+  );
+  ctx.status = 200;
+  ctx.body = filtered;
+});
+
 // GET /exams/:id - dettaglio di un singolo esame
 router.get("/:id", (ctx) => {
   const { id } = ctx.params;
