@@ -10,6 +10,7 @@ const findExamById = (id: string) => exams.find((e) => e._id === id);
 const findExamIndexById = (id: string) => exams.findIndex((e) => e._id === id);
 const cleanSearchName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, "");
 const findExamByName = (name: string) => exams.filter((e) => e.name.toLocaleLowerCase().includes(name));
+const findExamByTime = (exams: {minTime: number; max_time: number}[]) => exams.filter((e) => e.minTime < e.max_time);
 
 // ---- Routes ----
 
@@ -120,4 +121,9 @@ router.get("/search/:name", (ctx) => {
   ctx.body = examsName;
 });
 
+//GET /time - cerca un esame per durata massima
+router.get("/time", (ctx) => {
+  const examsTime = ctx.params;
+  const examsFilteredTime = findExamByTime(examsTime);
+});
 export default router;
