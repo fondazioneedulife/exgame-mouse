@@ -32,6 +32,18 @@ router.get("/:id", (ctx) => {
   ctx.body = exam;
 });
 
+//GET /exams/search
+router.get("/search/:query", (ctx) => {
+  const { query } = ctx.params;
+  const results = exams.filter((e) =>
+    e.name.toLowerCase().includes(query.toLowerCase()),
+  );
+
+  ctx.status = 200;
+  ctx.body = results;
+});
+
+
 // POST /exams/new - crea un nuovo esame
 router.post("/new", (ctx) => {
   try {
