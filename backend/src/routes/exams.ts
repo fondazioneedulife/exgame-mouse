@@ -29,6 +29,11 @@ function sanitizeSearchInput(input: string): string {
 
 router.get("/search", (ctx) => {
   const { name } = ctx.query;
+  if (!name) {
+    ctx.status = 400;
+    ctx.body = { error: "400 Bad Request" };
+    return;
+  }
   const searchTerm = typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
 const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
 
