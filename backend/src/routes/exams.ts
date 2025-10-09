@@ -17,6 +17,27 @@ router.get("/", (ctx) => {
   ctx.body = exams;
 });
 
+// GET /exams/search - cercare gli esami simili a quel nome
+router.get("/search", (ctx) => {
+  const { name } = ctx.query;
+
+  if (!name || typeof name !== "string") {
+    ctx.status = 400;
+    ctx.body = { error: "Missing query parameter 'name'" };
+    return;
+  }
+
+  const search = name.toLowerCase();
+
+  const results = exams.filter((exam) =>
+    exam.name.toLowerCase().includes(search)
+  );
+
+  ctx.status = 200;
+  ctx.body = results;
+});
+
+
 // GET /exams/:id - dettaglio di un singolo esame
 router.get("/:id", (ctx) => {
   const { id } = ctx.params;
