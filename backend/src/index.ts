@@ -6,6 +6,8 @@ import serverRoute from "./routes/server";
 import examsRoute from "./routes/exams";
 import cors from "@koa/cors";
 
+import { responseTimeLogger } from "../src/middleware/logger";
+
 const app = new Koa();
 const router = new Router();
 
@@ -16,6 +18,8 @@ app.use(
     origin: config.FRONTEND_APP,
   }),
 );
+
+app.use(responseTimeLogger);
 
 app.use(router.routes()).use(router.allowedMethods());
 app.use(serverRoute.routes()).use(serverRoute.allowedMethods());
