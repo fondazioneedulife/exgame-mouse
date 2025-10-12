@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import ChipList from "../components/ChipList/ChipList";
 import ClockComponent from "../components/Clock/ClockComponent";
 import Description from "../components/Description/Description";
@@ -14,7 +15,6 @@ const useApiData = (url: string, defaultState: ExamType) => {
   const [state, setState] = useState<ExamType>(defaultState);
 
   useEffect(() => {
-    // DA RIPRISTINARE quando sarà pronta l'api
     fetch(url)
       .then((response) => response.json())
       .then((response: ExamType) => {
@@ -24,15 +24,17 @@ const useApiData = (url: string, defaultState: ExamType) => {
         console.error("Errore nel fetch:", error);
       });
 
-    // setState(questions); // DA RIMUOVERE quando sarà pronta l'api
+    // setState(questions); // DA RIMUOVERE quando sarà pronta l'api (versione mock)
   }, []);
 
   return state;
 };
 
 export const Subscription = () => {
+  const { id } = useParams();
+
   const exam = useApiData(
-    "http://localhost:3000/api/exams/exam_001",
+    "http://localhost:3000/api/exams/" + id,
     {} as ExamType,
   );
 

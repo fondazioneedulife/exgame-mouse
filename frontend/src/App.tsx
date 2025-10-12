@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Link, Route, Routes } from "react-router";
 import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import { MySubscriptions } from "./pages/student/mySubscriptions";
@@ -14,14 +14,14 @@ function App() {
           </a>
           <ul>
             <li>
-              <a href="#" className={styles.sx}>
+              <Link to="/" className={styles.sx}>
                 Dashboard
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className={styles.sx}>
+              <Link to="/" className={styles.sx}>
                 Esami
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -46,7 +46,7 @@ function App() {
         <div className={styles.content}>
           <Routes>
             <Route index element={<MySubscriptions />} />
-            <Route path="subscription" element={<Subscription />} />
+            <Route path="subscription/:id" element={<Subscription />} />
           </Routes>
         </div>
       </div>
