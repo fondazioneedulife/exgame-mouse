@@ -1,10 +1,10 @@
 import { IconEdit, IconEye, IconPlayerPlay } from "@tabler/icons-react";
 import { Link } from "react-router";
-import type { SubscriptionType } from "../../mocks/mySubscriptions";
+import type { SubscribedExam } from "../../pages/student/mySubscriptions";
 import styles from "./Table.module.css";
 
 type TableProps = {
-  data: SubscriptionType[];
+  data: SubscribedExam[];
 };
 
 export const Table: React.FC<TableProps> = ({ data }) => {
@@ -20,9 +20,9 @@ export const Table: React.FC<TableProps> = ({ data }) => {
       </div>
       {data.map((subscription) => {
         return (
-          <div className={styles.row}>
-            <div className={styles.cell}>{subscription.exam}</div>
-            <div className={styles.cell}>{subscription.date}</div>
+          <div className={styles.row} key={subscription._id}>
+            <div className={styles.cell}>{subscription.name}</div>
+            <div className={styles.cell}>{subscription.schedule_date}</div>
 
             {hasGrade && (
               <div className={styles.cell}>{subscription.grade}</div>
@@ -30,21 +30,36 @@ export const Table: React.FC<TableProps> = ({ data }) => {
 
             <div className={styles.cell}>
               <ul>
-                <li>
-                  <Link to="/subscription" title="Visualizza esame">
-                    <IconEye stroke={2} />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/subscription" title="Inizia esame">
-                    <IconPlayerPlay stroke={2} />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/subscription" title="Modifica esame">
-                    <IconEdit />
-                  </Link>
-                </li>
+                {hasGrade && (
+                  <li>
+                    <Link
+                      to={"/subscription/" + subscription._id}
+                      title="Visualizza esame"
+                    >
+                      <IconEye stroke={2} />
+                    </Link>
+                  </li>
+                )}
+                {!hasGrade && (
+                  <>
+                    <li>
+                      <Link
+                        to={"/subscription/" + subscription._id}
+                        title="Inizia esame"
+                      >
+                        <IconPlayerPlay stroke={2} />
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to={"/subscription/" + subscription._id}
+                        title="Modifica esame"
+                      >
+                        <IconEdit />
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
