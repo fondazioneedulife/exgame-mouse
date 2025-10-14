@@ -1,14 +1,13 @@
 import { IconEdit, IconEye, IconPlayerPlay } from "@tabler/icons-react";
 import { Link } from "react-router";
-import type { SubscriptionType } from "../../mocks/mySubscriptions";
 import styles from "./Table.module.css";
 
 type TableProps = {
-  data: SubscriptionType[];
+  data: SubscribedExam[];
 };
 
 export const Table: React.FC<TableProps> = ({ data }) => {
-  const hasGrade = Boolean(data[0].grade);
+  const hasGrade = Boolean(data[0]?.grade);
 
   return (
     <div className={styles.table}>
