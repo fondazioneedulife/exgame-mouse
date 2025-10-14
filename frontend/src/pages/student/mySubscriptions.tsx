@@ -1,7 +1,16 @@
+import { useState, useEffect } from "react";
 import { Table } from "../../components/Table/Table";
 import { mySubscriptions } from "../../mocks/mySubscriptions";
 
 export const MySubscriptions: React.FC = () => {
+
+  const [mySubsctiptions, setMySubscriptions] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/api/subscriptions")
+      .then((response) => response.json())
+      .then(setMySubscriptions);
+}, []);
+
   const esamiDaSostenere = mySubscriptions.filter(
     (subscription) => !subscription.completed,
   );
