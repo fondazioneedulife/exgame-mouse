@@ -1,7 +1,7 @@
 import { IconEdit, IconEye, IconPlayerPlay } from "@tabler/icons-react";
 import { Link } from "react-router";
-import type { SubscriptionType } from "../../mocks/mySubscriptions";
 import styles from "./Table.module.css";
+import type { SubscriptionType } from "../../../../api/types";
 
 type TableProps = {
   data: SubscriptionType[];
