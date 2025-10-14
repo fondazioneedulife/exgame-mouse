@@ -6,6 +6,7 @@ import QuestionList from "../components/QuestionList/QuestionList";
 import type { ExamType } from "../components/QuestionList/types";
 import UserInfoComponent from "../components/UserInfo/UserInfoComponent";
 import { chips } from "../mocks/chips";
+import { useParams } from "react-router";
 
 /**
  * Invoca una API e restituisce i dati.
@@ -25,14 +26,15 @@ const useApiData = (url: string, defaultState: ExamType) => {
       });
 
     // setState(questions); // DA RIMUOVERE quando sarà pronta l'api
-  }, []);
+  }, [url]);
 
   return state;
 };
 
 export const Subscription = () => {
+  const { subscriptionId } = useParams();
   const exam = useApiData(
-    "http://localhost:3000/api/exams/exam_001",
+    "http://localhost:3000/api/subscriptions/" + subscriptionId,
     {} as ExamType,
   );
 
