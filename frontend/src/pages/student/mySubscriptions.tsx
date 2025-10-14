@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Table } from "../../components/Table/Table";
-import type { SubscriptionType } from "../../../../api/types";
+import type { ExamType, SubscriptionType } from "../../../../api/types";
 
 export const MySubscriptions: React.FC = () => {
 
@@ -13,6 +13,20 @@ export const MySubscriptions: React.FC = () => {
       .then((response) => response.json())
       .then(setMySubscriptions);
   }, []);
+
+  const mySubscribedExams: Promise<SubscribedExam>[] = response.map(
+    (subscription) => {
+      return fetch(
+        `http://localhost:3000/api/exams/${subscription.examId}`,
+      )
+      .then((res) => res.json())
+      .then((exam: ExamType) => ({
+      ...exam,
+      status: subscription.status,
+      grade: subscription.grade,
+    }));
+    },
+  );
 
   const esamiDaSostenere = mySubsctiptions.filter(
     (subscription) => subscription.status === "to-do",
