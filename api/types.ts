@@ -31,6 +31,8 @@ export type SubscriptionType = {
   _id: string;
   exam_id: string;
   student_id: string;
+  status: "to-do" | "completed";
+  grade: number | null;
   questions: SubscriptionQuestion[];
 };
 

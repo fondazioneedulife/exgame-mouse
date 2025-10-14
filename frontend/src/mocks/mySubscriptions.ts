@@ -1,71 +1,101 @@
-export type SubscriptionType = {
-  _id: string;
-  exam: string;
-  completed: boolean;
-  date: string;
-  grade?: number;
-};
+import type { SubscriptionType } from "../../../api/types";
 
 export const mySubscriptions: SubscriptionType[] = [
   {
+    _id: "subscription_001",
+    exam_id: "exam_001",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [
+      {
+        question_id: "string",
+        responses: [
+          {
+            answer_id: "string",
+          },
+        ],
+      },
+    ],
+  },
+  {
     _id: "sub_001",
-    exam: "Matematica - 1A",
-    completed: false,
-    date: "20/06/2024",
+    exam_id: "exam_001",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
   },
   {
     _id: "sub_002",
-    exam: "Italiano - 2B",
-    completed: true,
-    date: "15/05/2024",
+    exam_id: "exam_002",
+    student_id: "student_001",
+    status: "completed",
     grade: 9,
+    questions: [],
   },
   {
     _id: "sub_003",
-    exam: "Scienze - 3C",
-    completed: false,
-    date: "10/07/2024",
+    exam_id: "exam_003",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
   },
   {
     _id: "sub_004",
-    exam: "Storia - 1D",
-    completed: true,
-    date: "05/06/2024",
+    exam_id: "exam_004",
+    student_id: "student_001",
+    status: "completed",
+    grade: 0,
+    questions: [],
   },
   {
     _id: "sub_005",
-    exam: "Geografia - 2E",
-    completed: false,
-    date: "25/06/2024",
+    exam_id: "exam_005",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
   },
   {
     _id: "sub_006",
-    exam: "Inglese - 3F",
-    completed: true,
-    date: "30/05/2024",
+    exam_id: "exam_006",
+    student_id: "student_001",
+    status: "completed",
+    grade: 0,
+    questions: [],
   },
   {
     _id: "sub_007",
-    exam: "Fisica - 1G",
-    completed: false,
-    date: "15/07/2024",
+    exam_id: "exam_007",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
   },
   {
     _id: "sub_008",
-    exam: "Chimica - 2H",
-    completed: true,
-    date: "12/06/2024",
+    exam_id: "exam_008",
+    student_id: "student_001",
+    status: "completed",
+    grade: 0,
+    questions: [],
   },
   {
     _id: "sub_009",
-    exam: "Biologia - 3I",
-    completed: false,
-    date: "20/07/2024",
+    exam_id: "exam_009",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
   },
   {
     _id: "sub_010",
-    exam: "Arte - 1J",
-    completed: true,
-    date: "18/05/2024",
+    exam_id: "exam_010",
+    student_id: "student_001",
+    status: "completed",
+    grade: 0,
+    questions: [],
   },
 ];
