@@ -28,6 +28,8 @@ export type QuestionId = string;
 export type AnswerId = string;
 
 export type SubscriptionType = {
+  schedule_date: ReactNode;
+  name: ReactNode;
   _id: string;
   exam_id: string;
   student_id: string;

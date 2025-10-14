@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import type { ExamType, SubscriptionType } from "../../../../api/types";
 import { Table } from "../../components/Table/Table";
 
+export type SubscribedExamType = SubscriptionType & {
+  name: string;
+  schedule_date: string; // schedule_date dall'esame
+};
+
 export const MySubscriptions: React.FC = () => {
-  const [subscriptions, setSubscriptions] = useState<SubscriptionType[]>([]);
+  const [subscriptions, setSubscriptions] = useState<SubscribedExamType[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,9 +30,9 @@ export const MySubscriptions: React.FC = () => {
             // Unisci dati iscrizione + esame
             return {
               ...subscription,
-              examName: exam.name,
-              date: exam.schedule_date,
-            };
+              name: exam.name,
+              schedule_date: exam.schedule_date,
+            } as SubscribedExamType;
           }),
         );
 

@@ -1,14 +1,14 @@
 import { IconEdit, IconEye, IconPlayerPlay } from "@tabler/icons-react";
 import { Link } from "react-router";
-import type { SubscriptionType } from "../../mocks/mySubscriptions";
+import type { SubscribedExamType } from "../../pages/student/mySubscriptions";
 import styles from "./Table.module.css";
 
 type TableProps = {
-  data: SubscriptionType[];
+  data: SubscribedExamType[];
 };
 
 export const Table: React.FC<TableProps> = ({ data }) => {
-  const hasGrade = Boolean(data[0].grade);
+  const hasGrade = Boolean(data[0]?.grade || data[0]?.grade === 0);
 
   return (
     <div className={styles.table}>
@@ -21,8 +21,8 @@ export const Table: React.FC<TableProps> = ({ data }) => {
       {data.map((subscription) => {
         return (
           <div className={styles.row}>
-            <div className={styles.cell}>{subscription.exam}</div>
-            <div className={styles.cell}>{subscription.date}</div>
+            <div className={styles.cell}>{subscription.name}</div>
+            <div className={styles.cell}>{subscription.schedule_date}</div>
 
             {hasGrade && (
               <div className={styles.cell}>{subscription.grade}</div>
@@ -31,17 +31,26 @@ export const Table: React.FC<TableProps> = ({ data }) => {
             <div className={styles.cell}>
               <ul>
                 <li>
-                  <Link to="/subscription" title="Visualizza esame">
+                  <Link
+                    to={"/subscriptions/" + subscription._id}
+                    title="Visualizza esame"
+                  >
                     <IconEye stroke={2} />
                   </Link>
                 </li>
                 <li>
-                  <Link to="/subscription" title="Inizia esame">
+                  <Link
+                    to={"/subscriptions/" + subscription._id}
+                    title="Inizia esame"
+                  >
                     <IconPlayerPlay stroke={2} />
                   </Link>
                 </li>
                 <li>
-                  <Link to="/subscription" title="Modifica esame">
+                  <Link
+                    to={"/subscriptions/" + subscription._id}
+                    title="Modifica esame"
+                  >
                     <IconEdit />
                   </Link>
                 </li>
