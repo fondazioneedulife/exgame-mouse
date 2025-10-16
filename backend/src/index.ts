@@ -4,6 +4,7 @@ import bodyParser from "@koa/bodyparser";
 import { config } from "./config/config";
 import serverRoute from "./routes/server";
 import examsRoute from "./routes/exams";
+import subscriptionsRoute from "./routes/subscriptions";
 import cors from "@koa/cors";
 import logger from "./middlewares/logger";
 import { exams } from "./mocks/exams";
@@ -23,6 +24,7 @@ app.use(
 app.use(router.routes()).use(router.allowedMethods());
 app.use(serverRoute.routes()).use(serverRoute.allowedMethods());
 app.use(examsRoute.routes()).use(examsRoute.allowedMethods());
+app.use(subscriptionsRoute.routes()).use(subscriptionsRoute.allowedMethods());
 
 app.listen(config.PORT, () => {
   console.log(`Server running at http://${config.HOST}:${config.PORT}`);
