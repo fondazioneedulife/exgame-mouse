@@ -22,7 +22,7 @@ router.post("/", (ctx) => {
             ctx.body = {error: "correct id required"};
         }
         subscriptions.map((sub) => {
-            if(sub.student_id === newSub.student_id)
+            if(sub.student_id === newSub.student_id && sub.exam_id === newSub.exam_id)
                 ctx.status = 400;
                 ctx.body = {error: "you're already registered for this exam!"};
         })
