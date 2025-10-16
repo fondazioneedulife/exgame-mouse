@@ -19,25 +19,41 @@ router.get("/", (ctx) => {
 });
 
 router.get("/search", (ctx) => {
-  const { name } = ctx.query;
-  if (!name) {
+  const { keyword } = ctx.query;
+  if (!keyword) {
     ctx.status = 400;
-    ctx.body = { error: "400 Bad Request" };
+    ctx.body = { error: "Il parametro 'keyword' è mancante" };
     return;
   }
-  const searchTerm =
-    typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
-  const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
+   // Sanificazione e normalizzazione (case-insensitive)
+  const searchTerm = Array.isArray(keyword) ? keyword[0] : keyword;
+  const sanitized = sanitizeSearchInput(searchTerm).toLowerCase();
 
-  const results = exams.filter((e) =>
-    e.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
-  );
+  // Filtro complesso su exam.name, question.text e answer.answer
+  const results = exams.filter((exam) => {
+    // Ricerca nel nome dell’esame
+    const inExamName = exam.name?.toLowerCase().includes(sanitized);
+
+    // Ricerca nelle domande (question.text)
+    const inQuestions = exam.questions?.some((q) =>
+      q.question?.text?.toLowerCase().includes(sanitized)
+    );
+
+    // Ricerca nelle risposte (answer.answer)
+    const inAnswers = exam.questions?.some((q) =>
+      q.answers?.some((a) =>
+        a.answer?.toLowerCase().includes(sanitized)
+      )
+    );
+
+    return inExamName || inQuestions || inAnswers;
+  });
 
   ctx.status = 200;
   ctx.body = {
-    searchTerm: sanitizedSearchTerm,
+    searchTerm: sanitized,
     count: results.length,
-    results: results,
+    results,
   };
 });
 
