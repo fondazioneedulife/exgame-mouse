@@ -19,18 +19,28 @@ router.get("/", (ctx) => {
 });
 
 router.get("/search", (ctx) => {
-  const { name } = ctx.query;
-  if (!name) {
+  const { keyword } = ctx.query;
+  if (!keyword) {
     ctx.status = 400;
     ctx.body = { error: "400 Bad Request" };
     return;
   }
   const searchTerm =
-    typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
+    typeof keyword === "string"
+      ? keyword
+      : Array.isArray(keyword)
+        ? keyword[0]
+        : "";
   const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
 
   const results = exams.filter((e) =>
-    e.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
+    e.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()) ||
+    e.questions.some((q) =>
+      q.text.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()) ||
+      q.answers.some((a) =>
+        a.answer.toLowerCase().includes(sanitizedSearchTerm.toLowerCase())
+      )
+    )
   );
 
   ctx.status = 200;
