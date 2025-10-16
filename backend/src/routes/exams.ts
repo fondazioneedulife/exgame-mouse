@@ -1,10 +1,10 @@
 import Router from "@koa/router";
-import { exams } from "../mocks/exams";
 import {
   findExamById,
   findExamIndexById,
   sanitizeSearchInput,
 } from "../lib/helper";
+import { exams } from "../mocks/exams";
 
 const router = new Router({
   prefix: "/api/exams",
@@ -19,19 +19,33 @@ router.get("/", (ctx) => {
 });
 
 router.get("/search", (ctx) => {
-  const { name } = ctx.query;
-  if (!name) {
+  const { keyword } = ctx.query;
+  if (!keyword) {
     ctx.status = 400;
     ctx.body = { error: "400 Bad Request" };
     return;
   }
   const searchTerm =
-    typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
+    typeof keyword === "string"
+      ? keyword
+      : Array.isArray(keyword)
+        ? keyword[0]
+        : "";
   const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
 
-  const results = exams.filter((e) =>
-    e.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
-  );
+  const results = exams.filter((exam) => {
+    return (
+      exam.name.toLowerCase().includes(sanitizedSearchTerm) ||
+      exam.questions?.some((question) =>
+        question.text.toLowerCase().includes(sanitizedSearchTerm),
+      ) ||
+      exam.questions?.some((question) =>
+        question.answers?.some((answer) =>
+          answer.answer.toLowerCase().includes(sanitizedSearchTerm),
+        ),                                
+      )
+    );
+  });
 
   ctx.status = 200;
   ctx.body = {
