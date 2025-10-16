@@ -1,8 +1,8 @@
 import type { SubscriptionType } from "../../../api/types";
 
-const STUDENT_1 = "student_abc123";
-const STUDENT_2 = "student_def456";
-const STUDENT_3 = "student_ghi789";
+export const STUDENT_1 = "student_abc123";
+export const STUDENT_2 = "student_def456";
+export const STUDENT_3 = "student_ghi789";
 
 export const subscriptions: SubscriptionType[] = [
   // Studente 1 iscritto a 3 esami (001, 002, 003)
