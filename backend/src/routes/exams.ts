@@ -29,9 +29,28 @@ router.get("/search", (ctx) => {
     typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
   const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
 
-  const results = exams.filter((e) =>
-    e.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
-  );
+  const results = exams.filter((exam) => {
+    if (exam.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()))
+      return true;
+
+    if (
+      exam.questions.some((q) =>
+        q.text.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
+      )
+    )
+      return true;
+
+    if (
+      exam.questions.some((q) =>
+        q.answers.some((a) =>
+          a.answer.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
+        ),
+      )
+    )
+      return true;
+
+    return false;
+  });
 
   ctx.status = 200;
   ctx.body = {
