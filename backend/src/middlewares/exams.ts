@@ -16,14 +16,6 @@ export const examsMiddleware = async (ctx: Context, next: Next) => {
     return;
   }
 
-  // Controlla se l'esame esiste
-  const examExists = exams.some((exam) => exam._id === exam_id);
-  if (!examExists) {
-    ctx.status = 404;
-    ctx.body = { error: "Esame non trovato" };
-    return;
-  }
-
   // Controlla se lo studente ha già registrato l'esame
   const studentYetRegistered = subscriptions.some(
     (sub) => sub.exam_id === exam_id && sub.student_id === student_id
