@@ -19,7 +19,7 @@ router.get("/", (ctx) => {
 });
 
 router.get("/search", (ctx) => {
-  const keyword = ctx.query.keyword;
+  const { keyword } = ctx.query;
   if (!keyword) {
     ctx.status = 400;
     ctx.body = { error: "400 Bad Request" };
