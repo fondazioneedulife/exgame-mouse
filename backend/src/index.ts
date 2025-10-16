@@ -7,6 +7,7 @@ import examsRoute from "./routes/exams";
 import cors from "@koa/cors";
 import logger from "./middlewares/logger";
 import { exams } from "./mocks/exams";
+import subscriptionsRoutes from "./routes/subscriptions.js";
 
 const app = new Koa();
 const router = new Router();
@@ -27,3 +28,6 @@ app.use(examsRoute.routes()).use(examsRoute.allowedMethods());
 app.listen(config.PORT, () => {
   console.log(`Server running at http://${config.HOST}:${config.PORT}`);
 });
+
+app.use(subscriptionsRoutes.routes());
+app.use(subscriptionsRoutes.allowedMethods());
