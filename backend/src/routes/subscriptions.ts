@@ -14,12 +14,12 @@ router.get("/", (ctx) => {
 })
 
 //POST /subscriptions -crea una nuova subscription
-router.post("/", (ctx) => {
+router.post("/new", (ctx) => {
     try{
         const newSub = ctx.request.body;
-        if(!newSub || !newSub.exam_id){
+        if(!newSub || !newSub.exam_id || !newSub.student_id){
             ctx.status = 400;
-            ctx.body = {error: "correct id required"};
+            ctx.body = {error: "missing informations"};
         }
         subscriptions.map((sub) => {
             if(sub.student_id === newSub.student_id && sub.exam_id === newSub.exam_id)
