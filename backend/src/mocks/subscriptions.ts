@@ -1,0 +1,101 @@
+import type { SubscriptionType } from "../../../api/types";
+
+export const subscriptions: SubscriptionType[] = [
+  {
+    _id: "subscription_001",
+    exam_id: "exam_001",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [
+      {
+        question_id: "string",
+        responses: [
+          {
+            answer_id: "string",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    _id: "sub_001",
+    exam_id: "exam_001",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
+  },
+  {
+    _id: "sub_002",
+    exam_id: "exam_002",
+    student_id: "student_001",
+    status: "completed",
+    grade: 9,
+    questions: [],
+  },
+  {
+    _id: "sub_003",
+    exam_id: "exam_003",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
+  },
+  {
+    _id: "sub_004",
+    exam_id: "exam_004",
+    student_id: "student_001",
+    status: "completed",
+    grade: 0,
+    questions: [],
+  },
+  {
+    _id: "sub_005",
+    exam_id: "exam_005",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
+  },
+  {
+    _id: "sub_006",
+    exam_id: "exam_006",
+    student_id: "student_001",
+    status: "completed",
+    grade: 0,
+    questions: [],
+  },
+  {
+    _id: "sub_007",
+    exam_id: "exam_007",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
+  },
+  {
+    _id: "sub_008",
+    exam_id: "exam_008",
+    student_id: "student_001",
+    status: "completed",
+    grade: 0,
+    questions: [],
+  },
+  {
+    _id: "sub_009",
+    exam_id: "exam_009",
+    student_id: "student_001",
+    status: "to-do",
+    grade: 0,
+    questions: [],
+  },
+  {
+    _id: "sub_010",
+    exam_id: "exam_010",
+    student_id: "student_001",
+    status: "completed",
+    grade: 0,
+    questions: [],
+  },
+];
