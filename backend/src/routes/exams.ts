@@ -30,7 +30,9 @@ router.get("/search", (ctx) => {
   const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
 
   const results = exams.filter((e) =>
-    e.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
+    e.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()) || 
+    e.questions.some((q) => q.text.toLowerCase().includes(sanitizedSearchTerm)) ||
+    e.questions.some((q) => q.answers.some((a) => a.answer.toLowerCase().includes(sanitizedSearchTerm)))
   );
 
   ctx.status = 200;
