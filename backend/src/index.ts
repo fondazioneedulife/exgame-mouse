@@ -1,8 +1,10 @@
 import bodyParser from "@koa/bodyparser";
 import cors from "@koa/cors";
 import Router from "@koa/router";
+import { createServer } from "http";
 import Koa from "koa";
 import { config } from "./config/config";
+import { initSocketIo } from "./io";
 import logger from "./middlewares/logger";
 import examsRoute from "./routes/exams";
 import serverRoute from "./routes/server";
@@ -25,6 +27,9 @@ app.use(serverRoute.routes()).use(serverRoute.allowedMethods());
 app.use(examsRoute.routes()).use(examsRoute.allowedMethods());
 app.use(subscriptionsRoute.routes()).use(subscriptionsRoute.allowedMethods());
 
-app.listen(config.PORT, () => {
+const httpServer = createServer(app.callback());
+initSocketIo(httpServer);
+
+httpServer.listen(config.PORT, () => {
   console.log(`Server running at http://${config.HOST}:${config.PORT}`);
 });
