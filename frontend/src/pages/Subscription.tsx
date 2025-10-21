@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { data, useParams } from "react-router";
 import ChipList from "../components/ChipList/ChipList";
 import ClockComponent from "../components/Clock/ClockComponent";
 import Description from "../components/Description/Description";
@@ -33,6 +33,14 @@ const useApiData = (url: string, defaultState: ExamType) => {
 
 export const Subscription = () => {
   const { subcriptionId } = useParams();
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/subscriptions/${subcriptionId}`)
+    .then((response) => response.json())
+    .then((examData:ExamType) => {
+      console.log("Exam Data: ", examData)
+    })
+  })
 
   const exam = useApiData(
     "http://localhost:3000/api/subscriptions/" + subcriptionId,
