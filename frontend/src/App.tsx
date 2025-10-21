@@ -3,10 +3,14 @@ import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import { MySubscriptions } from "./pages/student/mySubscriptions";
 import { Subscription } from "./pages/Subscription";
+import { Login } from "../pages/login.tsx";
+import { Logout } from "../pages/logout.tsx";
+import { AuthenticationProvider } from "../components/authentication/AuthenticationProvider";
 
 function App() {
   return (
-    <>
+    <AuthenticationProvider>
+
       <nav className={styles.navbar}>
         <div className={styles.left}>
           <Link to="/">
@@ -44,16 +48,27 @@ function App() {
 
       <div className={styles.main}>
         <div className={styles.content}>
-          <Routes>
+
+        <Routes>
+
+          <Route element={<Authenticator/>}>
             <Route index element={<MySubscriptions />} />
-            <Route
-              path="subscriptions/:subcriptionId"
-              element={<Subscription />}
+            <Route 
+              path="subscriptions/:subscriptionId" 
+              element={<Subscription />} 
             />
-          </Routes>
+          </Route>
+
+          <Route path="/login" element={<Login />}/>
+          {/* Logout Route */}
+          <Route path="/logout" element={<Logout />}/>
+
+        </Routes>
+
+
         </div>
       </div>
-    </>
+    </AuthenticationProvider>
   );
 }
 
