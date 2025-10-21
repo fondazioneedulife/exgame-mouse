@@ -5,10 +5,12 @@ import { MySubscriptions } from "./pages/student/mySubscriptions";
 import { Subscription } from "./pages/Subscription";
 import { Login } from "./pages/login/login";
 import { Logout } from "./pages/logout/logout";
+import { AuthenticationProvider } from "./components/AuthenticationProvider/AuthenticationProvider";
+import { CurrentUser } from "./components/AuthenticationProvider/CurrentUser";
 
 function App() {
   return (
-    <>
+    <AuthenticationProvider>
       <nav className={styles.navbar}>
         <div className={styles.left}>
           <Link to="/">
@@ -32,7 +34,7 @@ function App() {
           <ul>
             <li>
               <a href="#" className={styles.dx}>
-                Albe Molon
+                <CurrentUser/>
               </a>
             </li>
             <li>
@@ -57,7 +59,7 @@ function App() {
           </Routes>
         </div>
       </div>
-    </>
+    </AuthenticationProvider>
   );
 }
 

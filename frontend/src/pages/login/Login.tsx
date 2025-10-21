@@ -1,13 +1,9 @@
-import { useState } from "react";
-
+import { useContext } from "react";
 import styles from "./Login.module.css";
+import { AuthenticationContext } from "../../components/AuthenticationProvider/AuthenticationProvider";
 
 export function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-
-
+  const ctx = useContext(AuthenticationContext);
 
   return (
     <div className={styles.loginContainer}>
@@ -16,22 +12,18 @@ export function Login() {
 
         <div className={styles.inputGroup}>
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Nome"
+            onChange={(e) => {
+              const nome = e.target.value;
+              ctx.setUsername(nome);
+            }}
             required
           />
         </div>
 
         <div className={styles.inputGroup}>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <input type="password" placeholder="Password" required />
         </div>
 
         <button type="submit" className={styles.loginBtn}>
