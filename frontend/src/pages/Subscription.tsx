@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import type { SubscriptionType } from "../../../api/types";
 import ChipList from "../components/ChipList/ChipList";
@@ -8,10 +8,12 @@ import QuestionList from "../components/QuestionList/QuestionList";
 import type { ExamType } from "../components/QuestionList/types";
 import UserInfoComponent from "../components/UserInfo/UserInfoComponent";
 import { chips } from "../mocks/chips";
+import { AuthenticationContext } from "../components/Authentication/AuthenticationProvider";
 
 export const Subscription = () => {
   const { subcriptionId } = useParams();
   const [exam, setExam] = useState<ExamType | null>(null);
+  const {username} = useContext(AuthenticationContext)
 
   console.log("ID SOTTOSCRIZIONE:", subcriptionId);
 
@@ -32,11 +34,11 @@ export const Subscription = () => {
         console.error("Errore nel fetch della sottoscrizione:", error);
       });
 
-  }, []);
+  }, [subcriptionId]);
 
   return (
     <>
-      <UserInfoComponent testo="Alberto Molon"></UserInfoComponent>
+      <UserInfoComponent testo={username}></UserInfoComponent>
       <Description classe="1A" tipoDiTest="Matematica"></Description>
       <ChipList chips={chips}></ChipList>
       <ClockComponent tempo={7200}></ClockComponent>

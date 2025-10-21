@@ -3,56 +3,65 @@ import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import { MySubscriptions } from "./pages/student/mySubscriptions";
 import { Subscription } from "./pages/Subscription";
+import Login from "./components/Login/Login";
+import {Logout} from "./components/Logout/Logout";
+import { AuthenticationProvider } from "./components/Authentication/AuthenticationProvider";
+import { CurrentUser } from "./components/CurrentUser/CurrentUser";
+import { Authenticated } from "./components/Authentication/Authenticated";
 
 function App() {
   return (
     <>
-      <nav className={styles.navbar}>
-        <div className={styles.left}>
-          <Link to="/">
-            <img src={Logo} alt="" className={styles.logo} />
-          </Link>
-          <ul>
-            <li>
-              <Link to="/" className={styles.sx}>
-                Dashboard
-              </Link>
-            </li>
-            {/* <li>
+      <AuthenticationProvider>
+        <nav className={styles.navbar}>
+          <div className={styles.left}>
+            <Link to="/">
+              <img src={Logo} alt="" className={styles.logo} />
+            </Link>
+            <ul>
+              <li>
+                <Link to="/" className={styles.sx}>
+                  Dashboard
+                </Link>
+              </li>
+              {/* <li>
               <a href="/" className={styles.sx}>
                 Esami
               </a>
             </li> */}
-          </ul>
-        </div>
+            </ul>
+          </div>
 
-        <div className={styles.right}>
-          <ul>
-            <li>
-              <a href="#" className={styles.dx}>
-                Albe Molon
-              </a>
-            </li>
-            <li>
-              <a href="#" className={styles.dx}>
-                Logout
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+          <div className={styles.right}>
+            <ul>
+              <li>
+                <Link to="#" className={styles.dx}>
+                  <CurrentUser/>
+                </Link>
+              </li>
+              <li>
+                <Logout/>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-      <div className={styles.main}>
-        <div className={styles.content}>
-          <Routes>
-            <Route index element={<MySubscriptions />} />
-            <Route
-              path="subscriptions/:subcriptionId"
-              element={<Subscription />}
-            />
-          </Routes>
+        <div className={styles.main}>
+          <div className={styles.content}>
+            <Routes>
+              <Route element={<Authenticated />}>
+                <Route index element={<MySubscriptions />} />
+                <Route
+                  path="subscriptions/:subcriptionId"
+                  element={<Subscription />}
+                />
+              </Route>
+              <Route path="login" element={<Login />} />
+              <Route path="logout" />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </AuthenticationProvider>
     </>
   );
 }
