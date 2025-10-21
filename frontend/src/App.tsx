@@ -3,6 +3,8 @@ import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import { MySubscriptions } from "./pages/student/mySubscriptions";
 import { Subscription } from "./pages/Subscription";
+import { Login } from "./components/Login/Login";
+import { Logout } from "./components/Logout/Logout";
 
 function App() {
   return (
@@ -50,6 +52,8 @@ function App() {
               path="subscriptions/:subcriptionId"
               element={<Subscription />}
             />
+            <Route path="login" element={<Login />} />
+            <Route path="logout" element={<Logout />} />
           </Routes>
         </div>
       </div>
