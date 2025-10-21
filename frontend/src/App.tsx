@@ -3,10 +3,15 @@ import styles from "./App.module.css";
 import Logo from "./assets/ExGame logo.svg";
 import { MySubscriptions } from "./pages/student/mySubscriptions";
 import { Subscription } from "./pages/Subscription";
+import Login from "./pages/Login";
+import {Logout} from "./pages/Logout";
+import { AuthenticationProvider } from "./components/AuthenticationProvider/AuthenticationProvider";
+import { CurrentUser } from "./components/CurrentUser/CurrentUser";
+import { Authenticated } from "./components/AuthenticationProvider/Authenticated";
 
 function App() {
   return (
-    <>
+    <AuthenticationProvider>
       <nav className={styles.navbar}>
         <div className={styles.left}>
           <Link to="/">
@@ -18,11 +23,11 @@ function App() {
                 Dashboard
               </Link>
             </li>
-            {/* <li>
+            <li>
               <a href="/" className={styles.sx}>
                 Esami
               </a>
-            </li> */}
+            </li>
           </ul>
         </div>
 
@@ -30,7 +35,7 @@ function App() {
           <ul>
             <li>
               <a href="#" className={styles.dx}>
-                Albe Molon
+                <CurrentUser />
               </a>
             </li>
             <li>
@@ -45,15 +50,19 @@ function App() {
       <div className={styles.main}>
         <div className={styles.content}>
           <Routes>
+            <Route element={<Authenticated />}>
             <Route index element={<MySubscriptions />} />
             <Route
               path="subscriptions/:subcriptionId"
               element={<Subscription />}
             />
+            </Route>
+            <Route path="login" element={<Login/>} />
+            <Route path="logout" element={<Logout/>}/>
           </Routes>
         </div>
       </div>
-    </>
+    </ AuthenticationProvider>
   );
 }
 
