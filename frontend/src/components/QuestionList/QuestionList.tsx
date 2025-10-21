@@ -56,9 +56,13 @@ const QuestionList = ({ questionsList }: QuestionList) => {
     // ... quello che scrivo qui viene eseguito dopo aver chiamato l'api, ma PRIMA che arrivi la risposta
   };
 
+  if (questionsList.length === 0) {
+    return <div>Login ...</div>;
+  }
+
   return (
     <div className="QuestionList">
-      {questionsList.map((question) => (
+      {questionsList.map((question,) => (
         <QuestionComponent
           key={question._id}
           question={question}

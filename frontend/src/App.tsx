@@ -9,14 +9,14 @@ function App() {
     <>
       <nav className={styles.navbar}>
         <div className={styles.left}>
-          <a href="">
+          <Link to="/">
             <img src={Logo} alt="" className={styles.logo} />
-          </a>
+          </Link>
           <ul>
             <li>
-              <a href="#" className={styles.sx}>
+              <Link to="/" className={styles.sx}>
                 Dashboard
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className={styles.sx}>
@@ -48,7 +48,7 @@ function App() {
             <Route index element={<MySubscriptions />} />
             <Route
               path="subscriptions/:subcriptionId"
-              element={<Subscription />}
+              element={<Subscription/>}
             />
           </Routes>
         </div>
