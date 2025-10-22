@@ -11,6 +11,22 @@ router.get("/", (ctx) => {
   ctx.body = subscriptions;
 });
 
+router.get("/:id", (ctx) => {
+  const { id } = ctx.params;
+  const subscription = subscriptions.find((subscription) => subscription._id === id);
+
+  if (!subscription) {
+    ctx.status = 404;
+    ctx.body = { error: `Sottoscrizione con id ${id} non trovata` };
+    return;
+  }
+
+  ctx.status = 200;
+  ctx.body = subscription;
+})
+
+
+
 router.post("/new", examsMiddleware, (ctx) => {
   try {
     const newSubscription = { ...ctx.request.body };
@@ -32,6 +48,44 @@ router.post("/new", examsMiddleware, (ctx) => {
     ctx.status = 500;
     ctx.body = { error: "Errore durante la creazione della sottoscrizione" };
   }
+});
+
+router.put("/:id", (ctx) => {
+  const { id } = ctx.params;
+  const index = subscriptions.findIndex((subscription) => subscription._id === id);
+
+  if (index === -1) {
+    ctx.status = 404;
+    ctx.body = { error: "Sottoscrizione non trovata!" };
+    return;
+  }
+
+  try {
+    const updatedSubscription = { ...subscriptions[index], ...ctx.request.body };
+    subscriptions[index] = updatedSubscription;
+
+    ctx.status = 202;
+    ctx.body = updatedSubscription;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: "Errore durante l'aggiornamento" };
+  }});
+
+
+router.delete("/:id", (ctx) => {
+  const { id } = ctx.params;
+  const index = subscriptions.findIndex((subscription) => subscription._id === id);
+
+  if (index === -1) {
+    ctx.status = 404;
+    ctx.body = { error: "Sottoscrizione non trovata!" };
+    return;
+  }
+
+  subscriptions.splice(index, 1);
+
+  ctx.status = 204;
+  ctx.body = null;
 });
 
 export default router;
