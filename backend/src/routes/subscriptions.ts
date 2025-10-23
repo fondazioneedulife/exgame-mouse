@@ -69,20 +69,19 @@ router.post("/:id/calc", (ctx) => {
       }
 
       for (const studentAnswer of studentQuestion.responses) {
-        const isCorrect = examQuestion.answers.find(
+        const answerQuestion = examQuestion.answers.find(
           (a) => a._id === studentAnswer.answer_id,
         );
-        if (isCorrect && isCorrect.is_correct) {
+        if (answerQuestion && answerQuestion.is_correct) {
           count++;
         }
       }
     }
 
-    const finalGrade = ((count / subscription?.questions.length) * 10).toFixed(
-      1,
-    );
+    const finalGrade = ((count / subscription?.questions.length) * 10).toFixed(1);
 
     ctx.body = finalGrade;
+    return finalGrade;
   }
 });
 
