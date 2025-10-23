@@ -27,5 +27,12 @@ export const examsMiddleware = async (ctx: Context, next: Next) => {
     return;
   }
 
+  for (const question of questions) {
+    if (!exam.questions.includes(question)) {
+      continue;
+    }
+    break;
+  }
+
   await next();
 };
