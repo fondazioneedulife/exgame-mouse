@@ -29,3 +29,31 @@ export const examsMiddleware = async (ctx: Context, next: Next) => {
 
   await next();
 };
+
+
+export const validateSubscription = (ctx: Context, next: Next) => {
+  const { exam_id, student_id: submittedQuestions } = ctx.request.body;
+
+  //troviamo l'esame
+  const exam = exam_id.find((exam) => exam._id === exam_id);
+
+  if(!exam || !exam_id) {
+    //ritorna l'errore
+  }
+
+  const invalidateQuestions = [];
+  const invalidateAnswers = [];
+
+}
+
+
+//trovare l'esame nella lista dell subscriptoon e verifica che esista
+//ciclare tutte le questions che ci invia l'utente e verificare che esistano (ciclo for rispetto al foreach)
+//trovare tutte le ripsoste che ci invia l'utente e verificare che facciano parte dello stesso array delle answer/questions
+
+for (const question of questions) {
+  //if question non esiste, passo a continue
+  if (!exam.questions.includes(question))
+  continue;  
+  break; // condizione di chiusure che serve a interrompere il ciclo
+}
