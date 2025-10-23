@@ -78,10 +78,10 @@ router.post("/:id/calc", (ctx) => {
       }
     }
 
-    const finalGrade = ((count / subscription?.questions.length) * 10).toFixed(1);
+    const totalQuestions = exam?.questions.length || 0;
+    const finalGrade = ((count / totalQuestions) * 10).toFixed(1);
 
     ctx.body = finalGrade;
-    return finalGrade;
   }
 });
 
