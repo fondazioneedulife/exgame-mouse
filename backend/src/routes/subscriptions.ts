@@ -1,6 +1,6 @@
 import Router from "@koa/router";
 import { subscriptions } from "../mocks/subscriptions";
-import { examsMiddleware } from "../middlewares/exams";
+import { examsMiddleware, validateExamAnswersMiddleware } from "../middlewares/exams";
 
 const router = new Router({
   prefix: "/api/subscriptions",
@@ -93,6 +93,20 @@ router.delete("/:id", (ctx) => {
 
   ctx.status = 204;
   ctx.body = null;
+});
+
+router.post("/new", examsMiddleware, validateExamAnswersMiddleware, (ctx) => {
+  try {
+    const newSubscription = { ...ctx.request.body };
+
+    subscriptions.push(newSubscription);
+
+    ctx.status = 201;
+    ctx.body = newSubscription;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: "Errore durante la creazione della sottoscrizione" };
+  }
 });
 
 export default router;
