@@ -99,8 +99,9 @@ router.post("/:id/calc", validateSubscription, (ctx) => {
       }
     })
   })
+  const grade = (count / questions.length * 10).toFixed(1);
   ctx.status = 200;
-  ctx.body = count;
+  ctx.body = grade;
 });
 
 router.delete("/:id", (ctx) => {
