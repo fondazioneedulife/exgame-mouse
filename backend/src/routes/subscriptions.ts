@@ -1,6 +1,6 @@
 import Router from "@koa/router";
 import { subscriptions } from "../mocks/subscriptions";
-import { examsMiddleware } from "../middlewares/exams";
+import { examsMiddleware, validateSubscription } from "../middlewares/exams";
 
 const router = new Router({
   prefix: "/api/subscriptions",
@@ -27,7 +27,7 @@ router.get("/:id", (ctx) => {
   ctx.body = subscription;
 });
 
-router.post("/new", examsMiddleware, (ctx) => {
+router.post("/new", examsMiddleware, validateSubscription, (ctx) => {
   try {
     const newSubscription = { ...ctx.request.body };
 
