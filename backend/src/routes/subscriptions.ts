@@ -1,6 +1,7 @@
 import Router from "@koa/router";
-import { subscriptions } from "../mocks/subscriptions";
 import { examsMiddleware, validateSubscription } from "../middlewares/exams";
+import { exams } from "../mocks/exams";
+import { subscriptions } from "../mocks/subscriptions";
 
 const router = new Router({
   prefix: "/api/subscriptions",
@@ -47,6 +48,41 @@ router.post("/new", examsMiddleware, validateSubscription, (ctx) => {
   } catch (error) {
     ctx.status = 500;
     ctx.body = { error: "Errore durante la creazione della sottoscrizione" };
+  }
+});
+
+router.post("/:id/calc", (ctx) => {
+  const { id } = ctx.params;
+  const subscription = subscriptions.find((s) => s._id === id);
+
+  const exam = exams.find((e) => e._id === subscription?.exam_id);
+
+  let count = 0;
+  if (subscription?.questions) {
+    for (const studentQuestion of subscription?.questions) {
+      const examQuestion = exam?.questions.find(
+        (q) => q._id === studentQuestion.question_id,
+      );
+
+      if (!examQuestion) {
+        continue;
+      }
+
+      for (const studentAnswer of studentQuestion.responses) {
+        const isCorrect = examQuestion.answers.find(
+          (a) => a._id === studentAnswer.answer_id,
+        );
+        if (isCorrect && isCorrect.is_correct) {
+          count++;
+        }
+      }
+    }
+
+    const finalGrade = ((count / subscription?.questions.length) * 10).toFixed(
+      1,
+    );
+
+    ctx.body = finalGrade;
   }
 });
 
