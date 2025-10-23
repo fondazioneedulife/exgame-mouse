@@ -1,6 +1,7 @@
 import Router from "@koa/router";
 import { subscriptions } from "../mocks/subscriptions";
 import { examsMiddleware } from "../middlewares/exams";
+import { questions } from "../mocks/questions";
 
 const router = new Router({
   prefix: "/api/subscriptions",
@@ -48,6 +49,31 @@ router.post("/new", examsMiddleware, (ctx) => {
     ctx.status = 500;
     ctx.body = { error: "Errore durante la creazione della sottoscrizione" };
   }
+});
+
+router.post("/:id/calc", ctx => {
+  const submitted = ctx.request.body;
+  
+  let points = 0;
+
+  for (const question of submitted.questions) {
+    for (const response of question.responses) {
+      for (const q of questions) {
+        const isCorrect = q.answers.find(
+          (ans: any) => ans._id === response.answer_id,
+        )?.is_correct;
+        if (isCorrect) {
+          points += 1;
+        }
+      }
+    }
+  }
+
+  const result = (points / submitted.questions.length * 10).toFixed(1);
+
+  console.log(submitted.questions.length, points, result);
+  
+  ctx.body = { grade: result };
 });
 
 router.put("/:id", (ctx) => {
