@@ -1,6 +1,9 @@
 import Router from "@koa/router";
 import { subscriptions } from "../mocks/subscriptions";
-import { examsMiddleware } from "../middlewares/exams";
+import { examsMiddleware, validateSubscription } from "../middlewares/exams";
+import { findExamIdBySubId, findSubById } from "../lib/helper";
+import { questions } from "../mocks/questions";
+import { exams } from "../mocks/exams";
 
 const router = new Router({
   prefix: "/api/subscriptions",
@@ -75,6 +78,29 @@ router.put("/:id", (ctx) => {
     ctx.status = 500;
     ctx.body = { error: "Errore durante l'aggiornamento" };
   }
+});
+
+//POST /api/subscriptions/:id/calc PUNTEGGIO ESAME
+router.post("/:id/calc", validateSubscription, (ctx) => {
+  const { id } = ctx.params;
+  const originalExamId = findExamIdBySubId(id);  
+  const sub = findSubById(id);
+  let count = 0;
+  sub.questions.forEach((q) => {
+    questions.forEach((qExam) => {
+      if(q.question_id === qExam._id) {
+        q.responses.forEach((r) => {
+          qExam.answers.forEach((rExam) => {
+            if(r.answer_id === rExam.answer && rExam.is_correct === true) {
+              count ++;
+            }
+          })
+        })
+      }
+    })
+  })
+  ctx.status = 200;
+  ctx.body = count;
 });
 
 router.delete("/:id", (ctx) => {

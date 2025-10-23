@@ -28,37 +28,6 @@ export const examsMiddleware = async (ctx: Context, next: Next) => {
     return;
   }
 
-
-  //trovo esame e verifico che esista
-  const isExamsExists = exams.some(e => e._id === exam_id)
-  if (exam.exam_id && isExamsExists) {
-    //verifico che tutte le questions esistano in quell'esame 
-    for (const q of questions) {
-      if (q._id === q)
-        continue;
-      else {
-        ctx.status = 400;
-        ctx.body = { error: "Alcune domande o risposte non appartengono a questo esame!" };
-        break;
-      }
-    };
-    //verifico che tutte le risposte esistano per quella domanda e per quell'esame
-    for (const a of answers) {
-      if (a._id === a)
-        continue;
-      else {
-        ctx.status = 400;
-        ctx.body = { error: "Alcune domande o risposte non appartengono a questo esame!" };
-        break;
-      }
-    };
-  }
-  else {
-    ctx.status = 400;
-    ctx.body = { error: "L'esame non corrisponde o non esiste" };
-    return;
-  }
-
   await next();
 };
 

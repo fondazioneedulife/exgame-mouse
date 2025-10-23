@@ -1,6 +1,6 @@
 import Router from "@koa/router";
 import { exams } from "../mocks/exams";
-import { examsMiddleware } from "../middlewares/exams";
+import { examsMiddleware, validateSubscription } from "../middlewares/exams";
 import {
   findExamById,
   findExamIndexById,
@@ -19,7 +19,7 @@ router.get("/", (ctx) => {
   ctx.body = exams;
 });
 
-router.get("/search", examsMiddleware, (ctx) => {
+router.get("/search", examsMiddleware, validateSubscription, (ctx) => {
   const { name } = ctx.query;
   if (!name) {
     ctx.status = 400;
