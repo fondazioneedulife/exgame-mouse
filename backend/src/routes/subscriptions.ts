@@ -81,6 +81,7 @@ router.post("/:id/calc", (ctx) => {
     const totalQuestions = exam?.questions.length || 0;
     const finalGrade = ((count / totalQuestions) * 10).toFixed(1);
 
+    ctx.status = 200;
     ctx.body = finalGrade;
   }
 });
