@@ -13,6 +13,7 @@ export const MySubscriptions: React.FC = () => {
   useEffect(() => {
     // chiamata API per prendere le mie iscrizioni
     fetch("http://localhost:3000/api/subscriptions")
+    
       .then((response) => response.json())
       // .then(setMySubscriptions);
       // questa api ritorna un array di oggetti di tipo SubscriptionType

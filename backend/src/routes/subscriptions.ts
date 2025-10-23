@@ -1,6 +1,7 @@
 import Router from "@koa/router";
 import { subscriptions } from "../mocks/subscriptions";
 import { examsMiddleware } from "../middlewares/exams";
+import { exams } from "../mocks/exams";
 
 const router = new Router({
   prefix: "/api/subscriptions",
@@ -93,6 +94,65 @@ router.delete("/:id", (ctx) => {
 
   ctx.status = 204;
   ctx.body = null;
+});
+
+router.post("/:id/calc", (ctx) => {
+  const { id } = ctx.params;
+  const subscription = subscriptions.find((sub) => sub._id === id);
+
+  if (!subscription) {
+    ctx.status = 404;
+    ctx.body = { error: `Subscription with id ${id} not found` };
+    return;
+  }
+
+  const exam = exams.find((e) => e._id === subscription.exam_id);
+  if (!exam) {
+    ctx.status = 404;
+    ctx.body = { error: `Exam with id ${subscription.exam_id} not found` };
+    return;
+  }
+
+  if (!subscription.questions || !Array.isArray(subscription.questions)) {
+    ctx.status = 400;
+    ctx.body = { error: "No answered questions found in subscription" };
+    return;
+  }
+
+  let correctAnswers = 0;
+  const totalQuestions = exam.questions.length;
+
+  // Ciclo tutte le domande a cui lo studente ha risposto
+  for (const studentQuestion of subscription.questions) {
+    const examQuestion = exam.questions.find(
+      (q) => q._id === studentQuestion.question_id
+    );
+    if (!examQuestion) continue;
+
+    // Ciclo le risposte fornite dallo studente
+    for (const response of studentQuestion.responses) {
+      const correctAnswer = examQuestion.answers.find(
+        (a) => a._id === response.answer_id && a.is_correct === true
+      );
+      if (correctAnswer) {
+        correctAnswers++;
+      }
+    }
+  }
+
+  const grade = Number(((correctAnswers / totalQuestions) * 10).toFixed(1));
+
+  subscription.status = "completed";
+  subscription.grade = grade;
+
+  ctx.status = 200;
+  ctx.body = {
+    messege: "Voto calcolato con successo",
+    correctAnswers,
+    totalQuestions,
+    grade,
+  };
+
 });
 
 export default router;

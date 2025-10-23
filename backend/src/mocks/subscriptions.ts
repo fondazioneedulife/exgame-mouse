@@ -7,7 +7,7 @@ export const subscriptions: SubscriptionType[] = [
     student_id: "student_001",
     status: "to-do",
     grade: 0,
-    questions: [
+    questions: [ //risposte che corrsipondono alle doamnde // ciclare queste doamnde 
       { question_id: "q_001", responses: [{ answer_id: "a_001_1" }] },
       { question_id: "q_002", responses: [{ answer_id: "a_002_1" }] },
       { question_id: "q_003", responses: [{ answer_id: "a_003_1" }] },
