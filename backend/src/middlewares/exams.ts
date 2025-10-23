@@ -1,5 +1,6 @@
 import { Context, Next } from "koa";
 import { subscriptions } from "../mocks/subscriptions";
+import { exams } from "../mocks/exams";
 
 export const examsMiddleware = async (ctx: Context, next: Next) => {
   const { exam_id, student_id } = ctx.request.body;
@@ -30,30 +31,68 @@ export const examsMiddleware = async (ctx: Context, next: Next) => {
   await next();
 };
 
+export const validateSubscription = async (ctx: Context, next: Next) => {
+  const { exam_id, questions: submittedQuestions } = ctx.request.body;
 
-export const validateSubscription = (ctx: Context, next: Next) => {
-  const { exam_id, student_id: submittedQuestions } = ctx.request.body;
-
-  //troviamo l'esame
-  const exam = exam_id.find((exam) => exam._id === exam_id);
-
-  if(!exam || !exam_id) {
-    //ritorna l'errore
+  // Validazione base della richiesta
+  if (!exam_id || !Array.isArray(submittedQuestions)) {
+    ctx.status = 400;
+    ctx.body = { error: "Richiesta non valida." };
+    return;
   }
 
-  const invalidateQuestions = [];
-  const invalidateAnswers = [];
+  // Trova l'esame corrispondente all'ID
+  const exam = exams.find((e) => e._id === exam_id);
+  if (!exam) {
+    ctx.status = 404;
+    ctx.body = { error: "Esame non trovato." };
+    return;
+  }
 
-}
+  // Array per tenere traccia di errori
+  const invalidQuestionIds = [];
+  const invalidAnswerEntries = [];
 
+  // Verifica ogni domanda inviata dallo studente
+  for (const studentQuestion of submittedQuestions) {
+    const examQuestion = exam.questions.find(
+      (q) => q._id === studentQuestion.question_id,
+    );
 
-//trovare l'esame nella lista dell subscriptoon e verifica che esista
-//ciclare tutte le questions che ci invia l'utente e verificare che esistano (ciclo for rispetto al foreach)
-//trovare tutte le ripsoste che ci invia l'utente e verificare che facciano parte dello stesso array delle answer/questions
+    // La domanda non appartiene all'esame → errore
+    if (!examQuestion) {
+      invalidQuestionIds.push(studentQuestion.question_id);
+      continue;
+    }
 
-for (const question of questions) {
-  //if question non esiste, passo a continue
-  if (!exam.questions.includes(question))
-  continue;  
-  break; // condizione di chiusure che serve a interrompere il ciclo
-}
+    // Se ci sono risposte inviate, verifica la validità
+    if (Array.isArray(studentQuestion.responses)) {
+      const invalidAnswers = studentQuestion.responses
+        .filter(
+          (response: any) =>
+            !examQuestion.answers.some((a) => a._id === response.answer_id),
+        )
+        .map((response: any) => response.answer_id);
+
+      if (invalidAnswers.length > 0) {
+        invalidAnswerEntries.push({
+          question_id: studentQuestion.question_id,
+          invalidAnswers,
+        });
+      }
+    }
+  }
+
+  // Se ci sono errori blocca la richiesta e segnala gli errori
+  if (invalidQuestionIds.length > 0 || invalidAnswerEntries.length > 0) {
+    ctx.status = 400;
+    ctx.body = {
+      error: "Dati delle domande non validi.",
+      invalidQuestionIds,
+      invalidAnswerEntries,
+    };
+    return;
+  }
+
+  await next();
+};
