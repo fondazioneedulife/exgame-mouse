@@ -1,6 +1,8 @@
 import Router from "@koa/router";
 import { subscriptions } from "../mocks/subscriptions";
 import { examsMiddleware } from "../middlewares/exams";
+import {questions} from "../mocks/questions"
+import { error } from "console";
 
 const router = new Router({
   prefix: "/api/subscriptions",
@@ -94,5 +96,48 @@ router.delete("/:id", (ctx) => {
   ctx.status = 204;
   ctx.body = null;
 });
+
+
+
+// Calcolo del punteggio finale
+router.post("/:id/calc", (ctx) => {
+  const { id } = ctx.params;
+
+  //trova la subscription
+  const subscription = subscriptions.find((sub) => sub._id === id)
+  if (!subscription) {
+    ctx.status = 404
+    ctx.body = {error: `Sottoscrizione con ${id} non trovata`}
+    return
+  }
+
+  const studentQuestions = subscription.questions
+  let correctAnswers = 0
+
+  //cicla le domande dello studente
+  studentQuestions.forEach((studentQuestion) => {
+    const question = questions.find((q) => q._id === studentQuestion.question_id)
+    if (!question) return
+
+  //controllo se la risposat è corretta
+  studentQuestion.responses.forEach((response: { answer_id: any; }) => {
+    const answer = question.answers.find((a: { _id: any; }) => a._id === response.answer_id)
+    if (answer && answer.is_correct) {
+      correctAnswers++
+    }
+  })
+})
+
+  const totalQuestions = studentQuestions.length;
+  const grade = ((correctAnswers / totalQuestions) * 10).toFixed(1)
+
+  ctx.status = 200
+  ctx.body = {
+    message: "Calcolo completato con successo",
+    correctAnswers,
+    totalQuestions,
+    grade: subscription.grade
+  }
+})
 
 export default router;
