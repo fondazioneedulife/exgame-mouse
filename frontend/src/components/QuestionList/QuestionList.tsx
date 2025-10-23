@@ -43,8 +43,8 @@ const QuestionList = ({ questionsList }: QuestionList) => {
     };
 
     // Invio l'oggetto al server
-    fetch("http://localhost:3000/api/subscriptions", {
-      method: "PUT",
+    fetch("http://localhost:3000/api/subscriptions/new", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
