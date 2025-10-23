@@ -51,6 +51,7 @@ router.get("/search", examsMiddleware, (ctx) => {
       return true;
 
     return false;
+
   });
 
   ctx.status = 200;
