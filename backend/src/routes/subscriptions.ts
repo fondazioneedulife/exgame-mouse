@@ -1,6 +1,7 @@
 import Router from "@koa/router";
 import { subscriptions } from "../mocks/subscriptions";
 import { examsMiddleware } from "../middlewares/exams";
+import { exams } from "../mocks/exams";
 
 const router = new Router({
   prefix: "/api/subscriptions",
