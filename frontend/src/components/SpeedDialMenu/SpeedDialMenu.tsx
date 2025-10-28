@@ -1,20 +1,41 @@
-import { IconBellRinging, IconClipboardCheck, IconQuestionMark } from '@tabler/icons-react';
-import { useState } from 'react';
-import styles from './SpeedDialMenu.module.css';
+import {
+  IconBellRinging,
+  IconClipboardCheck,
+  IconQuestionMark,
+} from "@tabler/icons-react";
+import { useState } from "react";
+import styles from "./SpeedDialMenu.module.css";
+import { useSocket } from "../../sockets/socketProvider";
 
 const actions = [
-  { icon: <IconBellRinging />, name: 'Disturba' },
-  { icon: <IconClipboardCheck />, name: 'Copia' },
-  { icon: <IconQuestionMark />, name: "Chiedi all'insegnante" },
+  { icon: <IconBellRinging />, name: "Disturba", action: "disturb" },
+  { icon: <IconClipboardCheck />, name: "Copia", action: "copy" },
+  { icon: <IconQuestionMark />, name: "Chiedi all'insegnante", action: "ask" },
 ];
 
 export const SpeedDialMenu = () => {
   const [open, setOpen] = useState(false);
+  const { disturb, copy } = useSocket(); // 👈 prendi le funzioni dal context
 
   const handleToggle = () => setOpen(!open);
 
   const handleActionClick = (actionName: string) => {
     console.log(`Azione selezionata: ${actionName}`);
+
+    switch (actionName) {
+      case "Disturba":
+        disturb();
+        break;
+      case "Copia":
+        copy();
+        break;
+      case "Chiedi all'insegnante":
+        alert("🔔 Funzione 'Chiedi all'insegnante' non ancora implementata");
+        break;
+      default:
+        console.warn("Azione sconosciuta:", actionName);
+    }
+
     setOpen(false);
   };
 
@@ -28,7 +49,6 @@ export const SpeedDialMenu = () => {
               className={styles.action}
               style={{
                 transitionDelay: `${index * 50}ms`,
-                // bottom: `${(index + 1) * 60}px`
               }}
               onClick={() => handleActionClick(action.name)}
               title={action.name}
@@ -40,11 +60,11 @@ export const SpeedDialMenu = () => {
         </div>
       )}
       <button
-        className={`${styles.mainButton} ${open ? styles.open : ''}`}
+        className={`${styles.mainButton} ${open ? styles.open : ""}`}
         onClick={handleToggle}
         aria-label="Menu azioni"
       >
-        {open ? '✕' : '+'}
+        {open ? "✕" : "+"}
       </button>
     </div>
   );
