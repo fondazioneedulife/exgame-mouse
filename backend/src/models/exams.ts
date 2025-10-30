@@ -24,6 +24,19 @@ interface IAnswer {
   is_correct: boolean;
 }
 
+const questionSchema = new mongoose.Schema<IQuestion>({
+  _id: { type: String, required: true },
+  text: { type: String, required: true },
+  type: { type: String, required: true },
+  answers: [
+    {
+      _id: { type: String, required: true },
+      answer: { type: String, required: true },
+      is_correct: { type: Boolean, required: true },
+    },
+  ],
+});
+
 const examSchema = new mongoose.Schema<IExam>({
   _id: { type: String, required: true, unique: true },
   name: { type: String, required: true },
@@ -32,7 +45,7 @@ const examSchema = new mongoose.Schema<IExam>({
   created_by: { type: String, required: true },
   schedule_date: { type: Date, required: true },
   max_time: { type: Number, required: true },
-  questions: { type: [], required: true },
+  questions: [questionSchema],
 });
 
 export const examModel = mongoose.model<IExam>("Exam", examSchema);
