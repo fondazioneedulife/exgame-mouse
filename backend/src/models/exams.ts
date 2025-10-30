@@ -26,7 +26,14 @@ const examSchema = new mongoose.Schema<IExam>(
                 id: { type: String, required: true },
                 text: { type: String, required: true },
                 type: { type: String, required: true },
-                answers: { type: mongoose.Schema.Types.Mixed, required: true },
+                answers: [
+                    {
+                        id: { type: String, required: true },
+                        answer: { type: String, required: true },
+                        type: { type: String, required: true },
+                        is_correct: { type: Boolean, required: true },
+                    }
+                ],
             }
         ],
     },

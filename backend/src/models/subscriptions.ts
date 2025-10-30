@@ -16,7 +16,9 @@ const SubscriptionSchema = new mongoose.Schema<ISubscription>(
         questions: [
             {
                 question_id: { type: String, required: true },
-                responses: { type: mongoose.Schema.Types.Mixed, required: true },
+                responses: [
+                    { answer_id: { type: String, required: true } }
+                ],
             },
         ],
     }
