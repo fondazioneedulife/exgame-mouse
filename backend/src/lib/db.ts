@@ -1,16 +1,11 @@
-import { config } from "../config/config.js";
 import mongoose from "mongoose";
+import { config } from "../config/config.js";
 
-mongoose.connect(config.DB_URL);
-
-interface ICat {
-  name: string;
-  age: number;
-}
-
-const catSchema = new mongoose.Schema({
-  name: String,
-  age: Number,
-});
-
-const catModel = mongoose.model<ICat>("Cat", catSchema);
+export const dbClient = () => {
+  try {
+    mongoose.connect(config.DB_URL);
+    console.log("Database connected!");
+  } catch (err) {
+    console.error("Database connection error: ", err);
+  }
+};
