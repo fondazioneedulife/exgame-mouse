@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Answer, QuestionType } from "../../../api/types";
 
 interface ISubscription {
-  _id: number;
+  _id: string;
   student_id: string;
   exam_id: string;
   questions: {
@@ -14,7 +14,7 @@ interface ISubscription {
 }
 
 const subscriptionSchema = new mongoose.Schema<ISubscription>({
-  _id: { type: Number, required: true, unique: true },
+  _id: { type: String, required: true, unique: true },
   student_id: { type: String, required: true },
   exam_id: { type: String, required: true },
   questions: [

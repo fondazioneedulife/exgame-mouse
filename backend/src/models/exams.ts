@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
 interface IExams {
-  id: number;
+  id: string;
   name: string;
   created_at: Date;
   updated_at: Date;
@@ -22,7 +22,7 @@ interface IExams {
 }
 
 const examsSchema = new mongoose.Schema<IExams>({
-  id: { type: Number, required: true, unique: true },
+  id: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
