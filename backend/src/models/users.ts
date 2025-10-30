@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 interface Iuser {
-  id: number;
+  id: string;
   first_name: string;
   last_name: string;
   email: string;
@@ -14,7 +14,7 @@ interface Iuser {
 }
 
 const userSchema = new mongoose.Schema<Iuser>({
-  id: { type: Number, required: true, unique: true },
+  id: { type: String, required: true, unique: true },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   email: { type: String, required: true, unique: true },

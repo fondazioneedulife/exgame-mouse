@@ -5,6 +5,7 @@ import { createServer } from "http";
 import Koa from "koa";
 import { config } from "./config/config";
 import { initSocketIo } from "./io";
+import { dbClient } from "./lib/db";
 import logger from "./middlewares/logger";
 import examsRoute from "./routes/exams";
 import serverRoute from "./routes/server";
@@ -12,6 +13,8 @@ import subscriptionsRoute from "./routes/subscriptions";
 
 const app = new Koa();
 const router = new Router();
+
+dbClient();
 
 app.use(logger);
 app.use(bodyParser());
