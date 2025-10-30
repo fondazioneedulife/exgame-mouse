@@ -9,8 +9,10 @@ import Logout from "./components/Logout/logout";
 import { SocketIoRoute } from "./pages/SocketIoRoute";
 import { MySubscriptions } from "./pages/student/mySubscriptions";
 import { Subscription } from "./pages/Subscription";
+import { dbClient} from "../../backend/src/lib/db";
 
 function App() {
+  dbClient();
   return (
     <AuthenticationProvider>
       <nav className={styles.navbar}>
