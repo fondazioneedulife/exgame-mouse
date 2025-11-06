@@ -80,7 +80,7 @@ router.get("/time", (ctx) => {
 // GET /exams/:id - dettaglio di un singolo esame
 router.get("/:id", (ctx) => {
   const { id } = ctx.params;
-  const exam = findExamById(id);
+  const exam = examsDAO.getById(id);
 
   if (!exam) {
     ctx.status = 404;
