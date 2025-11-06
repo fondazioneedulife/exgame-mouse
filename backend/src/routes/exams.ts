@@ -77,9 +77,9 @@ router.get("/time", async (ctx) => {
 });
 
 // GET /exams/:id - dettaglio di un singolo esame
-router.get("/:id", (ctx) => {
+router.get("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const exam = findExamById(id);
+  const exam = await examsDao.getById(id);
 
   if (!exam) {
     ctx.status = 404;

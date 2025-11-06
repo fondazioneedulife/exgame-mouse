@@ -2,14 +2,18 @@ import Router from "@koa/router";
 import { subscriptions } from "../mocks/subscriptions";
 import { examsMiddleware, validateSubscription } from "../middlewares/exams";
 import { exams } from "../mocks/exams";
+import SubscriptionsDao from "../dao/subscriptions.dao";
+
 
 const router = new Router({
   prefix: "/api/subscriptions",
 });
 
-router.get("/", (ctx) => {
+const subscriptionsDao = new SubscriptionsDao();
+
+router.get("/", async (ctx) => {
   ctx.status = 200;
-  ctx.body = subscriptions;
+  ctx.body = await subscriptionsDao.getAll();
 });
 
 router.get("/:id", (ctx) => {
