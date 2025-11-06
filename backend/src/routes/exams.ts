@@ -1,11 +1,7 @@
 import Router from "@koa/router";
 import { exams } from "../mocks/exams";
-import {
-  findExamById,
-  findExamIndexById,
-  sanitizeSearchInput,
-} from "../lib/helper";
 import ExamsDao from "../dao/examsDao";
+import { findExamIndexById } from "../lib/helper";
 
 const router = new Router({
   prefix: "/api/exams",
@@ -22,16 +18,15 @@ router.get("/", async (ctx) => {
   ctx.body = result;
 });
 
-router.get("/search", (ctx) => {
+router.get("/search", async (ctx) => {
   const { name } = ctx.query;
   if (!name) {
     ctx.status = 400;
     ctx.body = { error: "400 Bad Request" };
     return;
   }
-  const searchTerm =
-    typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
-  const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
+  const searchTerm = typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
+  const sanitizedSearchTerm = await examsDao.sanitizeSearchInput(searchTerm);
 
   const results = exams.filter((exam) => {
     if (exam.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()))
@@ -64,23 +59,24 @@ router.get("/search", (ctx) => {
   };
 });
 
-router.get("/time", (ctx) => {
+router.get("/time", async (ctx) => {
   const minTime = parseInt(ctx.query.min_time as string) || 0;
+  const maxTime = parseInt(ctx.query.min_time as string) || 100;
 
   if (!minTime || isNaN(minTime) || minTime < 0) {
     ctx.status = 400;
     ctx.body = { error: "Parametro 'min_time' mancante o non valido" };
     return;
   }
-  const filtered = exams.filter((exam) => exam.max_time > minTime);
+  const filtered = await examsDao.filterExams(maxTime, minTime);
   ctx.status = 200;
   ctx.body = filtered;
 });
 
 // GET /exams/:id - dettaglio di un singolo esame
-router.get("/:id", (ctx) => {
+router.get("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const exam = findExamById(id);
+  const exam = await examsDao.getById(id);
 
   if (!exam) {
     ctx.status = 404;
@@ -93,7 +89,7 @@ router.get("/:id", (ctx) => {
 });
 
 // POST /exams/new - crea un nuovo esame
-router.post("/new", (ctx) => {
+router.post("/new", async (ctx) => {
   try {
     const newExam = ctx.request.body;
 
@@ -103,7 +99,7 @@ router.post("/new", (ctx) => {
       return;
     }
 
-    exams.push(newExam);
+    const examsUpdated = await examsDao.addExam(newExam);
     ctx.status = 201;
     ctx.body = newExam;
   } catch (error) {
@@ -113,9 +109,9 @@ router.post("/new", (ctx) => {
 });
 
 // PATCH /exams/update/:id - aggiorna un esame esistente
-router.patch("/update/:id", (ctx) => {
+router.patch("/update/:id", async (ctx) => {
   const { id } = ctx.params;
-  const index = findExamIndexById(id);
+  const index = findExamIndexById(id);  //da fare anche questo?
 
   if (index === -1) {
     ctx.status = 404;
@@ -136,9 +132,9 @@ router.patch("/update/:id", (ctx) => {
 });
 
 // DELETE /exams/:id - elimina un esame
-router.delete("/:id", (ctx) => {
+router.delete("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const index = findExamIndexById(id);
+  const index = findExamIndexById(id);   //da fare anche questo?
 
   if (index === -1) {
     ctx.status = 404;
@@ -147,7 +143,7 @@ router.delete("/:id", (ctx) => {
   }
 
   try {
-    const deletedExam = exams.splice(index, 1)[0];
+    const deletedExam = await examsDao.deleteExam(index);
     ctx.status = 200;
     ctx.body = { message: "Esame eliminato!", exam: deletedExam };
   } catch (error) {

@@ -1,5 +1,17 @@
 import mongoose from "mongoose";
-
+//import type * as mongooseType from "mongoose";
+// mock per testare anche senza avere mongoose installato
+//let mongoose: typeof mongooseType | any;
+//try {
+//  mongoose = await import("mongoose");
+//} catch {
+//  mongoose = {
+//    Schema: class MockSchema {
+//      constructor(public definition: any) {}
+//    },
+//    model: (name: string, schema: any) => ({ name, schema }),
+//  };
+//}
 
 interface IExams {
   id: string;
