@@ -1,10 +1,10 @@
 import Router from "@koa/router";
-import { exams } from "../mocks/exams";
 import {
   findExamById,
   findExamIndexById,
   sanitizeSearchInput,
 } from "../lib/helper";
+import { exams } from "../mocks/exams";
 import ExamsDao from "../dao/exams.dao";
 
 const router = new Router({
@@ -20,7 +20,8 @@ router.get("/", async (ctx) => {
   ctx.status = 200;
 });
 
-router.get("/search", (ctx) => {
+router.get("/search", async (ctx) => {
+  const exams = await examsDao.getAll();
   const { name } = ctx.query;
   if (!name) {
     ctx.status = 400;
@@ -45,7 +46,7 @@ router.get("/search", (ctx) => {
     if (
       exam.questions.some((q) =>
         q.answers.some((a) =>
-          a.answer.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
+          a.answer_id.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
         ),
       )
     )
