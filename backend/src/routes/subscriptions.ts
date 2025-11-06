@@ -1,5 +1,6 @@
 import Router from "@koa/router";
 import { examsMiddleware, validateSubscription } from "../middlewares/exams";
+import { subscriptions } from "../mocks/subscriptions";
 import SubsctiptionsDao from "../dao/subscriptionsdao";
 import ExamsDao from "../dao/examsdao";
 
@@ -90,13 +91,13 @@ router.post("/:id/calc", async (ctx) => {
   }
 });
 
-router.put("/:id", (ctx) => {
+router.put("/:id", async (ctx) => {
   const { id } = ctx.params;
   const index = subscriptions.findIndex(
     (subscription) => subscription._id === id,
   );
 
-  if (index === -1) {
+  if (index === null) {
     ctx.status = 404;
     ctx.body = { error: "Sottoscrizione non trovata!" };
     return;
