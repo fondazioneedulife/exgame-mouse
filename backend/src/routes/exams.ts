@@ -4,7 +4,7 @@ import {
   findExamIndexById,
   sanitizeSearchInput,
 } from "../lib/helper";
-import { exams } from "../mocks/exams";
+
 import ExamsDao from "../dao/exams.dao";
 
 const router = new Router({
@@ -63,7 +63,7 @@ router.get("/search", async (ctx) => {
   };
 });
 
-router.get("/time", (ctx) => {
+router.get("/time", async (ctx) => {
   const minTime = parseInt(ctx.query.min_time as string) || 0;
 
   if (!minTime || isNaN(minTime) || minTime < 0) {
@@ -71,7 +71,7 @@ router.get("/time", (ctx) => {
     ctx.body = { error: "Parametro 'min_time' mancante o non valido" };
     return;
   }
-  const filtered = exams.filter((exam) => exam.max_time > minTime);
+  const filtered = await examsDao.getAll().then ((exams) => exams.filter((exam) => exam.max_time > minTime));
   ctx.status = 200;
   ctx.body = filtered;
 });
