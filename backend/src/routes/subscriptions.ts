@@ -16,11 +16,11 @@ router.get("/", async (ctx) => {
   ctx.body = await subscriptionsDao.getAll();
 });
 
-router.get("/:id", (ctx) => {
+router.get("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const subscription = subscriptions.find(
-    (subscription) => subscription._id === id,
-  );
+  const subscription = await subscriptionsDao.getById(id).then((subscription) => {
+    return subscription;
+  });
 
   if (!subscription) {
     ctx.status = 404;
@@ -35,6 +35,7 @@ router.get("/:id", (ctx) => {
 router.post("/new", examsMiddleware, validateSubscription, (ctx) => {
   try {
     const newSubscription = { ...ctx.request.body };
+    const createdSubscription = subscriptionsDao.create(newSubscription);
 
     if (
       !newSubscription ||
@@ -45,10 +46,8 @@ router.post("/new", examsMiddleware, validateSubscription, (ctx) => {
       ctx.body = { error: "Parametri mancanti" };
       return;
     }
-
-    subscriptions.push(newSubscription);
     ctx.status = 201;
-    ctx.body = newSubscription;
+    ctx.body = createdSubscription
   } catch (error) {
     ctx.status = 500;
     ctx.body = { error: "Errore durante la creazione della sottoscrizione" };
@@ -117,22 +116,26 @@ router.put("/:id", (ctx) => {
   }
 });
 
-router.delete("/:id", (ctx) => {
+router.delete("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const index = subscriptions.findIndex(
-    (subscription) => subscription._id === id,
-  );
 
-  if (index === -1) {
-    ctx.status = 404;
-    ctx.body = { error: "Sottoscrizione non trovata!" };
-    return;
+  try {
+    const subscription = await subscriptionsDao.getById(id);
+    if (!subscription) {
+      ctx.status = 404;
+      ctx.body = { error: "Sottoscrizione non trovata!" };
+      return;
+    }
+
+    await subscriptionsDao.delete(id);
+
+    const deletedSubscription = subscription;
+    ctx.status = 200;
+    ctx.body = { message: "Sottoscrizione eliminata!", subscription: deletedSubscription };
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: "Errore durante l'eliminazione" };
   }
-
-  subscriptions.splice(index, 1);
-
-  ctx.status = 204;
-  ctx.body = null;
 });
 
 export default router;
