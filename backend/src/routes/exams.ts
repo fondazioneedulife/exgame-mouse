@@ -92,9 +92,10 @@ router.get("/:id", (ctx) => {
 });
 
 // POST /exams/new - crea un nuovo esame
-router.post("/new", (ctx) => {
+router.post("/new", async (ctx) => {
   try {
     const newExam = ctx.request.body;
+    const createdExam = await examsDao.create(newExam);
 
     if (!newExam || !newExam._id) {
       ctx.status = 400;
@@ -102,9 +103,8 @@ router.post("/new", (ctx) => {
       return;
     }
 
-    exams.push(newExam);
     ctx.status = 201;
-    ctx.body = newExam;
+    ctx.body = createdExam;
   } catch (error) {
     ctx.status = 500;
     ctx.body = { error: "Errore durante la creazione" };
@@ -112,41 +112,42 @@ router.post("/new", (ctx) => {
 });
 
 // PATCH /exams/update/:id - aggiorna un esame esistente
-router.patch("/update/:id", (ctx) => {
+router.patch("/update/:id", async (ctx) => {
   const { id } = ctx.params;
-  const index = findExamIndexById(id);
-
-  if (index === -1) {
+  const updateData = ctx.request.body;
+try {
+  const index = await examsDao.getById(id);
+  if (!index) {
     ctx.status = 404;
     ctx.body = { error: "Esame non trovato!" };
     return;
   }
 
-  try {
-    const updatedExam = { ...exams[index], ...ctx.request.body };
-    exams[index] = updatedExam;
+  const updatedExam = await examsDao.update(id, updateData);
 
-    ctx.status = 202;
-    ctx.body = updatedExam;
-  } catch (error) {
-    ctx.status = 500;
-    ctx.body = { error: "Errore durante l'aggiornamento" };
-  }
+  ctx.status = 202;
+  ctx.body = updatedExam;
+} catch (error) {
+  ctx.status = 500;
+  ctx.body = { error: "Errore durante l'aggiornamento" };
+}
 });
 
 // DELETE /exams/:id - elimina un esame
-router.delete("/:id", (ctx) => {
+router.delete("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const index = findExamIndexById(id);
-
-  if (index === -1) {
-    ctx.status = 404;
-    ctx.body = { error: "Esame non trovato!" };
-    return;
-  }
 
   try {
-    const deletedExam = exams.splice(index, 1)[0];
+    const exam = await examsDao.getById(id);
+    if (!exam) {
+      ctx.status = 404;
+      ctx.body = { error: "Esame non trovato!" };
+      return;
+    }
+
+    await examsDao.delete(id);
+
+    const deletedExam = exam;
     ctx.status = 200;
     ctx.body = { message: "Esame eliminato!", exam: deletedExam };
   } catch (error) {
