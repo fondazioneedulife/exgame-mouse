@@ -1,22 +1,26 @@
 import Router from "@koa/router";
-import { subscriptions } from "../mocks/subscriptions";
 import { examsMiddleware, validateSubscription } from "../middlewares/exams";
-import { exams } from "../mocks/exams";
+import SubsctiptionsDao from "../dao/subscriptionsdao";
+import ExamsDao from "../dao/examsdao";
 
 const router = new Router({
   prefix: "/api/subscriptions",
 });
 
-router.get("/", (ctx) => {
+const subscriptionsdao = new SubsctiptionsDao();
+
+const examsdao = new ExamsDao();
+
+//ROUTES
+router.get("/", async (ctx) => {
+  const result = await subscriptionsdao.getAll();
   ctx.status = 200;
-  ctx.body = subscriptions;
+  ctx.body = result;
 });
 
-router.get("/:id", (ctx) => {
+router.get("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const subscription = subscriptions.find(
-    (subscription) => subscription._id === id,
-  );
+  const subscription = await subscriptionsdao.getSubscription(id);
 
   if (!subscription) {
     ctx.status = 404;
@@ -28,7 +32,7 @@ router.get("/:id", (ctx) => {
   ctx.body = subscription;
 });
 
-router.post("/new", examsMiddleware, validateSubscription, (ctx) => {
+router.post("/new", examsMiddleware, validateSubscription, async (ctx) => {
   try {
     const newSubscription = { ...ctx.request.body };
 
@@ -42,7 +46,7 @@ router.post("/new", examsMiddleware, validateSubscription, (ctx) => {
       return;
     }
 
-    subscriptions.push(newSubscription);
+    const subscriptionsUpdated = await subscriptionsdao.addSub(newSubscription);
     ctx.status = 201;
     ctx.body = newSubscription;
   } catch (error) {
@@ -51,11 +55,11 @@ router.post("/new", examsMiddleware, validateSubscription, (ctx) => {
   }
 });
 
-router.post("/:id/calc", (ctx) => {
+router.post("/:id/calc", async (ctx) => {
   const { id } = ctx.params;
-  const subscription = subscriptions.find((s) => s._id === id);
+  const subscription = await subscriptionsdao.getSubscription(id);
 
-  const exam = exams.find((e) => e._id === subscription?.exam_id);
+  const exam = await examsdao.getById(id);
 
   let count = 0;
   if (subscription?.questions) {
@@ -113,7 +117,7 @@ router.put("/:id", (ctx) => {
   }
 });
 
-router.delete("/:id", (ctx) => {
+router.delete("/:id", async (ctx) => {
   const { id } = ctx.params;
   const index = subscriptions.findIndex(
     (subscription) => subscription._id === id,
@@ -124,8 +128,8 @@ router.delete("/:id", (ctx) => {
     ctx.body = { error: "Sottoscrizione non trovata!" };
     return;
   }
-
-  subscriptions.splice(index, 1);
+  
+  subscriptionsdao.deleteSub(index);
 
   ctx.status = 204;
   ctx.body = null;

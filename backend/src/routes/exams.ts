@@ -1,6 +1,6 @@
 import Router from "@koa/router";
 import { exams } from "../mocks/exams";
-import ExamsDao from "../dao/examsDao";
+import ExamsDao from "../dao/examsdao";
 import { findExamIndexById } from "../lib/helper";
 
 const router = new Router({
