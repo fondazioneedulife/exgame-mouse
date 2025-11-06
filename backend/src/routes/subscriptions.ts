@@ -1,24 +1,24 @@
 import Router from "@koa/router";
-import { subscriptions } from "../mocks/subscriptions";
 import { examsMiddleware, validateSubscription } from "../middlewares/exams";
-import { exams } from "../mocks/exams";
 import SubscriptionDAO from "../dao/subscription.dao";
+import ExamsDAO from "../dao/exams.dao";
 
 const router = new Router({
   prefix: "/api/subscriptions",
 });
 
-const subcriptionDAO = new SubscriptionDAO();
+const examsDAO = new ExamsDAO();
+const subscriptionDAO = new SubscriptionDAO();
 
 router.get("/", async (ctx) => {
-  const subscriptions = await subcriptionDAO.getAll();
+  const subscriptions = await subscriptionDAO.getAll();
   ctx.status = 200;
   ctx.body = subscriptions;
 });
 
 router.get("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const subscription = await subcriptionDAO.getById(id);
+  const subscription = await subscriptionDAO.getById(id);
 
   if (!subscription) {
     ctx.status = 404;
@@ -32,7 +32,7 @@ router.get("/:id", async (ctx) => {
 
 router.post("/new", examsMiddleware, validateSubscription, async (ctx) => {
   try {
-    const newSubscription = await subcriptionDAO.create(ctx.request.body);
+    const newSubscription = await subscriptionDAO.create(ctx.request.body);
 
     if (
       !newSubscription ||
@@ -52,11 +52,10 @@ router.post("/new", examsMiddleware, validateSubscription, async (ctx) => {
   }
 });
 
-router.post("/:id/calc", (ctx) => {
+router.post("/:id/calc", async (ctx) => {
   const { id } = ctx.params;
-  const subscription = subscriptions.find((s) => s._id === id);
-
-  const exam = exams.find((e) => e._id === subscription?.exam_id);
+  const subscription = await subscriptionDAO.getById(id);
+  const exam = await examsDAO.getById(subscription?.exam_id);
 
   let count = 0;
   if (subscription?.questions) {
@@ -91,7 +90,7 @@ router.put("/:id", async (ctx) => {
   const { id } = ctx.params;
 
   try {
-    const updatedSubscription = await subcriptionDAO.update(
+    const updatedSubscription = await subscriptionDAO.update(
       id,
       ctx.request.body,
     );
@@ -107,7 +106,7 @@ router.put("/:id", async (ctx) => {
 router.delete("/:id", async (ctx) => {
   const { id } = ctx.params;
   try {
-    const deletedSubscription = await subcriptionDAO.delete(id);
+    const deletedSubscription = await subscriptionDAO.delete(id);
     ctx.status = 200;
     ctx.body = {
       message: "Subscription eliminata!",
