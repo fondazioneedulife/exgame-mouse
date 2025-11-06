@@ -31,35 +31,14 @@ router.get("/search", async (ctx) => {
   }
   const searchTerm =
     typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
-  const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
-  const exams = examsDAO.search(searchTerm);
 
-  const results = (await exams).filter((exam) => {
-    if (exam.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()))
-      return true;
-
-    if (
-      exam.questions.some((q) =>
-        q.text.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
-      )
-    )
-      return true;
-
-    if (
-      exam.questions.some((q) =>
-        q.answers.some((a) =>
-          a.answer.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
-        ),
-      )
-    )
-      return true;
-
-    return false;
-  });
+  const sanitizedSearcserhTerm = sanitizeSearchInput(searchTerm);
+  const exam = examsDAO.search(sanitizedSearcserhTerm);
+  const results = await exam;
 
   ctx.status = 200;
   ctx.body = {
-    searchTerm: sanitizedSearchTerm,
+    searchTerm: sanitizedSearcserhTerm,
     count: results.length,
     results: results,
   };
@@ -121,6 +100,7 @@ router.post("/new", (ctx) => {
 router.patch("/update/:id", (ctx) => {
   const { id } = ctx.params;
   const index = findExamIndexById(id);
+  
 
   if (index === -1) {
     ctx.status = 404;
@@ -131,9 +111,10 @@ router.patch("/update/:id", (ctx) => {
   try {
     const updatedExam = { ...exams[index], ...ctx.request.body };
     exams[index] = updatedExam;
+    const exam = examsDAO.update(id, updatedExam);  
 
     ctx.status = 202;
-    ctx.body = updatedExam;
+    ctx.body = exam;
   } catch (error) {
     ctx.status = 500;
     ctx.body = { error: "Errore durante l'aggiornamento" };
@@ -152,7 +133,7 @@ router.delete("/:id", (ctx) => {
   }
 
   try {
-    const deletedExam = exams.splice(index, 1)[0];
+    const deletedExam = examsDAO.delete(id);
     ctx.status = 200;
     ctx.body = { message: "Esame eliminato!", exam: deletedExam };
   } catch (error) {
