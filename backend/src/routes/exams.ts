@@ -5,17 +5,19 @@ import {
   findExamIndexById,
   sanitizeSearchInput,
 } from "../lib/helper";
+import ExamsDao from "../dao/exams.dao";
 
 const router = new Router({
   prefix: "/api/exams",
 });
 
+const examsDao = new ExamsDao();
 // ---- Routes ----
 
 // GET /exams - lista di tutti gli esami
-router.get("/", (ctx) => {
+router.get("/", async (ctx) => {
+  ctx.body = await examsDao.getAll();
   ctx.status = 200;
-  ctx.body = exams;
 });
 
 router.get("/search", (ctx) => {
