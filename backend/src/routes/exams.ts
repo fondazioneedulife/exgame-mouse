@@ -1,3 +1,11 @@
+// Exam Routes
+// GET api/exams getAll
+// GET api/exams/:id getById
+// GET api/exams/search search
+// POST api/exams/new create
+// PATCH api/exams/update/:id update
+// DELETE api/exams/:id delete
+
 import Router from "@koa/router";
 import { exams } from "../mocks/exams";
 import {
@@ -22,7 +30,7 @@ router.get("/", async (ctx) => {
   ctx.body = exams;
 });
 
-router.get("/search", (ctx) => {
+router.get("/search", async (ctx) => {
   const { name } = ctx.query;
   if (!name) {
     ctx.status = 400;
@@ -33,35 +41,18 @@ router.get("/search", (ctx) => {
     typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
   const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
 
-  const results = exams.filter((exam) => {
-    if (exam.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()))
-      return true;
-
-    if (
-      exam.questions.some((q) =>
-        q.text.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
-      )
-    )
-      return true;
-
-    if (
-      exam.questions.some((q) =>
-        q.answers.some((a) =>
-          a.answer.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()),
-        ),
-      )
-    )
-      return true;
-
-    return false;
-  });
-
-  ctx.status = 200;
-  ctx.body = {
-    searchTerm: sanitizedSearchTerm,
-    count: results.length,
-    results: results,
-  };
+  try {
+    const results = await examsDAO.search(sanitizedSearchTerm);
+    ctx.status = 200;
+    ctx.body = {
+      searchTerm: sanitizedSearchTerm,
+      count: results.length,
+      results: results,
+    };
+  } catch (err) {
+    ctx.status = 500;
+    ctx.body = { err: "Errore durante la richiesta" };
+  }
 });
 
 router.get("/time", (ctx) => {
@@ -78,9 +69,9 @@ router.get("/time", (ctx) => {
 });
 
 // GET /exams/:id - dettaglio di un singolo esame
-router.get("/:id", (ctx) => {
+router.get("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const exam = findExamById(id);
+  const exam = await examsDAO.getById(id);
 
   if (!exam) {
     ctx.status = 404;
@@ -93,9 +84,9 @@ router.get("/:id", (ctx) => {
 });
 
 // POST /exams/new - crea un nuovo esame
-router.post("/new", (ctx) => {
+router.post("/new", async (ctx) => {
   try {
-    const newExam = ctx.request.body;
+    const newExam = await examsDAO.create(ctx.request.body);
 
     if (!newExam || !newExam._id) {
       ctx.status = 400;
@@ -103,7 +94,7 @@ router.post("/new", (ctx) => {
       return;
     }
 
-    exams.push(newExam);
+    // exams.push(newExam);
     ctx.status = 201;
     ctx.body = newExam;
   } catch (error) {
@@ -112,21 +103,12 @@ router.post("/new", (ctx) => {
   }
 });
 
-// PATCH /exams/update/:id - aggiorna un esame esistente
-router.patch("/update/:id", (ctx) => {
+// PATCH /exams/update/:id - aggiorna un esame
+router.patch("/update/:id", async (ctx) => {
   const { id } = ctx.params;
-  const index = findExamIndexById(id);
-
-  if (index === -1) {
-    ctx.status = 404;
-    ctx.body = { error: "Esame non trovato!" };
-    return;
-  }
 
   try {
-    const updatedExam = { ...exams[index], ...ctx.request.body };
-    exams[index] = updatedExam;
-
+    const updatedExam = await examsDAO.update(id, ctx.request.body);
     ctx.status = 202;
     ctx.body = updatedExam;
   } catch (error) {
@@ -136,18 +118,11 @@ router.patch("/update/:id", (ctx) => {
 });
 
 // DELETE /exams/:id - elimina un esame
-router.delete("/:id", (ctx) => {
+router.delete("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const index = findExamIndexById(id);
-
-  if (index === -1) {
-    ctx.status = 404;
-    ctx.body = { error: "Esame non trovato!" };
-    return;
-  }
 
   try {
-    const deletedExam = exams.splice(index, 1)[0];
+    const deletedExam = await examsDAO.delete(id);
     ctx.status = 200;
     ctx.body = { message: "Esame eliminato!", exam: deletedExam };
   } catch (error) {
