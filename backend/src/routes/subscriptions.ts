@@ -89,24 +89,16 @@ router.post("/:id/calc", (ctx) => {
   }
 });
 
-router.put("/:id", (ctx) => {
+router.put("/:id", async (ctx) => {
   const { id } = ctx.params;
-  const index = subscriptions.findIndex(
-    (subscription) => subscription._id === id,
-  );
-
-  if (index === -1) {
+try {
+  const index = await subscriptionsDao.getById(id);
+  if (!index) {
     ctx.status = 404;
     ctx.body = { error: "Sottoscrizione non trovata!" };
     return;
   }
-
-  try {
-    const updatedSubscription = {
-      ...subscriptions[index],
-      ...ctx.request.body,
-    };
-    subscriptions[index] = updatedSubscription;
+  const updatedSubscription = await subscriptionsDao.update(id, ctx.request.body);
 
     ctx.status = 202;
     ctx.body = updatedSubscription;
