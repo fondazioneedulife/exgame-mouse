@@ -9,7 +9,7 @@ class ExamsDAO {
         return await examsModel.findById(id);
     }
 
-    async search(searchTerm: string) {
+    async search(searchTerm: string): Promise<any[]> {
         return await examsModel.find({
             $or: [
                 { name: { $regex: searchTerm, $options: "i" } },
@@ -30,5 +30,11 @@ class ExamsDAO {
     async delete(id: string) {
         return await examsModel.findByIdAndDelete(id);
     }
+
+    async getByTimeRange(minTime: number, maxTime: number) {
+        return await examsModel.find({
+            time: { $gte: minTime, $lte: maxTime },
+        });
+    }   
 }
 export default ExamsDAO;

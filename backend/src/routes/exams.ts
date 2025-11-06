@@ -22,7 +22,7 @@ router.get("/", (ctx) => {
   ctx.body = exams;
 });
 
-router.get("/search", (ctx) => {
+router.get("/search", async (ctx) => {
   const { name } = ctx.query;
   if (!name) {
     ctx.status = 400;
@@ -32,8 +32,9 @@ router.get("/search", (ctx) => {
   const searchTerm =
     typeof name === "string" ? name : Array.isArray(name) ? name[0] : "";
   const sanitizedSearchTerm = sanitizeSearchInput(searchTerm);
+  const exams = examsDAO.search(searchTerm);
 
-  const results = exams.filter((exam) => {
+  const results = (await exams).filter((exam) => {
     if (exam.name.toLowerCase().includes(sanitizedSearchTerm.toLowerCase()))
       return true;
 
@@ -65,14 +66,18 @@ router.get("/search", (ctx) => {
 });
 
 router.get("/time", (ctx) => {
+  
   const minTime = parseInt(ctx.query.min_time as string) || 0;
+  const maxTime = parseInt(ctx.query.max_time as string) || 0;
 
-  if (!minTime || isNaN(minTime) || minTime < 0) {
+
+  if (!minTime || isNaN(minTime) || minTime < 0 || !maxTime || isNaN(maxTime) || maxTime < 0) {
     ctx.status = 400;
     ctx.body = { error: "Parametro 'min_time' mancante o non valido" };
     return;
   }
-  const filtered = exams.filter((exam) => exam.max_time > minTime);
+
+  const filtered = examsDAO.getByTimeRange(minTime, maxTime);
   ctx.status = 200;
   ctx.body = filtered;
 });
@@ -103,7 +108,7 @@ router.post("/new", (ctx) => {
       return;
     }
 
-    exams.push(newExam);
+    examsDAO.create(newExam);
     ctx.status = 201;
     ctx.body = newExam;
   } catch (error) {
