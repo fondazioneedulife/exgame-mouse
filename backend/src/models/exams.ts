@@ -18,7 +18,7 @@ interface IExams {
       text: string;
       is_correct: boolean;
     }[];
-  }
+  }[]
 }
 
 const examsSchema = new mongoose.Schema<IExams>({

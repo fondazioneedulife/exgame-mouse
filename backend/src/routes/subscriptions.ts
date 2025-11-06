@@ -1,7 +1,7 @@
 import Router from "@koa/router";
-import { examsMiddleware, validateSubscription } from "../middlewares/exams";
-import SubscriptionDAO from "../dao/subscription.dao";
 import ExamsDAO from "../dao/exams.dao";
+import SubscriptionDAO from "../dao/subscription.dao";
+import { examsMiddleware, validateSubscription } from "../middlewares/exams";
 
 const router = new Router({
   prefix: "/api/subscriptions",
@@ -55,13 +55,20 @@ router.post("/new", examsMiddleware, validateSubscription, async (ctx) => {
 router.post("/:id/calc", async (ctx) => {
   const { id } = ctx.params;
   const subscription = await subscriptionDAO.getById(id);
-  const exam = await examsDAO.getById(subscription?.exam_id);
+
+  if (!subscription?.exam_id) {
+    ctx.status = 400;
+    ctx.body = { error: "Subscription senza exam_id" };
+    return;
+  }
+
+  const exam = await examsDAO.getById(subscription.exam_id);
 
   let count = 0;
   if (subscription?.questions) {
     for (const studentQuestion of subscription?.questions) {
       const examQuestion = exam?.questions.find(
-        (q) => q._id === studentQuestion.question_id,
+        (q) => q.question_id === studentQuestion.question_id,
       );
 
       if (!examQuestion) {
@@ -70,7 +77,7 @@ router.post("/:id/calc", async (ctx) => {
 
       for (const studentAnswer of studentQuestion.responses) {
         const answerQuestion = examQuestion.answers.find(
-          (a) => a._id === studentAnswer.answer_id,
+          (a) => a.answer_id === studentAnswer.answer_id,
         );
         if (answerQuestion && answerQuestion.is_correct) {
           count++;
