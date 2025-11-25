@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
 
-
 interface IExams {
   id: string;
   name: string;
   created_at: Date;
   updated_at: Date;
-  created_by: number;
+  created_by: string;
   schedule_date: Date;
   max_time: number;
   questions: {
@@ -18,7 +17,7 @@ interface IExams {
       text: string;
       is_correct: boolean;
     }[];
-  }[]
+  }[];
 }
 
 const examsSchema = new mongoose.Schema<IExams>({
@@ -26,7 +25,7 @@ const examsSchema = new mongoose.Schema<IExams>({
   name: { type: String, required: true },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
-  created_by: { type: Number, required: true },
+  created_by: { type: String, required: true },
   schedule_date: { type: Date, required: true },
   max_time: { type: Number, required: true },
   questions: [
