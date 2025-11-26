@@ -1,4 +1,4 @@
-import subscriptionModel from "../models/subscriptions";
+import subscriptionModel, { ISubscription } from "../models/subscriptions";
 
 class SubscriptionDAO {
   async getAll() {
@@ -9,7 +9,7 @@ class SubscriptionDAO {
     return await subscriptionModel.findById(id);
   }
 
-  async create(data: any) {
+  async create(data: ISubscription) {
     const newSubscription = new subscriptionModel(data);
     return await newSubscription.save();
   }

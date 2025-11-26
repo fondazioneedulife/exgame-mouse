@@ -1,4 +1,4 @@
-import examsModel from "../models/exams";
+import examsModel, { IExams } from "../models/exams";
 
 class ExamsDAO {
   async getAll() {
@@ -17,7 +17,7 @@ class ExamsDAO {
     ]);
   }
 
-  async create(examData: any) {
+  async create(examData: IExams) {
     const newExam = new examsModel(examData);
     return await newExam.save();
   }

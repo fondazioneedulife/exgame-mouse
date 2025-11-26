@@ -19,6 +19,19 @@ export type ExamType = {
   questions: QuestionType[];
 };
 
+export type UserType = {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  image: string;
+  createdAt: Date;
+  updatedAt: Date;
+  role: "user" | "teacher" | "admin";
+  data: any;
+};
+
 export type QuestionComponentProp = QuestionType & {
   response: string;
   setReponse: (value: string) => void;

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface IExams {
+export interface IExams {
   id: string;
   name: string;
   created_at: Date;
