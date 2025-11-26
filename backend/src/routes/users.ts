@@ -13,6 +13,18 @@ const usersDAO = new UsersDAO();
 
 // --- Routes ---
 
+//GEt - tutti gli utenti
+router.get("/", async (ctx) => {
+  try {
+    const allUsers = await usersDAO.getAll();
+    ctx.status = 200;
+    ctx.body = allUsers;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: "Errore durante il caricamento degli utenti" };
+  }
+});
+
 //POST - creazione nuovo utente
 router.post("/new", async (ctx) => {
   try {
