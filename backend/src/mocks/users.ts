@@ -8,9 +8,9 @@ export const exams: UserType[] = [
     email: "gino.paoli@gmail.com",
     password: "biri",
     image: "https://share.google/images/ojIXUSTT6tVMjpDaT",
-    createdAt: new Date(24/11/2025),
-    updatedAt: new Date(25/11/2025),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     role: "user",
-    data: null,
+    data: {},
   },
 ];

@@ -21,7 +21,7 @@ router.get("/", async (ctx) => {
     ctx.body = allUsers;
   } catch (error) {
     ctx.status = 500;
-    ctx.body = { error: "Errore durante il caricamento degli utenti" };
+    ctx.body = { error: "Internal Server Error" };
   }
 });
 
