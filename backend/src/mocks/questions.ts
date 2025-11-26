@@ -1,4 +1,3 @@
-// questions.js
 export const questions = [
   {
     _id: "q_001",

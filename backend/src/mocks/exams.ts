@@ -1,11 +1,54 @@
-import type { ExamType } from "../../../api/types";
+import { IExams } from "../models/exams";
 import { questions } from "./questions";
 
-export const exams: ExamType[] = [
+export const exams: IExams[] = [
   {
-    _id: "exam_001",
-    name: "Quiz Generale 1",
-    schedule_date: "2025-01-15",
+    id: "exam_001",
+    name: "Quiz generale 1",
+    created_at: new Date(),
+    updated_at: new Date(),
+    created_by: "admin_user",
+    schedule_date: new Date("2025-01-15"),
+    max_time: 1800,
+    questions: questions,
+  },
+  {
+    id: "exam_002",
+    name: "Quiz generale 2",
+    created_at: new Date(),
+    updated_at: new Date(),
+    created_by: "admin_user",
+    schedule_date: new Date("2025-02-15"),
+    max_time: 1800,
+    questions: questions,
+  },
+  {
+    id: "exam_003",
+    name: "Quiz generale 3",
+    created_at: new Date(),
+    updated_at: new Date(),
+    created_by: "admin_user",
+    schedule_date: new Date("2025-03-15"),
+    max_time: 1800,
+    questions: questions,
+  },
+  {
+    id: "exam_004",
+    name: "Quiz generale 4",
+    created_at: new Date(),
+    updated_at: new Date(),
+    created_by: "admin_user",
+    schedule_date: new Date("2025-04-15"),
+    max_time: 1800,
+    questions: questions,
+  },
+  {
+    id: "exam_005",
+    name: "Quiz generale 5",
+    created_at: new Date(),
+    updated_at: new Date(),
+    created_by: "admin_user",
+    schedule_date: new Date("2025-05-15"),
     max_time: 1800,
     questions: questions,
   },

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface IExams {
+export interface IExams {
   id: string;
   name: string;
   created_at: Date;
@@ -9,12 +9,12 @@ interface IExams {
   schedule_date: Date;
   max_time: number;
   questions: {
-    question_id: string;
+    _id: string;
     text: string;
     type: string;
     answers: {
-      answer_id: string;
-      text: string;
+      _id: string;
+      answer: string;
       is_correct: boolean;
     }[];
   }[];
@@ -30,13 +30,13 @@ const examsSchema = new mongoose.Schema<IExams>({
   max_time: { type: Number, required: true },
   questions: [
     {
-      question_id: { type: String, required: true },
+      _id: { type: String, required: true },
       text: { type: String, required: true },
       type: { type: String, required: true },
       answers: [
         {
-          answer_id: { type: String, required: true },
-          text: { type: String, required: true },
+          _id: { type: String, required: true },
+          answer: { type: String, required: true },
           is_correct: { type: Boolean, required: true },
         },
       ],

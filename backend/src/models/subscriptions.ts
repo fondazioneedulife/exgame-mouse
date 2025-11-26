@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 import { Answer, QuestionType } from "../../../api/types";
 
-interface ISubscription {
+export interface ISubscription {
   _id: string;
   student_id: string;
   exam_id: string;
   questions: {
-    question_id: string;
+    _id: string;
     responses: {
-      answer_id: string;
+      _id: string;
     }[];
   }[];
 }
@@ -19,10 +19,10 @@ const subscriptionSchema = new mongoose.Schema<ISubscription>({
   exam_id: { type: String, required: true },
   questions: [
     {
-      question_id: { type: String, required: true },
+      _id: { type: String, required: true },
       responses: [
         {
-          answer_id: { type: String, required: true },
+          _id: { type: String, required: true },
         },
       ],
     },
