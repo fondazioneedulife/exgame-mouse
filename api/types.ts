@@ -44,3 +44,16 @@ export type SubscriptionQuestion = {
 export type SubscriptionAnswer = {
   answer_id: AnswerId;
 };
+
+export type User = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  image: string;
+  createdAt: Date;
+  updatedAt: Date;
+  role: "user" | "teacher" | "admin";
+  data: any;
+};
