@@ -73,13 +73,50 @@ import userModel from "../models/users.js";
     },
   ]);
 
-  // const exams = await examsModel.create([{
-  //     _id: "exam_001",
-  //     name: "Quiz Generale 1",
-  //     schedule_date: "2025-01-15",
-  //     max_time: 1800,
-  //     questions: questions,
-  //   }]);
+    const exams = await examsModel.create([
+      {
+        id: "exam_001",
+        name: "Quiz Generale 1",
+        created_at: new Date(),
+        updated_at: new Date(),
+        created_by: "admin_001",
+        schedule_date: new Date("2025-01-15T10:00:00"),
+        max_time: 1800, // secondi, es. 30 minuti
+        questions: [
+          {
+            question_id: "q_001",
+            text: "Qual è la capitale d'Italia?",
+            type: "single-choice",
+            answers: [
+              { answer_id: "a_001_1", text: "Roma", is_correct: true },
+              { answer_id: "a_001_2", text: "Milano", is_correct: false },
+              { answer_id: "a_001_3", text: "Napoli", is_correct: false },
+            ],
+          },
+          {
+            question_id: "q_002",
+            text: "Quali sono i colori della bandiera italiana?",
+            type: "multiple-choice",
+            answers: [
+              { answer_id: "a_002_1", text: "Verde", is_correct: true },
+              { answer_id: "a_002_2", text: "Blu", is_correct: false },
+              { answer_id: "a_002_3", text: "Bianco", is_correct: true },
+              { answer_id: "a_002_4", text: "Rosso", is_correct: true },
+            ],
+          },
+          {
+            question_id: "q_003",
+            text: "In che anno è caduto l'Impero Romano d'Occidente?",
+            type: "single-choice",
+            answers: [
+              { answer_id: "a_003_1", text: "476 d.C.", is_correct: true },
+              { answer_id: "a_003_2", text: "410 d.C.", is_correct: false },
+              { answer_id: "a_003_3", text: "1453 d.C.", is_correct: false },
+            ],
+          },
+        ],
+      },
+    ]);
 
   process.exit(0);
 })().catch((error) => console.error(error));
