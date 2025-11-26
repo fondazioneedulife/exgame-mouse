@@ -10,6 +10,7 @@ import logger from "./middlewares/logger";
 import examsRoute from "./routes/exams";
 import serverRoute from "./routes/server";
 import subscriptionsRoute from "./routes/subscriptions";
+import usersRoute from "./routes/users";
 
 const app = new Koa();
 const router = new Router();
@@ -29,6 +30,7 @@ app.use(router.routes()).use(router.allowedMethods());
 app.use(serverRoute.routes()).use(serverRoute.allowedMethods());
 app.use(examsRoute.routes()).use(examsRoute.allowedMethods());
 app.use(subscriptionsRoute.routes()).use(subscriptionsRoute.allowedMethods());
+app.use(usersRoute.routes()).use(usersRoute.allowedMethods());
 
 const httpServer = createServer(app.callback());
 initSocketIo(httpServer);
