@@ -4,7 +4,9 @@
   "description": "ITS - corso React, Nodejs, DB - 2025/26",
   "main": "index.ts",
   "scripts": {
-    "dev": "npx tsx --watch src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/index.js",
+    "seed": "node --loader ts-node/esm src/seed/index.ts"
   },
   "type": "module",
   "repository": {
@@ -35,7 +37,7 @@
     "globals": "^16.4.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
-    "typescript": "^5.9.2",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.44.1"
   }
 }
