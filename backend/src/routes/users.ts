@@ -2,23 +2,9 @@ import Router from "@koa/router";
 import UsersDAO from "../dao/user.dao";
 
 const router = new Router({
-  prefix: "/api/users",
+  prefix: "/api/user",
 });
 const usersDAO = new UsersDAO();
-
-router.get("/:id", async (ctx) => {
-  const { id } = ctx.params;
-  const user = await usersDAO.getById(id);
-
-  if (!user) {
-    ctx.status = 404;
-    ctx.body = { error: `Utente con id ${id} non trovato` };
-    return;
-  }
-
-  ctx.status = 200;
-  ctx.body = user;
-});
 
 router.post("/new", async (ctx) => {
   try {
@@ -29,6 +15,18 @@ router.post("/new", async (ctx) => {
     ctx.status = 500;
     ctx.body = { error: "Errore durante la creazione" };
   }
+});
+
+router.post("/login", async (ctx) => {
+
+});
+
+router.post("/logout", async (ctx) => {
+
+});
+
+router.get("/me", async (ctx) => {
+
 });
 
 
