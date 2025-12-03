@@ -7,3 +7,5 @@ mongoose
   .connect("mongodb://localhost:27017/myapp")
   .then(() => console.log("Connesso a MongoDB"))
   .catch((err) => console.error("Errore di connessione:", err));
+
+mongoose.disconnect();
