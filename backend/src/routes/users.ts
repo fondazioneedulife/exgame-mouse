@@ -7,9 +7,9 @@ const router = new Router({
 
 const usersDAO = new UsersDAO();
 
-router.get("/",  async (ctx) => {
+router.get("/", async (ctx) => {
   try {
-    const users =  await usersDAO.getAll();
+    const users = await usersDAO.getAll();
     ctx.status = 200;
     ctx.body = users;
   } catch (error) {
@@ -19,18 +19,18 @@ router.get("/",  async (ctx) => {
 });
 
 router.post("/", async (ctx) => {
-  try{
-    const {email,password} = ctx.request.body;
-    
-    if(!email || !password){
+  try {
+    const {email, password } = ctx.request.body;
+
+    if (!email || !password) {
       ctx.status = 400;
       ctx.body = { error: "Email and password are required" };
       return;
     }
 
-    const newUser = await usersDAO.create({email, password});
+    const newUser = await usersDAO.create(ctx.request.body);
 
-    if(!newUser || !newUser.id){
+    if (!newUser || !newUser.id) {
       ctx.status = 400;
       ctx.body = { error: "400 Bad Request" };
       return;

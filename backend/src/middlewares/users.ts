@@ -2,6 +2,19 @@ import { Context, Next } from "koa";
 import Joi from "joi";
 
 export const userSchema = Joi.object({
+
+  id: Joi.number().required(),
+
+  firstName: Joi.string()
+    .min(2)
+    .max(30)
+    .required(),
+
+  lastName: Joi.string()
+    .min(2)
+    .max(30)
+    .required(),
+
   email: Joi.string()
     .email()
     .required(),
