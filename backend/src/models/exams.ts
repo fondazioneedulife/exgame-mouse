@@ -9,11 +9,11 @@ export interface IExams {
   schedule_date: Date;
   max_time: number;
   questions: {
-    _id: string;
+    id: string;
     text: string;
     type: string;
     answers: {
-      _id: string;
+      id: string;
       answer: string;
       is_correct: boolean;
     }[];
@@ -30,12 +30,12 @@ const examsSchema = new mongoose.Schema<IExams>({
   max_time: { type: Number, required: true },
   questions: [
     {
-      _id: { type: String, required: true },
+      id: { type: String, required: true },
       text: { type: String, required: true },
       type: { type: String, required: true },
       answers: [
         {
-          _id: { type: String, required: true },
+          id: { type: String, required: true },
           answer: { type: String, required: true },
           is_correct: { type: Boolean, required: true },
         },
