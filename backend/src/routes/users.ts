@@ -52,3 +52,5 @@ router.post("/logout", async (ctx) => {});
 
 //ME - restituisce le informazioni dell'utente completo
 router.get("/me", async (ctx) => {});
+
+export default router;
