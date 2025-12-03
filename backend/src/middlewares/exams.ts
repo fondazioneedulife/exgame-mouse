@@ -42,7 +42,7 @@ export const validateSubscription = async (ctx: Context, next: Next) => {
   }
 
   // Trova l'esame corrispondente all'ID
-  const exam = exams.find((e) => e._id === exam_id);
+  const exam = exams.find((e) => e.id === exam_id);
   if (!exam) {
     ctx.status = 404;
     ctx.body = { error: "Esame non trovato." };
@@ -56,7 +56,7 @@ export const validateSubscription = async (ctx: Context, next: Next) => {
   // Verifica ogni domanda inviata dallo studente
   for (const studentQuestion of submittedQuestions) {
     const examQuestion = exam.questions.find(
-      (q) => q._id === studentQuestion.question_id,
+      (q) => q.id === studentQuestion.question_id,
     );
 
     // La domanda non appartiene all'esame → errore
@@ -70,7 +70,7 @@ export const validateSubscription = async (ctx: Context, next: Next) => {
       const invalidAnswers = studentQuestion.responses
         .filter(
           (response: any) =>
-            !examQuestion.answers.some((a) => a._id === response.answer_id),
+            !examQuestion.answers.some((a) => a.id === response.answer_id),
         )
         .map((response: any) => response.answer_id);
 
