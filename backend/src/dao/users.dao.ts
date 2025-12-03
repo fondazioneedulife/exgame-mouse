@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import userModel, { Iuser } from "../models/users";
 
 class UsersDAO {
@@ -6,11 +5,13 @@ class UsersDAO {
     return await userModel.find();
   }
 
+  async getByEmail(email: string) {
+    return await userModel.findOne({ email });
+  }
+
   async create(userData: Iuser) {
-    const password = await bcrypt.hash(userData.password, 10);
     const newUser = new userModel({
       ...userData,
-      password,
       createdAt: new Date(),
       updatedAt: new Date(),
       role: "user",

@@ -68,7 +68,7 @@ router.post("/:id/calc", async (ctx) => {
   if (subscription?.questions) {
     for (const studentQuestion of subscription?.questions) {
       const examQuestion = exam?.questions.find(
-        (q) => q.question_id === studentQuestion.question_id,
+        (q) => q.id === studentQuestion.id,
       );
 
       if (!examQuestion) {
@@ -77,7 +77,7 @@ router.post("/:id/calc", async (ctx) => {
 
       for (const studentAnswer of studentQuestion.responses) {
         const answerQuestion = examQuestion.answers.find(
-          (a) => a.answer_id === studentAnswer.answer_id,
+          (a) => a.id === studentAnswer.id,
         );
         if (answerQuestion && answerQuestion.is_correct) {
           count++;

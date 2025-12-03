@@ -1,5 +1,11 @@
 import Router from "@koa/router";
+import bcrypt from "bcryptjs";
 import UsersDAO from "../dao/users.dao";
+import {
+  generateJWT,
+  hashPassword,
+  validateRegistration,
+} from "../middlewares/users";
 
 const router = new Router({
   prefix: "/api/users",
@@ -7,9 +13,9 @@ const router = new Router({
 
 const usersDAO = new UsersDAO();
 
-router.get("/",  async (ctx) => {
+router.get("/", async (ctx) => {
   try {
-    const users =  await usersDAO.getAll();
+    const users = await usersDAO.getAll();
     ctx.status = 200;
     ctx.body = users;
   } catch (error) {
@@ -18,16 +24,52 @@ router.get("/",  async (ctx) => {
   }
 });
 
-router.post("/", async (ctx) => {
-  try{
-    const newUser = await usersDAO.create(ctx.request.body);
-    if(!newUser || !newUser.id){
-      ctx.status = 400;
-      ctx.body = { error: "400 Bad Request" };
+router.post(
+  "/registration",
+  validateRegistration,
+  hashPassword,
+  async (ctx) => {
+    try {
+      const { email } = ctx.request.body;
+      const existingUser = await usersDAO.getByEmail(email);
+      if (existingUser) {
+        ctx.status = 409;
+        ctx.body = { error: "Email already in use" };
+        return;
+      }
+
+      const newUser = await usersDAO.create(ctx.request.body);
+      if (!newUser || !newUser._id) {
+        ctx.status = 400;
+        ctx.body = { error: "User registration failed" };
+        return;
+      }
+      ctx.status = 201;
+      ctx.body = newUser;
+    } catch (error) {
+      ctx.status = 500;
+      ctx.body = { error: "Internal Server Error" };
+    }
+  },
+);
+
+router.post("/login", generateJWT, async (ctx) => {
+  try {
+    const { email, password } = ctx.request.body;
+    const existingUser = await usersDAO.getByEmail(email);
+    if (!existingUser) {
+      ctx.status = 401;
+      ctx.body = { error: "Invalid email or password" };
       return;
     }
-    ctx.status = 201;
-    ctx.body = newUser;
+    const passwordMatch = await bcrypt.compare(password, existingUser.password);
+    if (!passwordMatch) {
+      ctx.status = 401;
+      ctx.body = { error: "Invalid email or password" };
+      return;
+    }
+    ctx.status = 200;
+    ctx.body = { message: "Login successful", token: ctx.request.body.token };
   } catch (error) {
     ctx.status = 500;
     ctx.body = { error: "Internal Server Error" };
