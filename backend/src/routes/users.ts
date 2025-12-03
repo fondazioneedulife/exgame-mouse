@@ -1,5 +1,6 @@
 import Router from "@koa/router";
 import UsersDAO from "../dao/users.dao";
+import { userValidator, hashPassword, compareEmail } from "../middlewares/users";
 
 const router = new Router({
   prefix: "/api/users",
@@ -18,7 +19,7 @@ router.get("/",  async (ctx) => {
   }
 });
 
-router.post("/", async (ctx) => {
+router.post("/", userValidator, compareEmail, hashPassword, async (ctx) => {
   try{
     const newUser = await usersDAO.create(ctx.request.body);
     if(!newUser || !newUser.id){
