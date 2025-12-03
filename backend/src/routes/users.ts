@@ -20,7 +20,16 @@ router.get("/",  async (ctx) => {
 
 router.post("/", async (ctx) => {
   try{
-    const newUser = await usersDAO.create(ctx.request.body);
+    const {email,password} = ctx.request.body;
+    
+    if(!email || !password){
+      ctx.status = 400;
+      ctx.body = { error: "Email and password are required" };
+      return;
+    }
+
+    const newUser = await usersDAO.create({email, password});
+
     if(!newUser || !newUser.id){
       ctx.status = 400;
       ctx.body = { error: "400 Bad Request" };
