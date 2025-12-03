@@ -4,7 +4,7 @@
   "description": "ITS - corso React, Nodejs, DB - 2025/26",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon --ext ts --watch src --exec tsx src/index.ts",
+    "dev": "tsx src/index.ts",
     "start": "node dist/index.js",
     "seed": "tsx src/seed/index.ts"
   },
