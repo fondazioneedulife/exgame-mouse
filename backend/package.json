@@ -4,9 +4,9 @@
   "description": "ITS - corso React, Nodejs, DB - 2025/26",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon --ext ts --watch src --exec tsx src/index.ts",
     "start": "node dist/index.js",
-    "seed": "node --loader ts-node/esm src/seed/index.ts"
+    "seed": "tsx src/seed/index.ts"
   },
   "type": "module",
   "repository": {
@@ -31,10 +31,11 @@
     "@types/koa": "^3.0.0",
     "@types/koa__cors": "^5.0.0",
     "@types/koa__router": "^12.0.4",
-    "@types/node": "^24.5.2",
+    "@types/node": "^24.10.1",
     "@types/validator": "^13.15.3",
     "eslint": "^9.36.0",
     "globals": "^16.4.0",
+    "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
     "typescript": "^5.9.3",
