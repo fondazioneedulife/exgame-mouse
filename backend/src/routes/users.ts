@@ -53,6 +53,27 @@ router.post(
   },
 );
 
-router.post("/login", async (ctx) => {});
+router.post("/login", generateJWT, async (ctx) => {
+  try {
+    const { email, password } = ctx.request.body;
+    const existingUser = await usersDAO.getByEmail(email);
+    if (!existingUser) {
+      ctx.status = 401;
+      ctx.body = { error: "Invalid email or password" };
+      return;
+    }
+    const passwordMatch = await bcrypt.compare(password, existingUser.password);
+    if (!passwordMatch) {
+      ctx.status = 401;
+      ctx.body = { error: "Invalid email or password" };
+      return;
+    }
+    ctx.status = 200;
+    ctx.body = { message: "Login successful", token: ctx.request.body.token };
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: "Internal Server Error" };
+  }
+});
 
 export default router;

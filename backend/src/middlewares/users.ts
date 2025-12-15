@@ -29,3 +29,13 @@ export const hashPassword = async (ctx: Context, next: Next) => {
   ctx.request.body.password = password;
   await next();
 };
+
+export const generateJWT = async (ctx: Context, next: Next) => {
+  const { email } = ctx.request.body;
+  const token = jwt.sign({ email }, process.env.JWT_SECRET as string, {
+    expiresIn: "30m",
+  });
+  ctx.request.body.token = token;
+
+  await next();
+};
