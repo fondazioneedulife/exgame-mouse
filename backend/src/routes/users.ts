@@ -53,6 +53,6 @@ router.post(
   },
 );
 
-router.post("/login", generateJWT, async (ctx) => {});
+router.post("/login", async (ctx) => {});
 
 export default router;
