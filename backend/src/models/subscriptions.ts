@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Answer, QuestionType } from "../../../api/types";
 
 export interface ISubscription {
   id: string;
@@ -31,7 +30,7 @@ const subscriptionSchema = new mongoose.Schema<ISubscription>({
 
 const subscriptionModel = mongoose.model<ISubscription>(
   "Subscription",
-  subscriptionSchema
+  subscriptionSchema,
 );
 
 export default subscriptionModel;
