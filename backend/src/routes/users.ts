@@ -1,5 +1,6 @@
 import Router from "@koa/router";
 import UsersDAO from "../dao/users.dao";
+import { hashPasswordMiddleware, usersValidateMiddleware } from "../middlewares/users";
 
 const router = new Router({
   prefix: "/api/users",
@@ -18,29 +19,36 @@ router.get("/", async (ctx) => {
   }
 });
 
-router.post("/", async (ctx) => {
-  try {
-    const {email, password } = ctx.request.body;
+router.post(
+  "/",
+  usersValidateMiddleware,
+  hashPasswordMiddleware,
+  async (ctx) => {
+    try {
+      const { email } = ctx.request.body;
+      const existingUser = await usersDAO.findByEmail(email);
 
-    if (!email || !password) {
-      ctx.status = 400;
-      ctx.body = { error: "Email and password are required" };
-      return;
+      if (existingUser) {
+        ctx.status = 409;
+        ctx.body = {
+          status: "error",
+          message: "User with this email already exists",
+        };
+        return;
+      }
+      const newUser = await usersDAO.create(ctx.request.body);
+
+      ctx.status = 201;
+      ctx.body = newUser;
+
+    } catch (error) {
+      ctx.status = 500;
+      ctx.body = {
+        status: "error",
+        message: "Internal Server Error",
+      };
     }
-
-    const newUser = await usersDAO.create(ctx.request.body);
-
-    if (!newUser || !newUser.id) {
-      ctx.status = 400;
-      ctx.body = { error: "400 Bad Request" };
-      return;
-    }
-    ctx.status = 201;
-    ctx.body = newUser;
-  } catch (error) {
-    ctx.status = 500;
-    ctx.body = { error: "Internal Server Error" };
   }
-});
+);
 
 export default router;
