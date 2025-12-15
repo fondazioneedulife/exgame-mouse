@@ -12,8 +12,6 @@ class UsersDAO {
   async create(userData: Iuser) {
     const newUser = new userModel({
       ...userData,
-      createdAt: new Date(),
-      updatedAt: new Date(),
       role: "user",
     });
     return await newUser.save();

@@ -4,6 +4,7 @@ import UsersDAO from "../dao/users.dao";
 import {
   generateJWT,
   hashPassword,
+  validateLogin,
   validateRegistration,
 } from "../middlewares/users";
 
@@ -53,6 +54,30 @@ router.post(
   },
 );
 
-router.post("/login", async (ctx) => {});
+router.post("/login", validateLogin, async (ctx) => {
+  try {
+    const { email, password } = ctx.request.body;
+    const user = await usersDAO.getByEmail(email);
+    if (!user) {
+      ctx.status = 401;
+      ctx.body = { error: "Invalid email or password" };
+      return;
+    }
+
+    const passwordValid = await bcrypt.compare(password, user.password);
+    if (!passwordValid) {
+      ctx.status = 401;
+      ctx.body = { error: "Invalid email or password" };
+      return;
+    }
+
+    const token = generateJWT(user);
+    ctx.status = 200;
+    ctx.body = { token };
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: "Internal Server Error" };
+  }
+});
 
 export default router;

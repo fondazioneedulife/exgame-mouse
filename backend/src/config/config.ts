@@ -25,7 +25,7 @@ const getConfig = (): IConfig => {
     PORT: process.env["APP_PORT"] || "3000",
     DB_URL: process.env["MONGODB_URI"] || "mongodb://localhost:27017/exgame",
     FRONTEND_APP: process.env["FRONTEND_APP"] || "http://localhost:3000",
-    SECRET_KEY: process.env["JWT_SECRET"] || "default_secret_key",
+      JWT_SECRET: process.env.JWT_SECRET as string,
   };
 
   // Esempio di validazione: lancia un errore se una variabile cruciale non è definita
