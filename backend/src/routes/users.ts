@@ -7,6 +7,7 @@ import {
   validateLogin,
   validateRegistration,
 } from "../middlewares/users";
+import { protectRoute } from "../middlewares/protection";
 
 const router = new Router({
   prefix: "/api/users",
@@ -79,5 +80,10 @@ router.post("/login", validateLogin, async (ctx) => {
     ctx.body = { error: "Internal Server Error" };
   }
 });
+
+router.get("/profile", protectRoute, async (ctx) => {
+  ctx.body = ctx.state.user;
+});
+
 
 export default router;
